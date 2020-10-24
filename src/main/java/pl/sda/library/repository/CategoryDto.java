@@ -1,4 +1,4 @@
-package pl.sda.library.model;
+package pl.sda.library.repository;
 
 import lombok.*;
 
@@ -8,13 +8,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Setter
 @Getter
-@ToString
 @Entity
 @Table(name = "categories")
-public class CategoryEntity {
+class CategoryDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_category")
-    private int idCategory;
+    private Long idCategory;
     private String name;
 }

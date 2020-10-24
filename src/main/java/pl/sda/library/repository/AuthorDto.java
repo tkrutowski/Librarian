@@ -1,5 +1,4 @@
-package pl.sda.library.model;
-
+package pl.sda.library.repository;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -10,18 +9,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "authors")
-public class AuthorEntity {
+class AuthorDto {
     @Id
     @Column(name = "id_author")
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    private int id;
+    private Long id;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-
 }

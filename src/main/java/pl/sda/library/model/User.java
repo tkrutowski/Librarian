@@ -1,0 +1,18 @@
+package pl.sda.library.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class User {
+    private int idUser;
+    private String login;
+    private String password;
+    private String name;
+    boolean isAdmin;
+}

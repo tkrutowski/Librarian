@@ -1,4 +1,4 @@
-package pl.sda.library.model;
+package pl.sda.library.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "users")
-public class UserEntity {
+class UserDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
@@ -25,5 +25,4 @@ public class UserEntity {
     boolean isAdmin;
     //@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)//relacja dwukierunkowa
     //private Set<BookEntity> books;
-
 }

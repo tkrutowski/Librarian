@@ -1,20 +1,16 @@
-package pl.sda.library.model;
+package pl.sda.library.repository;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
-@ToString
 @Entity
 @Table(name = "bookstores")
-public class BookstoreEntity {
-
+class BookstoreDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_bookstore")
@@ -24,10 +20,4 @@ public class BookstoreEntity {
 //
 //    @OneToMany(mappedBy = "books", fetch = FetchType.LAZY)
 //    private Set<BookEntity> books = new HashSet<>();
-
-    public BookstoreEntity( String name, String www) {
-        this.name = name;
-        this.www = www;
-    }
-
 }
