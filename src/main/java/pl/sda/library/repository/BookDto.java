@@ -22,33 +22,33 @@ class BookDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_book")
-    private int idBook;
+    private Long idBook;
     //private int idUser;
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private User user;
+    private UserDto user;
 
     @ManyToOne
     @JoinColumn(name = "id_bookstore")
     //private int idBookstore;
-    private Bookstore bookstore;
+    private BookstoreDto bookstore;
 
     @ManyToOne
     @JoinColumn(name = "id_series")
     //private int idSeries;
-    private Series series;
+    private SeriesDto series;
 
     @ManyToMany()
     @JoinTable(name = "books_authors",
             joinColumns = {@JoinColumn(name ="id_book")},
             inverseJoinColumns = {@JoinColumn(name ="id_author")})
-    private Set<Author> authors = new HashSet<>();
+    private Set<AuthorDto> authors = new HashSet<>();
 
     @ManyToMany()//cascade = {CascadeType.ALL})
     @JoinTable(name = "books_categories",
             joinColumns = {@JoinColumn(name ="id_book")},
             inverseJoinColumns = {@JoinColumn(name ="id_category")})
-    private Set<Category> categories = new HashSet<>();
+    private Set<CategoryDto> categories = new HashSet<>();
 
     private String title;
     private String subtitle;
