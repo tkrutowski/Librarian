@@ -3,6 +3,7 @@ package pl.sda.library.service;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.sda.library.infrastructure.upolujebooka.UpolujebookaAdapter;
 import pl.sda.library.model.Book;
 import pl.sda.library.repository.BookRepository;
 
@@ -19,7 +20,6 @@ public class BookService {
         return new Book();
     }
 
-    public List<Book> getAllBooks(){
-        return new ArrayList<>();
+    public List<Book> getAllBooks(){return new ArrayList<>();
     }
 }
