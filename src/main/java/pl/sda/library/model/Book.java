@@ -1,21 +1,17 @@
 package pl.sda.library.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Book {
     private Long idBook;
     private String userLogin;
@@ -33,7 +29,6 @@ public class Book {
     private LocalDate readFrom; //zaczęto czytać
     private LocalDate readTo; //skończono czytać
     private String info; //jakieś swoje zapiski
-    private Boolean isRead;//czy przeczytana
+    private boolean isRead;//czy przeczytana
     private String isbn;  //                    !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    private int volume;       //jak jest to część jakiejś serii  !!!!!!!!!!!!!!
 }
