@@ -34,7 +34,10 @@ class UpolujebookaScrapper {
     private static List<String> connectElements(Elements title, Elements authors, Elements isbn, Elements image, Elements description, Elements itemType) {
 
         List<String> foundElements = new ArrayList<>();
-        Integer minValue = Collections.min(List.of(title.size(),authors.size(), isbn.size(), image.size(), description.size(), itemType.size() ));
+        //Integer minValue = Collections.min(List.of(title.size(),authors.size(), isbn.size(), image.size(), description.size(), itemType.size()));
+
+        //heroku error with List.of!!!
+        Integer minValue =title.size();
 
         //String authorsList = authors.stream().map(Element::text).collect(Collectors.joining(","));
         String typeOfItem;
