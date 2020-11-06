@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.sda.library.model.Series;
 
 import javax.persistence.*;
 
@@ -20,4 +21,12 @@ class SeriesDto {
     private Long idSeries;
     private String title;
     private String description;
+
+    public Series toModel() {
+        Series series = new Series();
+        series.setIdSeries(getIdSeries());
+        series.setTitle(getTitle());
+        series.setDescription(getDescription());
+        return series;
+    }
 }
