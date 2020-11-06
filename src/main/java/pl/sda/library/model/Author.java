@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class Author {
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
 }
