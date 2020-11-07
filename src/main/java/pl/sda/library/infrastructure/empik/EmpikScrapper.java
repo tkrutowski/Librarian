@@ -5,34 +5,51 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
+import pl.sda.library.model.EditionType;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class EmpikScrapper {
 
-    private final static String URL = "https://empik.pl";
+    private final static String URL = "https://empik.com";
+    private final static String EBOOK = "/audiobooki-i-ebooki/ebooki,3501,s?q=";
+    private final static String BOOK = "/ksiazki,31,s?q=";
+    private final static String AUDIOBOOK = "/audiobooki-i-ebooki/audiobooki,3502,s?q=";
+    private final static Map<Enum, String> chanelMap = new Hashtable<>();
+
 
     public static List<String> finder(String phrase) {
+        chanelMap.putIfAbsent(EditionType.AUDIOBOOK, "/audiobooki-i-ebooki/audiobooki,3502,s?q=");
+        chanelMap.putIfAbsent(EditionType.BOOK, "/ksiazki,31,s?q=");
+        chanelMap.putIfAbsent(EditionType.EBOOK, "/audiobooki-i-ebooki/ebooki,3501,s?q=");
+
         List<String> productsList = new ArrayList<>();
         //https://www.empik.com/szukaj/produkt?q=dobry&qtype=basicForm&resultsPP=45
-        String url = URL + "/szukaj/produkt?q=" + phrase.replace(" ","%20") + "&qtype=basicForm&ac=true";
-        if (phrase.isEmpty()){
-            throw new RuntimeException("Pole wyszukiwanie nie może zostać puste!");
-        }
-        try {
-            Document page = Jsoup.connect(url).userAgent("Jsoup Scraper").get();
-            productsList = connectElements(getTitles(page), getAuthors(page));//, getIsbn(page), getImageLink(page), getDescription(page), getItemType(page));
-        } catch (IOException e) {
-            e.printStackTrace();
+        List<String> allChanels = new ArrayList<>();
+        allChanels.addAll(List.of("AUDIOBOOK", "BOOK", "EBOOK"));
+        for (Map.Entry<Enum, String> chanel: chanelMap.entrySet()) {
+            List<String> chanelList = new ArrayList<>();
+            String url = URL + chanel.getValue().toString() + phrase.replace(" ","%20");
+            if (phrase.isEmpty()){
+                throw new RuntimeException("Pole wyszukiwanie nie może zostać puste!");
+            }
+            try {
+                Document page = Jsoup.connect(url).userAgent("Jsoup Scraper").get();
+                chanelList = connectElements(chanel.getKey().toString(),getTitles(page), getAuthors(page));//, getIsbn(page), getImageLink(page), getDescription(page), getItemType(page));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            productsList.addAll(chanelList);
         }
         return productsList;
     }
 
-    private static List<String> connectElements(Elements title, Elements authors){//, Elements isbn, Elements image, Elements description, Elements itemType) {
+    private static List<String> connectElements(String chanel, Elements title, Elements authors){//, Elements isbn, Elements image, Elements description, Elements itemType) {
 
         List<String> foundElements = new ArrayList<>();
         //Integer minValue = Collections.min(List.of(title.size(),authors.size()));//, isbn.size(), image.size(), description.size(), itemType.size() ));
@@ -42,24 +59,12 @@ public class EmpikScrapper {
         //String authorsList = authors.stream().map(Element::text).collect(Collectors.joining(","));
         String typeOfItem;
         for (int i = 0; i < minValue; i++) {
-            /*
-            if (itemType.get(i).text().contains("mp3")) {
-                typeOfItem = "AUDIOBOOK";
-            }
-            else if (itemType.get(i).text().contains("ebook")){
-                typeOfItem = "EBOOK";
-            }
-            else  {
-                typeOfItem = "BOOK";
-            }
-            */
-
             foundElements.add(URL
                     + "::"+authors.get(i).text()
                     + "::"+title.get(i).attr("data-product-name")
 //                    + "::"+description.get(i).attr("title").substring(description.get(i).attr("title").lastIndexOf("<br/>")+5).trim()
 //                    + "::"+URL+"/"+image.get(i).attr("src")
-//                    + "::"+typeOfItem
+                    + "::"+chanel
 //                    + "::"+isbn.get(i).attr("content")
                     + "");
         }
@@ -106,16 +111,13 @@ public class EmpikScrapper {
 
 
     private static Elements getAuthors(Document doc) throws IOException {
-        return pagesTraverse(doc, "div.search-content > div > div > div > div > div.name > div.smartAuthorWrapper > a");
+        return pagesTraverse(doc, "div.search-content > div > div > div > div > div.name > div.smartAuthorWrapper ");
     }
 
     private static Elements getTitles(Document doc) throws IOException {
         return pagesTraverse(doc,"div.search-content > div");
     }
-//
-//    private static Elements getIsbn(Document doc) throws IOException {
-//        return pagesTraverse(doc,"#OfferListingFull > div.polka > div > div > div[itemscope] > meta[itemprop=isbn] ");
-//    }
+
 //
 //    private static Elements getImageLink(Document doc) throws IOException {
 //        return pagesTraverse(doc,"#OfferListingFull > div.polka > div > div > a > img");
