@@ -19,7 +19,6 @@ import java.util.List;
 @Service
 public class BookService {
 
-    @Autowired //TODO - do usuniecia
     private BookRepository bookRepository ;
 
     public Book getBook(Long id){

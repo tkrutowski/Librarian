@@ -1,8 +1,9 @@
 package pl.sda.library.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.sda.library.service.exceptions.ObjectAlreadyExistException;
+import pl.sda.library.service.exceptions.ObjectDoesNotExistException;
 import pl.sda.library.model.Author;
 import pl.sda.library.repository.AuthorRepository;
 
@@ -12,21 +13,43 @@ import java.util.List;
 @AllArgsConstructor
 public class AuthorService {
 
-    @Autowired //TODO - usunąć
     private AuthorRepository authorRepository;
 
-
-    boolean addAuthor(Author author){
-        //TODO - sprawdzić przed dodaniem czy w bazie nie istnieje już zamienione imie nazwisko <-> nazwisko imie
-        authorRepository.add(author);
-        return true;
+    public Long addAuthor(Author author)   {
+        if(alreadyExist(author))
+           throw new ObjectAlreadyExistException("Podany autor już istnieje w bazie danych.");
+        Long id = authorRepository.add(author);
+        return id;
     }
 
-    List<Author> getAllAuthors(){
+    private boolean alreadyExist(Author author) {
+        return authorRepository.isExist(author.getFirstName(),author.getLastName());
+    }
+
+    public List<Author> getAllAuthors(){
         return authorRepository.getAllAuthors();
     }
 
     public void delAuthor(long id) {
         authorRepository.deleteAuthor(id);
+    }
+
+    public Author editAuthor(Author author)   {
+        Author authorById = authorRepository.getAuthorById(author.getId());
+        if(authorById.getId() == null)
+            throw new ObjectDoesNotExistException("Podany autor nie istnieje w bazie danych.");
+
+        authorById.setLastName(author.getLastName());
+        authorById.setFirstName(author.getFirstName());
+
+        return authorRepository.editAuthor(authorById);
+    }
+
+    public Author getAuthor(Long id) {
+        Author authorById = authorRepository.getAuthorById(id);
+        if(authorById.getId() == null)
+            throw new ObjectDoesNotExistException("Podany autor nie istnieje w bazie danych.");
+        else
+            return authorById;
     }
 }
