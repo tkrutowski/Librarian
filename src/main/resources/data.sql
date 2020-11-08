@@ -1,8 +1,8 @@
    INSERT INTO users(login,password,name,is_admin) VALUES('admin','1234','administrator',1);
     INSERT INTO users(login,password,name,is_admin) VALUES('test@gmail.com','12345','tom kru',0);
 
-      INSERT INTO categories(name) VALUES('SF');
-        INSERT INTO categories(name) VALUES('Fantasy');
+      INSERT INTO categories(name) VALUES('Thriler');
+        INSERT INTO categories(name) VALUES('Sensacja');
 
 
           INSERT INTO authors(first_name, last_name) VALUES('Lee','Child' );
