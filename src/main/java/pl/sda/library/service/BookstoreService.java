@@ -1,11 +1,11 @@
 package pl.sda.library.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sda.library.model.Bookstore;
 import pl.sda.library.repository.BookstoreRepository;
-import pl.sda.library.repository.DtoFactory;
+import pl.sda.library.service.exceptions.ObjectAlreadyExistException;
+import pl.sda.library.service.exceptions.ObjectDoesNotExistException;
 
 import java.util.List;
 
@@ -13,15 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 public class BookstoreService {
 
-    @Autowired //TODO - usunąć
     BookstoreRepository bookstoreRepository;
-    @Autowired //TODO - usunąć
-    private DtoFactory dtoFactory;
 
-    public boolean addBookstore(Bookstore bookstore) {
-        //TODO - sprawdzić przed dodaniem czy nie istnieje już w bazie
-       bookstoreRepository.addBookstore(bookstore);
-        return true;
+    public Long addBookstore(Bookstore bookstore) {
+        if(alreadyExist(bookstore))
+            throw new ObjectAlreadyExistException("Podana księgarnia już istnieje w bazie danych.");
+        Long id = bookstoreRepository.addBookstore(bookstore);
+        return id;
     }
 
     public List<Bookstore> getAllBookstores() {
@@ -32,4 +30,26 @@ public class BookstoreService {
         bookstoreRepository.deleteBookstore(id);
     }
 
+    public Bookstore getBookstore(Long id) {
+        Bookstore bookstoreById = bookstoreRepository.getBookstoreById(id);
+        if(bookstoreById.getIdBookstore() == null)
+            throw new ObjectDoesNotExistException("Podana księgarnia nie istnieje w bazie danych.");
+        else
+            return bookstoreById;
+    }
+
+    public Bookstore editBookstore(Bookstore bookstoreToEdit) {
+        Bookstore bookstoreById = bookstoreRepository.getBookstoreById(bookstoreToEdit.getIdBookstore());
+        if(bookstoreById.getIdBookstore() == null)
+            throw new ObjectDoesNotExistException("Podana księgarnia nie istnieje w bazie danych.");
+
+        bookstoreById.setWww(bookstoreToEdit.getWww());
+        bookstoreById.setName(bookstoreToEdit.getName());
+
+        return bookstoreRepository.editBookstore(bookstoreById);
+    }
+
+    private boolean alreadyExist(Bookstore bookstore) {
+        return bookstoreRepository.isExist(bookstore.getName());
+    }
 }

@@ -42,10 +42,14 @@ public class AuthorService {
         authorById.setLastName(author.getLastName());
         authorById.setFirstName(author.getFirstName());
 
-        return authorRepository.editAuthor(author);
+        return authorRepository.editAuthor(authorById);
     }
 
     public Author getAuthor(Long id) {
-        return authorRepository.getAuthorById(id);
+        Author authorById = authorRepository.getAuthorById(id);
+        if(authorById.getId() == null)
+            throw new ObjectDoesNotExistException("Podany autor nie istnieje w bazie danych.");
+        else
+            return authorById;
     }
 }
