@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.sda.library.LibraryApplication;
+import pl.sda.library.exceptions.ObjectDoesNotExistException;
 import pl.sda.library.model.Author;
 
 import static org.junit.Assert.*;
@@ -18,15 +19,71 @@ public class AuthorServiceTest {
     private AuthorService authorService;
 
     @Test
-    public void should_return_true_when_author_added() {
+    public void should_return_id_bigger_than_zero_when_author_added() {
         //when
-        Author author=new Author(10L,"John","Doo");
+        Author author=new Author(null,"John","Doo");
 
         //given
-        boolean result = authorService.addAuthor(author);
+        Long id = authorService.addAuthor(author);
 
         //then
-        assertTrue(result);
+        assertNotEquals(java.util.Optional.of(0L),id);
+    }
+    @Test
+    public void should_return_zero_when_author_already_exist_when_adding_new_author() {
+        //when
+        Author author=new Author(null,"John","Doo");
+        authorService.addAuthor(author);
+        Long expectedId = 0L;
+        //given
+        Long id = authorService.addAuthor(author);
+
+        //then
+        assertEquals(expectedId, id);
+    }
+
+    @Test
+    public void should_return_changed_firstName_while_edit() throws ObjectDoesNotExistException {
+        //when
+        Author author=new Author(null,"John2","Doo2");
+        Long id = authorService.addAuthor(author);
+        Author toEdit = authorService.getAuthor(id);
+        toEdit.setFirstName("JohnEdit");
+
+        //given
+        Author afterEdit = authorService.editAuthor(toEdit);
+
+        //then
+        assertEquals("JohnEdit", afterEdit.getFirstName());
+    }
+    @Test
+    public void should_return_changed_firstName_while_edit() {
+        //when
+        Author author=new Author(null,"John2","Doo2");
+        Long id = authorService.addAuthor(author);
+        Author toEdit = authorService.getAuthor(id);
+        toEdit.setFirstName("JohnEdit");
+
+        //given
+        Author afterEdit = authorService.editAuthor(toEdit);
+
+        //then
+        assertThrows()
+    }
+
+    @Test
+    public void should_return_changed_lastName_while_edit() {
+        //when
+        Author author=new Author(null,"John3","Doo3");
+        Long id = authorService.addAuthor(author);
+        Author toEdit = authorService.getAuthor(id);
+        toEdit.setLastName("DooEdit");
+
+        //given
+        Author afterEdit = authorService.editAuthor(toEdit);
+
+        //then
+        assertEquals("DooEdit", afterEdit.getLastName());
     }
 
     @Test
