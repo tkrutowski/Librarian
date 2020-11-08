@@ -40,7 +40,7 @@ public class EmpikScrapper {
             }
             try {
                 Document page = Jsoup.connect(url).userAgent("Jsoup Scraper").get();
-                chanelList = connectElements(chanel.getKey().toString(),getTitles(page), getAuthors(page));//, getIsbn(page), getImageLink(page), getDescription(page), getItemType(page));
+                chanelList = connectElements(chanel.getKey().toString(),getTitles(page), getAuthors(page), getImageLink(page), getCategory(page));//, getIsbn(page), getImageLink(page), getDescription(page), getItemType(page));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -49,8 +49,8 @@ public class EmpikScrapper {
         return productsList;
     }
 
-    private static List<String> connectElements(String chanel, Elements title, Elements authors){//, Elements isbn, Elements image, Elements description, Elements itemType) {
-
+    private static List<String> connectElements(String chanel, Elements title, Elements authors, Elements image, Elements category){//, Elements isbn, Elements image, Elements description, Elements itemType) {
+g
         List<String> foundElements = new ArrayList<>();
         //Integer minValue = Collections.min(List.of(title.size(),authors.size()));//, isbn.size(), image.size(), description.size(), itemType.size() ));
         //heroku error with List.of!!!
@@ -63,34 +63,14 @@ public class EmpikScrapper {
                     + "::"+authors.get(i).text()
                     + "::"+title.get(i).attr("data-product-name")
 //                    + "::"+description.get(i).attr("title").substring(description.get(i).attr("title").lastIndexOf("<br/>")+5).trim()
-//                    + "::"+URL+"/"+image.get(i).attr("src")
+                    + "::"+image.get(i).attr("lazy-img")
+                    + "::"+category.get(i).attr("data-analytics-category")
                     + "::"+chanel
 //                    + "::"+isbn.get(i).attr("content")
                     + "");
         }
         return foundElements;
     }
-    /*
-    * private String bookstore; //nazwa księgarni np. Empik
-    * private String authors; //autorzy: imie nazwisko            !!!!!!!!!!!
-    * private String title; //tytuł                                 !!!!!!!!!!
-    * private String description; //krótki opis książki           !!!!!!!!!!
-    * private String cover; //link do okładki                     !!!!!!!!!
-    * private EditionType editionType; //typ: EBOOK, AUDIOBOOK lub BOOK   !!!!!!!!!!!!
-    * private String isbn;  //
-    private String categories; //kategorie np. Thriller, kryminał  !!!!!!!!!
-    private ReadingStatus readingStatus;
-    private Long idBook;
-    private String userLogin;
-    private String series; //cykl książek np 'Jack Reacher'   !!!!!!!!!!
-    private String subtitle;//podtytuł jeżęli jest              !!!!!!!!!!
-    private OwnershipStatus ownershipStatus;
-    private LocalDate readFrom; //zaczęto czytać
-    private LocalDate readTo; //skończono czytać
-    private String info; //jakieś swoje zapiski
-    private boolean isRead;//czy przeczytana
-
-     */
 
     private static Elements pagesTraverse (Document doc, String cssQuery) throws IOException {
         Elements siteElements = new Elements();
@@ -118,10 +98,16 @@ public class EmpikScrapper {
         return pagesTraverse(doc,"div.search-content > div");
     }
 
-//
-//    private static Elements getImageLink(Document doc) throws IOException {
-//        return pagesTraverse(doc,"#OfferListingFull > div.polka > div > div > a > img");
-//    }
+    private static Elements getImageLink(Document doc) throws IOException {
+        return pagesTraverse(doc,"div.search-content > div > div > div.productWrapper > a > img");
+    }
+
+
+    private static Elements getCategory(Document doc) throws IOException {
+        return pagesTraverse(doc,"div.search-content > div > div > div.productWrapper > div > div > button");
+    }
+
+
 //
 //    private static Elements getDescription(Document doc) throws IOException {
 //        return pagesTraverse(doc,"#OfferListingFull > div.polka > div > div > a ");
@@ -129,7 +115,27 @@ public class EmpikScrapper {
 //
 //    private static Elements getItemType (Document doc) throws IOException {
 //        return pagesTraverse(doc,"#OfferListingFull > div.polka > div > div > a > div");
-    }
+
+ /*   private Long idBook;
+    private String authors; //autorzy: imie nazwisko            !!!!!!!!!!!
+    private String title; //tytuł                                 !!!!!!!!!!
+    private String cover; //link do okładki                     !!!!!!!!!
+    private String categories; //kategorie np. Thriller, kryminał  !!!!!!!!!
+    private String bookstore; //nazwa księgarni np. Empik
+    private String userLogin;
+    private String series; //cykl książek np 'Jack Reacher'   !!!!!!!!!!
+    private String subtitle;//podtytuł jeżęli jest              !!!!!!!!!!
+    private String description; //krótki opis książki           !!!!!!!!!!
+    private EditionType editionType; //typ: EBOOK, AUDIOBOOK lub BOOK   !!!!!!!!!!!!
+    private ReadingStatus readingStatus;
+    private OwnershipStatus ownershipStatus;
+    private LocalDate readFrom; //zaczęto czytać
+    private LocalDate readTo; //skończono czytać
+    private String info; //jakieś swoje zapiski
+    private Boolean isRead;//czy przeczytana
+    private String isbn;  //                    !!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private int volume;       //jak jest to część jakiejś serii  !!!!!!!!!!!!!!*/
+}
 
 
 
