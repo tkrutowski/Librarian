@@ -1,6 +1,7 @@
 package pl.sda.library.repository;
 
 import lombok.*;
+import pl.sda.library.model.Category;
 
 import javax.persistence.*;
 
@@ -16,4 +17,11 @@ class CategoryDto {
     @Column(name = "id_category")
     private Long idCategory;
     private String name;
+
+    public Category toModel() {
+        Category category=new Category();
+        category.setIdCategory(getIdCategory());
+        category.setName(getName());
+        return category;
+    }
 }

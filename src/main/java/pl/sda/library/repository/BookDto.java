@@ -55,10 +55,13 @@ class BookDto {
     private String description;
     private String cover;
     @Column(name = "edition_type")
+    @Enumerated(EnumType.STRING)
     private EditionType editionType;
     @Column(name = "reading_status")
+    @Enumerated(EnumType.STRING)
     private ReadingStatus readingStatus;
     @Column(name = "ownership_status")
+    @Enumerated(EnumType.STRING)
     private OwnershipStatus ownershipStatus;
     @Column(name = "read_from")
     private LocalDate readFrom;
@@ -66,9 +69,50 @@ class BookDto {
     private LocalDate readTo;
     private String info;
     @Column(name = "is_read")
-    private boolean isRead;
+    private Boolean isRead;
+    private String isbn;
+    private int volume;
 
     Book toModel(){
-        return new Book();
+        Book b=new Book();
+        b.setIdBook(getIdBook());
+        b.setUserLogin(getUser().getLogin());
+        b.setBookstore(getBookstore().getName());
+        b.setSeries(getSeries().getTitle());
+        b.setAuthors(getAuthorsAsString());
+        b.setCategories(getCategoriesAsString());
+        b.setTitle(getTitle());
+        b.setSubtitle(getSubtitle());
+        b.setDescription(getDescription());
+        b.setCover(getCover());
+        b.setEditionType(getEditionType());
+        b.setReadingStatus(getReadingStatus());
+        b.setOwnershipStatus(getOwnershipStatus());
+        b.setReadFrom(getReadFrom());
+        b.setReadTo(getReadTo());
+        b.setInfo(getInfo());
+        b.setIsRead(getIsRead());
+        b.setIsbn(getIsbn());
+        b.setVolume(getVolume());
+        return b;
+    }
+
+     String getAuthorsAsString(){
+        String result = "";
+        for (AuthorDto authorDto : authors) {
+            result += authorDto.getFirstName() + " " + authorDto.getLastName() + ", ";
+        }
+        int index = result.lastIndexOf(',');
+        String substring = result.substring(0, index);
+        return substring;
+    }
+     String getCategoriesAsString(){
+        String result = "";
+        for (CategoryDto categoryDto: categories){
+            result += categoryDto.getName() + ", ";
+        }
+        int index = result.lastIndexOf(',');
+        String substring = result.substring(0, index);
+        return substring;
     }
 }

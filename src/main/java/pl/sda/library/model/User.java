@@ -10,9 +10,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class User {
-    private int idUser;
+    private Long idUser;
     private String login;
     private String password;
     private String name;
-    boolean isAdmin;
+    private Boolean isAdmin;
 }
