@@ -1,9 +1,9 @@
 package pl.sda.library.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.sda.library.exceptions.ObjectDoesNotExistException;
+import pl.sda.library.service.exceptions.ObjectAlreadyExistException;
+import pl.sda.library.service.exceptions.ObjectDoesNotExistException;
 import pl.sda.library.model.Author;
 import pl.sda.library.repository.AuthorRepository;
 
@@ -13,15 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 public class AuthorService {
 
-    @Autowired //TODO - usunąć
     private AuthorRepository authorRepository;
 
-
-    public Long addAuthor(Author author) {
+    public Long addAuthor(Author author)   {
         if(alreadyExist(author))
-        //TODO - rzucić jakimś wyjątkiem?
-          // throw new Exception("Podany autor już istnieje w bazie danych.");
-             return 0L;
+           throw new ObjectAlreadyExistException("Podany autor już istnieje w bazie danych.");
         Long id = authorRepository.add(author);
         return id;
     }
@@ -38,7 +34,7 @@ public class AuthorService {
         authorRepository.deleteAuthor(id);
     }
 
-    public Author editAuthor(Author author) throws ObjectDoesNotExistException {
+    public Author editAuthor(Author author)   {
         Author authorById = authorRepository.getAuthorById(author.getId());
         if(authorById.getId() == null)
             throw new ObjectDoesNotExistException("Podany autor nie istnieje w bazie danych.");

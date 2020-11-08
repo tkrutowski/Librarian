@@ -2,8 +2,9 @@ package pl.sda.library.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pl.sda.library.service.exceptions.ObjectAlreadyExistException;
+import pl.sda.library.service.exceptions.ObjectDoesNotExistException;
 import pl.sda.library.model.Author;
-import pl.sda.library.model.Book;
 import pl.sda.library.service.AuthorService;
 
 import java.util.List;
@@ -20,18 +21,22 @@ public class AuthorController {
     }
 
     @PostMapping("/add")
-    public Long addAuthor(@RequestBody Author author){
-        //TODO jeżeli zwraca 0 to znaczy ze juz istnieje
+    public Long addAuthor(@RequestBody Author author)  {
         return authorService.addAuthor(author);
     }
 
     @PutMapping("/edit")
-    public Author editAuthor(@RequestBody Author author){
+    public Author editAuthor(@RequestBody Author author)  {
         return authorService.editAuthor(author);
     }
 
     @GetMapping("/{id}")
     public Author getAuthor(@PathVariable Long id){
         return authorService.getAuthor(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delAuthor(@PathVariable Long id){
+        authorService.delAuthor(id);
     }
 }
