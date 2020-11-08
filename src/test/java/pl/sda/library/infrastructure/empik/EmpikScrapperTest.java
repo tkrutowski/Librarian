@@ -13,9 +13,9 @@ class EmpikScrapperTest {
     @Test
     void ShouldFindFourElements(){
         //given
-        //String phrase = "Dobry";
+        String phrase = "Dobry";
 //        String phrase = "omen";
-        String phrase = "Dobry Omen";
+//        String phrase = "Dobry Omen";
         //String phrase = "Neil Gaiman";
 
         EmpikAdapter empikAdapter = new EmpikAdapter();
