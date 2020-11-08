@@ -1,5 +1,6 @@
 package pl.sda.library.infrastructure.empik;
 
+import javassist.bytecode.annotation.DoubleMemberValue;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -7,11 +8,9 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 import pl.sda.library.model.EditionType;
 
+import javax.print.Doc;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class EmpikScrapper {
@@ -40,7 +39,7 @@ public class EmpikScrapper {
             }
             try {
                 Document page = Jsoup.connect(url).userAgent("Jsoup Scraper").get();
-                chanelList = connectElements(chanel.getKey().toString(),getTitles(page), getAuthors(page), getImageLink(page), getCategory(page));//, getIsbn(page), getImageLink(page), getDescription(page), getItemType(page));
+                chanelList = connectElements(chanel.getKey().toString(),getTitles(page), getAuthors(page), getImageLink(page), getCategory(page), getAvailability(page));//, getIsbn(page), getImageLink(page), getDescription(page), getItemType(page));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -49,12 +48,12 @@ public class EmpikScrapper {
         return productsList;
     }
 
-    private static List<String> connectElements(String chanel, Elements title, Elements authors, Elements image, Elements category){//, Elements isbn, Elements image, Elements description, Elements itemType) {
-g
+    private static List<String> connectElements(String chanel, Elements title, Elements authors, Elements image, Elements category, Elements availability){//, Elements isbn, Elements image, Elements description, Elements itemType) {
+
         List<String> foundElements = new ArrayList<>();
-        //Integer minValue = Collections.min(List.of(title.size(),authors.size()));//, isbn.size(), image.size(), description.size(), itemType.size() ));
+        Integer minValue = Collections.min(List.of(authors.size(), title.size(),image.size(), category.size(),availability.size()));//, isbn.size(), image.size(), description.size(), itemType.size() ));
         //heroku error with List.of!!!
-        Integer minValue = title.size();
+        //Integer minValue = title.size();
 
         //String authorsList = authors.stream().map(Element::text).collect(Collectors.joining(","));
         String typeOfItem;
@@ -66,6 +65,7 @@ g
                     + "::"+image.get(i).attr("lazy-img")
                     + "::"+category.get(i).attr("data-analytics-category")
                     + "::"+chanel
+                    + "::"+availability.get(i).text().trim()
 //                    + "::"+isbn.get(i).attr("content")
                     + "");
         }
@@ -74,7 +74,7 @@ g
 
     private static Elements pagesTraverse (Document doc, String cssQuery) throws IOException {
         Elements siteElements = new Elements();
-        Elements pagination = doc.select(".pagination > li > a");
+        Elements pagination = doc.select(".pagination > a");
         if (pagination.size() == 0) {
             siteElements = doc.select(cssQuery);
         }
@@ -108,6 +108,9 @@ g
     }
 
 
+    private static Elements getAvailability(Document doc) throws IOException {
+        return pagesTraverse(doc,"div.search-content > div > div > div.productWrapper > div > div.info > span >span.availability");
+    }
 //
 //    private static Elements getDescription(Document doc) throws IOException {
 //        return pagesTraverse(doc,"#OfferListingFull > div.polka > div > div > a ");
