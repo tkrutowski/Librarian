@@ -29,6 +29,7 @@ public class Book {
     private LocalDate readFrom; //zaczęto czytać
     private LocalDate readTo; //skończono czytać
     private String info; //jakieś swoje zapiski
-    private boolean isRead;//czy przeczytana
+    private Boolean isRead;//czy przeczytana
     private String isbn;  //                    !!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private int volume;
 }

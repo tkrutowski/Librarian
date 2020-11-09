@@ -49,7 +49,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-<<<<<<< 39e5fc4e32ca8b299c7749d0472b93d83ee5e4bc
+
 
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 <!--        <dependency>-->
@@ -64,13 +64,13 @@
         </dependency>
 
 
-=======
+
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.13.1</version>
         </dependency>
->>>>>>> Upoluj ebooka api
+
     </dependencies>
 
     <build>

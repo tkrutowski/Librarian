@@ -8,6 +8,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.sda.library.LibraryApplication;
 import pl.sda.library.model.Author;
 import pl.sda.library.model.Series;
+import pl.sda.library.service.exceptions.ObjectAlreadyExistException;
+import pl.sda.library.service.exceptions.ObjectDoesNotExistException;
 
 import static org.junit.Assert.*;
 
@@ -18,23 +20,61 @@ public class SeriesServiceTest {
     private SeriesService seriesService;
 
     @Test
-    public void should_return_true_when_series_added() {
+    public void should_return_id_bigger_than_zero_when_series_added() {
         //when
         Series series=new Series(null,"Rambo","Doo jakiś opis");
 
         //given
-        boolean result = seriesService.addSeries(series);
+        Long id = seriesService.addSeries(series);
 
         //then
-        assertTrue(result);
+        assertNotEquals(java.util.Optional.of(0L),id);
+    }
+
+    @Test
+    public void should_throw_ObjectAlreadyExistException_when_series_already_exist()   {
+        //when
+        Series series=new Series(null,"Commando","Doo jakiś opis");
+        seriesService.addSeries(series);
+
+        //then
+        assertThrows(ObjectAlreadyExistException.class, () -> seriesService.addSeries(series));
+    }
+
+    @Test
+    public void should_return_changed_title_while_edit()  {
+        //when
+        Series series=new Series(null,"Jack","Doo jakiś opis");
+        Long id =   seriesService.addSeries(series);
+        Series toEdit = seriesService.getSeries(id);
+        toEdit.setTitle("Jack Ryan");
+
+        //given
+        Series afterEdit = seriesService.editSeries(toEdit);
+
+        //then
+        assertEquals("Jack Ryan", afterEdit.getTitle());
+    }
+
+    @Test
+    public void should_throw_ObjectDoesNotExistException()   {
+        //when
+        Series series=new Series(null,"Piraci","Doo jakiś opis");
+        Long id =   seriesService.addSeries(series);
+        Series toEdit = seriesService.getSeries(id);
+        toEdit.setTitle("Piraci z karaibów");
+        toEdit.setIdSeries(0L);
+
+        //then
+        assertThrows(ObjectDoesNotExistException.class, () -> seriesService.editSeries(toEdit));
     }
 
     @Test
     public void should_return_size__plus_2_when_2_serieses_added() {
         //when
         final int SIZE = seriesService.getAllSerieses().size() + 2;
-        seriesService.addSeries(new Series(null,"John Rambo","Doo"));
-        seriesService.addSeries(new Series(null,"Jack Ryan","Browm"));
+        seriesService.addSeries(new Series(null,"Niezniszczalni","Doo"));
+        seriesService.addSeries(new Series(null,"Powrót do przyszłości","Browm"));
 
         //given
         int result = seriesService.getAllSerieses().size();

@@ -15,15 +15,10 @@ import java.util.Set;
 @NoArgsConstructor
 public class DtoFactory {
 
-    @Autowired //TODO - do usuniecia
     private UserDtoRepository userRepository;
-    @Autowired //TODO - do usuniecia
     private BookstoreDtoRepository bookstoreRepository;
-    @Autowired //TODO - do usuniecia
     private SeriesDtoRepository seriesRepository;
-    @Autowired //TODO - do usuniecia
     private AuthorDtoRepository authorDtoRepository;
-    @Autowired //TODO - do usuniecia
     private CategoryDtoRepository categoryDtoRepository;
 
     public BookDto createBookDto(Book book) {
