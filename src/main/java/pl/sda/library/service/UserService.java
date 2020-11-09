@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.library.model.User;
 import pl.sda.library.repository.UserRepository;
+import pl.sda.library.service.exceptions.ObjectAlreadyExistException;
+import pl.sda.library.service.exceptions.ObjectDoesNotExistException;
 
 import java.util.List;
 
@@ -13,17 +15,44 @@ public class UserService {
 
     private UserRepository userRepository;
 
-    boolean addUser(User user){
-        //TODO - sprawdzić przed dodaniem czy w bazie nie istnieje już
-        userRepository.addUser(user);
-        return true;
+    public Long addUser(User user){
+        if(alreadyExist(user))
+            throw new ObjectAlreadyExistException("Podany autor już istnieje w bazie danych.");
+        Long id = userRepository.addUser(user);
+        return id;
     }
 
-    List<User> getAllUsers(){
+    private boolean alreadyExist(User user) {
+        return userRepository.isExist(user.getLogin());
+    }
+
+    public List<User> getAllUsers(){
         return userRepository.getAllUsers();
     }
 
     public void delUser(long id) {
         userRepository.deleteUser(id);
+    }
+
+    public User getUser(Long id) {
+        User userById = userRepository.getUserById(id);
+        if(userById.getIdUser() == null)
+            throw new ObjectDoesNotExistException("Podany użytkownik nie istnieje w bazie danych.");
+        else
+            return userById;
+    }
+
+    public User editUser(User user) {
+        User userById = userRepository.getUserById(user.getIdUser());
+        if(userById.getIdUser() == null)
+            throw new ObjectDoesNotExistException("Podany użytkownik nie istnieje w bazie danych.");
+
+        userById.setName(user.getName());
+        //TODO zastanowić się nad edycją hasło w osobnej metodzie
+        userById.setPassword(user.getPassword());
+        //TODO zastanowić się nad edycją isAdmin w osobnej metodzie
+        userById.setIsAdmin(user.getIsAdmin());
+
+        return userRepository.editUser(userById);
     }
 }
