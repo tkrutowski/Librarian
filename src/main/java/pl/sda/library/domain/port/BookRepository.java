@@ -5,11 +5,12 @@ import pl.sda.library.domain.model.Book;
 import pl.sda.library.domain.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 interface BookRepository {
 
-    Book findById(Long id);
+    Optional<Book> findById(Long id);
 
     boolean addBook(Book book);
 

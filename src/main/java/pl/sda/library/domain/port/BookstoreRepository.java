@@ -1,58 +1,23 @@
 package pl.sda.library.domain.port;
 
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.Bookstore;
-import pl.sda.library.infrastructure.jpa.BookstoreDto;
-import pl.sda.library.infrastructure.jpa.BookstoreDtoRepository;
-import pl.sda.library.infrastructure.jpa.DtoFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Component
-public class BookstoreRepository {
+interface BookstoreRepository {
 
-    private BookstoreDtoRepository bookstoreDtoRepository;
-    private DtoFactory dtoFactory;
+    Long addBookstore(Bookstore bookstore);
 
-    public Long addBookstore(Bookstore bookstore) {
-        Long id = 0L;
-        BookstoreDto saved = bookstoreDtoRepository.save(dtoFactory.createBookstoreDto(bookstore));
-        id = saved.getIdBookstore();
-        return id;
-    }
+    List<Bookstore> getAllBookstores();
 
-    public List<Bookstore> getAllBookstores() {
-        List<Bookstore> bookstoreList = new ArrayList<>();
-        bookstoreDtoRepository.findAll().iterator().forEachRemaining(bookstoreDto -> bookstoreList.add(bookstoreDto.toModel()));
-        return bookstoreList;
-    }
+    void deleteBookstore(long id);
 
-    public void deleteBookstore(long id) {
-        bookstoreDtoRepository.deleteById(id);
-    }
+    Optional<Bookstore> getBookstoreById(Long id);
 
-    public Bookstore getBookstoreById(Long id) {
-        Optional<BookstoreDto> byId = bookstoreDtoRepository.findById(id);
-        if (byId.isPresent())
-            return byId.get().toModel();
-        else
-            return new Bookstore();
-    }
+    Optional<Bookstore> editBookstore(Bookstore bookstore);
 
-    public Bookstore editBookstore(Bookstore bookstore) {
-        BookstoreDto saved = bookstoreDtoRepository.save(dtoFactory.createBookstoreDto(bookstore));
-        return saved.toModel();
-    }
-
-    public boolean isExist(String name) {
-        Optional<BookstoreDto> bookstoreDtoByName = bookstoreDtoRepository.findBookstoreDtoByName(name);
-        if (bookstoreDtoByName.isPresent())
-            return true;
-        else
-            return false;
-    }
+    boolean isExist(String name);
 }

@@ -1,70 +1,25 @@
 package pl.sda.library.domain.port;
 
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.Category;
-import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
-import pl.sda.library.infrastructure.jpa.CategoryDto;
-import pl.sda.library.infrastructure.jpa.CategoryDtoRepository;
-import pl.sda.library.infrastructure.jpa.DtoFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Component
-public class CategoryRepository {
+public interface CategoryRepository {
 
-    private CategoryDtoRepository categoryDtoRepository;
-    private DtoFactory dtoFactory;
+    Long addCategory(Category category);
 
-    public Long addCategory(Category category) {
-        Long id = 0L;
-        CategoryDto saved = categoryDtoRepository.save(dtoFactory.createCategoryDto(category));
-        id=saved.getIdCategory();
-        return id;
-    }
+    List<Category> getAllCategories();
 
-    public List<Category> getAllCategories() {
-        List<Category> categoryList = new ArrayList<>();
-        categoryDtoRepository.findAll().iterator().forEachRemaining(categoryDto -> categoryList.add(categoryDto.toModel()));
-        return categoryList;
-    }
+    void deleteCategory(long id);
 
-    public void delCategory(long id) {
-        if(isExistById(id))
-            categoryDtoRepository.deleteById(id);
-        else
-            throw new ObjectDoesNotExistException("Nie ma kategorii o takim ID: " + id);
-    }
+    boolean isExist(String name);
 
-    public boolean isExist(String name) {
-        Optional<CategoryDto> categoryDto = categoryDtoRepository.findCategoryDtoByName(name);
-        if(categoryDto.isPresent())
-            return true;
-        else
-            return false;
-    }
+    boolean isExistById(Long id);
 
-    public boolean isExistById(Long id){
-        Optional<CategoryDto> byId = categoryDtoRepository.findById(id);
-        if(byId.isPresent())
-            return true;
-        else
-            return false;
-    }
+    Optional<Category> getCategoryById(Long id);
 
-    public Category getCategoryById(Long id) {
-        Optional<CategoryDto> byId = categoryDtoRepository.findById(id);
-        if(byId.isPresent())
-            return byId.get().toModel();
-        else
-            return new Category();
-    }
-
-    public Category editCategory(Category category) {
-        CategoryDto saved = categoryDtoRepository.save(dtoFactory.createCategoryDto(category));
-        return saved.toModel();
-    }
+    Optional<Category> editCategory(Category category);
 }

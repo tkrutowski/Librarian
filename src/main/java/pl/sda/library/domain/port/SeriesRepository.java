@@ -1,71 +1,25 @@
 package pl.sda.library.domain.port;
 
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.Series;
-import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
-import pl.sda.library.infrastructure.jpa.DtoFactory;
-import pl.sda.library.infrastructure.jpa.SeriesDto;
-import pl.sda.library.infrastructure.jpa.SeriesDtoRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Component
-public class SeriesRepository {
+public interface SeriesRepository {
 
-    private SeriesDtoRepository seriesDtoRepository;
-    private DtoFactory dtoFactory;
+    Long addSeries(Series series);
 
-    public Long addSeries(Series series) {
-        Long id = 0L;
-        SeriesDto saved =  seriesDtoRepository.save(dtoFactory.createSeriesDto(series));
-        id=saved.getIdSeries();
-        return id;
-    }
+    List<Series> getAllSerieses();
 
-    public List<Series> getAllSerieses() {
-        List<Series> seriesList = new ArrayList<>();
-        seriesDtoRepository.findAll().iterator().forEachRemaining(seriesDto -> seriesList.add(seriesDto.toModel()));
-        return seriesList;
-    }
+    void deleteSeries(long id);
 
-    public void deleteSeries(long id) {
-        if(isExistById(id))
-            seriesDtoRepository.deleteById(id);
-        else
-            throw new ObjectDoesNotExistException("Nie ma autora o takim ID: " + id);
+    boolean isExist(String title);
 
-    }
+    Optional<Series> getSeriesById(Long idSeries);
 
-    public boolean isExist(String title) {
-        Optional<SeriesDto> seriesDto = seriesDtoRepository.findSeriesDtoByTitle(title);
-        if(seriesDto.isPresent())
-            return true;
-        else
-            return false;
-    }
+    Optional<Series> editSeries(Series series);
 
-    public Series getSeriesById(Long idSeries) {
-        Optional<SeriesDto> byId = seriesDtoRepository.findById(idSeries);
-        if(byId.isPresent())
-            return byId.get().toModel();
-        else
-            return new Series();
-    }
-
-    public Series editSeries(Series series) {
-        SeriesDto seriesDto = seriesDtoRepository.save(dtoFactory.createSeriesDto(series));
-        return seriesDto.toModel();
-    }
-
-    public boolean isExistById(Long id){
-        Optional<SeriesDto> byId = seriesDtoRepository.findById(id);
-        if(byId.isPresent())
-            return true;
-        else
-            return false;
-    }
+    boolean isExistById(Long id);
 }
