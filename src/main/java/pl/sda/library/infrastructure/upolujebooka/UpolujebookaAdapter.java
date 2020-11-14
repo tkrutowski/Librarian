@@ -1,6 +1,6 @@
 package pl.sda.library.infrastructure.upolujebooka;
 
-import pl.sda.library.model.Book;
+import pl.sda.library.domain.model.Book;
 import pl.sda.library.model.ProductRepository;
 
 import java.util.ArrayList;

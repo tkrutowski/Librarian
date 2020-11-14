@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.sda.library.LibraryApplication;
-import pl.sda.library.model.*;
+import pl.sda.library.domain.model.*;
+import pl.sda.library.infrastructure.jpa.BookDto;
+import pl.sda.library.infrastructure.jpa.DtoFactory;
+import pl.sda.library.infrastructure.jpa.UserDto;
 
 import java.time.LocalDate;
 

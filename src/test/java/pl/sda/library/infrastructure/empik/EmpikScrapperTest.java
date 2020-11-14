@@ -1,8 +1,7 @@
 package pl.sda.library.infrastructure.empik;
 
 import org.junit.jupiter.api.Test;
-import pl.sda.library.infrastructure.upolujebooka.UpolujebookaAdapter;
-import pl.sda.library.model.Book;
+import pl.sda.library.domain.model.Book;
 
 import java.util.List;
 

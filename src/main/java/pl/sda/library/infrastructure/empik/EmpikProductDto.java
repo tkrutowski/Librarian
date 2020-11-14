@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.sda.library.model.Book;
+import pl.sda.library.domain.model.Book;
 
 @Data
 @Builder(toBuilder = true)
