@@ -1,6 +1,7 @@
-package pl.sda.library.repository;
+package pl.sda.library.infrastructure.jpa;
 
 import org.springframework.data.repository.CrudRepository;
+import pl.sda.library.infrastructure.jpa.UserDto;
 
 import java.util.Optional;
 

@@ -1,9 +1,12 @@
-package pl.sda.library.repository;
+package pl.sda.library.domain.port;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.Category;
 import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
+import pl.sda.library.infrastructure.jpa.CategoryDto;
+import pl.sda.library.infrastructure.jpa.CategoryDtoRepository;
+import pl.sda.library.infrastructure.jpa.DtoFactory;
 
 import java.util.ArrayList;
 import java.util.List;

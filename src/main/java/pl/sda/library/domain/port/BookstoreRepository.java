@@ -1,8 +1,11 @@
-package pl.sda.library.repository;
+package pl.sda.library.domain.port;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.Bookstore;
+import pl.sda.library.infrastructure.jpa.BookstoreDto;
+import pl.sda.library.infrastructure.jpa.BookstoreDtoRepository;
+import pl.sda.library.infrastructure.jpa.DtoFactory;
 
 import java.util.ArrayList;
 import java.util.List;

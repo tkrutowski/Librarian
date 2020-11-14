@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import pl.sda.library.domain.model.Book;
 import pl.sda.library.domain.model.User;
-import pl.sda.library.repository.BookRepository;
+import pl.sda.library.domain.port.BookRepository;
 
 import java.util.ArrayList;
 import java.util.List;

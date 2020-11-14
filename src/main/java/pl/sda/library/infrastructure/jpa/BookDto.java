@@ -1,4 +1,4 @@
-package pl.sda.library.repository;
+package pl.sda.library.infrastructure.jpa;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,10 @@ import pl.sda.library.domain.model.EditionType;
 import pl.sda.library.domain.model.OwnershipStatus;
 import pl.sda.library.domain.model.ReadingStatus;
 import pl.sda.library.infrastructure.jpa.AuthorDto;
+import pl.sda.library.repository.BookstoreDto;
+import pl.sda.library.repository.CategoryDto;
+import pl.sda.library.repository.SeriesDto;
+import pl.sda.library.repository.UserDto;
 
 import javax.persistence.*;
 import java.time.LocalDate;

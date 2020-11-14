@@ -1,11 +1,14 @@
-package pl.sda.library.repository;
+package pl.sda.library.infrastructure.jpa;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.*;
-import pl.sda.library.infrastructure.jpa.AuthorDto;
-import pl.sda.library.infrastructure.jpa.AuthorDtoRepository;
+import pl.sda.library.infrastructure.jpa.*;
+import pl.sda.library.repository.SeriesDto;
+import pl.sda.library.repository.SeriesDtoRepository;
+import pl.sda.library.repository.UserDto;
+import pl.sda.library.repository.UserDtoRepository;
 
 import java.util.HashSet;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package pl.sda.library.repository;
+package pl.sda.library.infrastructure.jpa;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

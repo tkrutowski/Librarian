@@ -3,7 +3,7 @@ package pl.sda.library.domain.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.library.domain.model.Bookstore;
-import pl.sda.library.repository.BookstoreRepository;
+import pl.sda.library.domain.port.BookstoreRepository;
 import pl.sda.library.domain.model.exception.ObjectAlreadyExistException;
 import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
 
