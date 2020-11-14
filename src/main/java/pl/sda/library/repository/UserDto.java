@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.sda.library.model.User;
+import pl.sda.library.domain.model.User;
 
 import javax.persistence.*;
 

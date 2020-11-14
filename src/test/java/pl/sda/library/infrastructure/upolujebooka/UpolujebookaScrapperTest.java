@@ -1,7 +1,7 @@
 package pl.sda.library.infrastructure.upolujebooka;
 
 import org.junit.jupiter.api.Test;
-import pl.sda.library.model.Book;
+import pl.sda.library.domain.model.Book;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

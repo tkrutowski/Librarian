@@ -2,7 +2,7 @@ package pl.sda.library.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.sda.library.model.Bookstore;
+import pl.sda.library.domain.model.Bookstore;
 
 import java.util.ArrayList;
 import java.util.List;

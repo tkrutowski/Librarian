@@ -1,14 +1,12 @@
 package pl.sda.library.infrastructure.empik;
 
-import javassist.bytecode.annotation.DoubleMemberValue;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
-import pl.sda.library.model.EditionType;
+import pl.sda.library.domain.model.EditionType;
 
-import javax.print.Doc;
 import java.io.IOException;
 import java.util.*;
 

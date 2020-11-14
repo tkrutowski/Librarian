@@ -1,7 +1,7 @@
 package pl.sda.library.repository;
 
 import lombok.*;
-import pl.sda.library.model.Category;
+import pl.sda.library.domain.model.Category;
 
 import javax.persistence.*;
 

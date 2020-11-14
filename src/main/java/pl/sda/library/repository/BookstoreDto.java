@@ -1,7 +1,7 @@
 package pl.sda.library.repository;
 
 import lombok.*;
-import pl.sda.library.model.Bookstore;
+import pl.sda.library.domain.model.Bookstore;
 
 import javax.persistence.*;
 

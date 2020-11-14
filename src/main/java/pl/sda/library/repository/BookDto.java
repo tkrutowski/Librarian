@@ -4,7 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.sda.library.model.*;
+import pl.sda.library.domain.model.Book;
+import pl.sda.library.domain.model.EditionType;
+import pl.sda.library.domain.model.OwnershipStatus;
+import pl.sda.library.domain.model.ReadingStatus;
+import pl.sda.library.infrastructure.jpa.AuthorDto;
 
 import javax.persistence.*;
 import java.time.LocalDate;

@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.sda.library.model.Book;
-import pl.sda.library.model.EditionType;
+import pl.sda.library.domain.model.Book;
+import pl.sda.library.domain.model.EditionType;
 
 @Data
 @Builder (toBuilder = true)

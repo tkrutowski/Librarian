@@ -2,9 +2,10 @@ package pl.sda.library.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.sda.library.model.*;
+import pl.sda.library.domain.model.*;
+import pl.sda.library.infrastructure.jpa.AuthorDto;
+import pl.sda.library.infrastructure.jpa.AuthorDtoRepository;
 
 import java.util.HashSet;
 import java.util.Optional;

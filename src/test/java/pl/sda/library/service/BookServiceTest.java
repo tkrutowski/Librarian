@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.sda.library.LibraryApplication;
-import pl.sda.library.model.Book;
-import pl.sda.library.model.EditionType;
-import pl.sda.library.model.OwnershipStatus;
-import pl.sda.library.model.ReadingStatus;
+import pl.sda.library.domain.model.Book;
+import pl.sda.library.domain.model.EditionType;
+import pl.sda.library.domain.model.OwnershipStatus;
+import pl.sda.library.domain.model.ReadingStatus;
+import pl.sda.library.domain.service.BookService;
 
 import static org.junit.jupiter.api.Assertions.*;
 

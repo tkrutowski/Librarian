@@ -2,9 +2,8 @@ package pl.sda.library.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.sda.library.model.Author;
-import pl.sda.library.model.Series;
-import pl.sda.library.service.exceptions.ObjectDoesNotExistException;
+import pl.sda.library.domain.model.Series;
+import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
 
 import java.util.ArrayList;
 import java.util.List;

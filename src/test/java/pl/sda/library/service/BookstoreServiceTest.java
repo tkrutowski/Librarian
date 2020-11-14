@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.sda.library.LibraryApplication;
-import pl.sda.library.model.Bookstore;
-import pl.sda.library.service.exceptions.ObjectAlreadyExistException;
-import pl.sda.library.service.exceptions.ObjectDoesNotExistException;
+import pl.sda.library.domain.model.Bookstore;
+import pl.sda.library.domain.service.BookstoreService;
+import pl.sda.library.domain.model.exception.ObjectAlreadyExistException;
+import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertThrows;
