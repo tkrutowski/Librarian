@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-interface BookRepository {
+public interface BookRepository {
 
     Optional<Book> findById(Long id);
 

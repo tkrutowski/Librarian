@@ -8,6 +8,7 @@ import pl.sda.library.domain.model.Author;
 import pl.sda.library.domain.port.AuthorRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class AuthorService {
     public Long addAuthor(Author author)   {
         if(alreadyExist(author))
            throw new ObjectAlreadyExistException("Podany autor już istnieje w bazie danych.");
-        Long id = authorRepository.add(author);
+        Long id = authorRepository.addAuthor(author);
         return id;
     }
 
@@ -35,21 +36,24 @@ public class AuthorService {
     }
 
     public Author editAuthor(Author author)   {
-        Author authorById = authorRepository.getAuthorById(author.getId());
-        if(authorById.getId() == null)
+        Optional<Author> authorById = authorRepository.getAuthorById(author.getId());
+        if(!authorById.isPresent()) {
             throw new ObjectDoesNotExistException("Podany autor nie istnieje w bazie danych.");
+        }
 
-        authorById.setLastName(author.getLastName());
-        authorById.setFirstName(author.getFirstName());
+        Author authorTemp = authorById.get();
 
-        return authorRepository.editAuthor(authorById);
+        authorTemp.setLastName(author.getLastName());
+        authorTemp.setFirstName(author.getFirstName());
+
+        return authorRepository.editAuthor(authorTemp);
     }
 
     public Author getAuthor(Long id) {
-        Author authorById = authorRepository.getAuthorById(id);
-        if(authorById.getId() == null)
+        Optional<Author> authorById = authorRepository.getAuthorById(id);
+        if(!authorById.isPresent()){
             throw new ObjectDoesNotExistException("Podany autor nie istnieje w bazie danych.");
-        else
-            return authorById;
+        }
+        return authorById.get();
     }
 }

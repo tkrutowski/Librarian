@@ -13,17 +13,17 @@ import java.util.List;
 public class AuthorController {
     AuthorService authorService;
 
-    @GetMapping("/all")
+    @GetMapping
     public List<Author> getAllAuthors(){
         return authorService.getAllAuthors();
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public Long addAuthor(@RequestBody Author author)  {
         return authorService.addAuthor(author);
     }
 
-    @PutMapping("/edit")
+    @PutMapping
     public Author editAuthor(@RequestBody Author author)  {
         return authorService.editAuthor(author);
     }

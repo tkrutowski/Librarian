@@ -17,9 +17,6 @@ public interface  AuthorRepository {
 
     void deleteAuthor(long id);
 
-    Author editAuthor(Author author);
+    Optional<Author> editAuthor(Author author);
 
-    boolean isExistById(Long id);
-
-    boolean isExist(String firstName, String lastName);
 }

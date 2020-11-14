@@ -59,13 +59,13 @@ public class DtoFactory {
         return userDto;
     }
 
-    public AuthorDto createAuthorDto(Author author){
-        AuthorDto authorDto=new AuthorDto();
-        authorDto.setId(author.getId());
-        authorDto.setFirstName(author.getFirstName());
-        authorDto.setLastName(author.getLastName());
-        return authorDto;
-    }
+//    public AuthorDto createAuthorDto(Author author){
+//        AuthorDto authorDto=new AuthorDto();
+//        authorDto.setId(author.getId());
+//        authorDto.setFirstName(author.getFirstName());
+//        authorDto.setLastName(author.getLastName());
+//        return authorDto;
+//    }
     private Set<AuthorDto> getAuthorsFromString(String authors) {
         Set<AuthorDto> authorDtos = new HashSet<>();
         String[] authorsList = authors.trim().split(",");
