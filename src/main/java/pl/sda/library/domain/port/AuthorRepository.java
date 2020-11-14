@@ -7,19 +7,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public interface  AuthorRepository {
+public interface AuthorRepository {
 
-    Long addAuthor(Author author) ;
+    Long add(Author author);
 
-    Optional<Author> getAuthorById(Long id);
+    Optional<Author> getById(Long id);
 
-    List<Author> getAllAuthors();
+    List<Author> getAll();
 
-    void deleteAuthor(long id);
+    void delete(Long id);
 
-    Optional<Author> editAuthor(Author author);
+    Optional<Author> edit(Author author);
 
-    boolean isExistByFirstNameAndLastName(String firstName, String lastName);
-
-    boolean isExistById(Long id);
+    Optional<Author> getByFirstNameAndLastName(String firstName, String lastName);
 }

@@ -31,8 +31,8 @@ class AuthorDto {
         return author;
     }
 
-    static AuthorDto fromDomain(Author author){
-        AuthorDto authorDto=new AuthorDto();
+    static AuthorDto fromDomain(Author author) {
+        AuthorDto authorDto = new AuthorDto();
         authorDto.setId(author.getId());
         authorDto.setFirstName(author.getFirstName());
         authorDto.setLastName(author.getLastName());

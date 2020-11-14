@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.library.domain.model.exception.AuthorAlreadyExistException;
 import pl.sda.library.domain.model.exception.AuthorDoesNotExistException;
-import pl.sda.library.domain.model.exception.ObjectAlreadyExistException;
-import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
 import pl.sda.library.domain.model.Author;
 import pl.sda.library.domain.port.AuthorRepository;
 
@@ -18,27 +16,27 @@ public class AuthorService {
 
     private AuthorRepository authorRepository;
 
-    public Long addAuthor(Author author)   {
-        if(authorRepository.isExistByFirstNameAndLastName(author.getFirstName(), author.getLastName())){
+    public Long addAuthor(Author author) {
+        if (authorRepository.getByFirstNameAndLastName(author.getFirstName(), author.getLastName()).isPresent()) {
             throw new AuthorAlreadyExistException();
         }
-        Long id = authorRepository.addAuthor(author);
-        return id;
+        return authorRepository.add(author);
     }
 
-    public List<Author> getAllAuthors(){
-        return authorRepository.getAllAuthors();
+    public List<Author> getAllAuthors() {
+        return authorRepository.getAll();
     }
 
-    public void delAuthor(long id) {
-        if(!authorRepository.isExistById(id)){
+    public void deleteAuthor(Long id) {
+        if (!authorRepository.getById(id).isPresent()) {
             throw new AuthorDoesNotExistException(id);
-        }authorRepository.deleteAuthor(id);
+        }
+        authorRepository.delete(id);
     }
 
-    public Author editAuthor(Author author)   {
-        Optional<Author> authorById = authorRepository.getAuthorById(author.getId());
-        if(!authorById.isPresent()) {
+    public Author editAuthor(Author author) {
+        Optional<Author> authorById = authorRepository.getById(author.getId());
+        if (!authorById.isPresent()) {
             throw new AuthorDoesNotExistException(author.getId());
         }
 
@@ -46,12 +44,12 @@ public class AuthorService {
         authorTemp.setLastName(author.getLastName());
         authorTemp.setFirstName(author.getFirstName());
 
-        return authorRepository.editAuthor(authorTemp).get();
+        return authorRepository.edit(authorTemp).get();
     }
 
     public Author getAuthor(Long id) {
-        Optional<Author> authorById = authorRepository.getAuthorById(id);
-        if(!authorById.isPresent()){
+        Optional<Author> authorById = authorRepository.getById(id);
+        if (!authorById.isPresent()) {
             throw new AuthorDoesNotExistException(id);
         }
         return authorById.get();

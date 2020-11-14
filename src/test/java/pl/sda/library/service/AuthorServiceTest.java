@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.sda.library.LibraryApplication;
+import pl.sda.library.domain.model.exception.AuthorDoesNotExistException;
 import pl.sda.library.domain.service.AuthorService;
 import pl.sda.library.domain.model.exception.ObjectAlreadyExistException;
 import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
@@ -84,6 +85,26 @@ public class AuthorServiceTest {
     }
 
     @Test
+    public void should_throw_AuthorDoesNotExistException_while_get_no_exist_author()  {
+        //when
+        Author author=new Author(null,"John3","Doo3");
+        Long id = authorService.addAuthor(author);
+        authorService.deleteAuthor(id);
+
+        //then
+        assertThrows(AuthorDoesNotExistException.class, () -> authorService.deleteAuthor(id));
+    }
+
+    @Test
+    public void should_throw_AuthorDoesNotExistException_while_delete_no_exist_author()  {
+        //when
+        Long id=0L;
+
+        //then
+        assertThrows(AuthorDoesNotExistException.class, () -> authorService.getAuthor(id));
+    }
+
+    @Test
     public void should_return_size__plus_3_when_3_authors_added()   {
         //when
         final int SIZE = authorService.getAllAuthors().size() + 3;
@@ -101,7 +122,7 @@ public class AuthorServiceTest {
     public void should_return_size__minus_1_when_one_author_deleted() {
         //when
         final int SIZE = authorService.getAllAuthors().size() -1;
-        authorService.delAuthor(3L);
+        authorService.deleteAuthor(3L);
 
         //given
         int result = authorService.getAllAuthors().size();

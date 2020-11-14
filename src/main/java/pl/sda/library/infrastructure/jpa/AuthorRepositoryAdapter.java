@@ -13,46 +13,37 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AuthorRepositoryAdapter implements AuthorRepository {
 
-    private  AuthorDtoRepository authorDtoRepository;
+    private AuthorDtoRepository authorDtoRepository;
 
     @Override
-    public Long addAuthor(Author author) {
+    public Long add(Author author) {
         return authorDtoRepository.save(AuthorDto.fromDomain(author)).getId();
     }
 
     @Override
-    public Optional<Author> getAuthorById(Long id) {
-        Optional<AuthorDto> byId = authorDtoRepository.findById(id);
-        if(byId.isPresent()){
-            return Optional.of(byId.get().toModel());
-        }
-        return Optional.empty();
+    public Optional<Author> getById(Long id) {
+        return authorDtoRepository.findById(id).map(authorDto -> authorDto.toModel());
     }
 
     @Override
-    public List<Author> getAllAuthors() {
+    public List<Author> getAll() {
         List<Author> authorList = new ArrayList<>();
         authorDtoRepository.findAll().iterator().forEachRemaining(authorDto -> authorList.add(authorDto.toModel()));
         return authorList;
     }
 
     @Override
-    public void deleteAuthor(long id) {
+    public void delete(Long id) {
         authorDtoRepository.deleteById(id);
     }
 
     @Override
-    public Optional<Author> editAuthor(Author author) {
+    public Optional<Author> edit(Author author) {
         return Optional.of(authorDtoRepository.save(AuthorDto.fromDomain(author)).toModel());
     }
 
     @Override
-    public boolean isExistById(Long id) {
-        return authorDtoRepository.findById(id).isPresent();
-    }
-
-    @Override
-    public boolean isExistByFirstNameAndLastName(String firstName, String lastName) {
-        return authorDtoRepository.findAuthorDtoByFirstNameAndLastName(firstName, lastName).isPresent();
+    public Optional<Author> getByFirstNameAndLastName(String firstName, String lastName) {
+        return authorDtoRepository.findAuthorDtoByFirstNameAndLastName(firstName, lastName).map(authorDto -> authorDto.toModel());
     }
 }
