@@ -2,6 +2,8 @@ package pl.sda.library.domain.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.sda.library.domain.model.exception.AuthorAlreadyExistException;
+import pl.sda.library.domain.model.exception.AuthorDoesNotExistException;
 import pl.sda.library.domain.model.exception.ObjectAlreadyExistException;
 import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
 import pl.sda.library.domain.model.Author;
@@ -17,14 +19,11 @@ public class AuthorService {
     private AuthorRepository authorRepository;
 
     public Long addAuthor(Author author)   {
-        if(alreadyExist(author))
-           throw new ObjectAlreadyExistException("Podany autor już istnieje w bazie danych.");
+        if(authorRepository.isExistByFirstNameAndLastName(author.getFirstName(), author.getLastName())){
+            throw new AuthorAlreadyExistException();
+        }
         Long id = authorRepository.addAuthor(author);
         return id;
-    }
-
-    private boolean alreadyExist(Author author) {
-        return authorRepository.isExist(author.getFirstName(),author.getLastName());
     }
 
     public List<Author> getAllAuthors(){
@@ -32,27 +31,28 @@ public class AuthorService {
     }
 
     public void delAuthor(long id) {
-        authorRepository.deleteAuthor(id);
+        if(!authorRepository.isExistById(id)){
+            throw new AuthorDoesNotExistException(id);
+        }authorRepository.deleteAuthor(id);
     }
 
     public Author editAuthor(Author author)   {
         Optional<Author> authorById = authorRepository.getAuthorById(author.getId());
         if(!authorById.isPresent()) {
-            throw new ObjectDoesNotExistException("Podany autor nie istnieje w bazie danych.");
+            throw new AuthorDoesNotExistException(author.getId());
         }
 
         Author authorTemp = authorById.get();
-
         authorTemp.setLastName(author.getLastName());
         authorTemp.setFirstName(author.getFirstName());
 
-        return authorRepository.editAuthor(authorTemp);
+        return authorRepository.editAuthor(authorTemp).get();
     }
 
     public Author getAuthor(Long id) {
         Optional<Author> authorById = authorRepository.getAuthorById(id);
         if(!authorById.isPresent()){
-            throw new ObjectDoesNotExistException("Podany autor nie istnieje w bazie danych.");
+            throw new AuthorDoesNotExistException(id);
         }
         return authorById.get();
     }

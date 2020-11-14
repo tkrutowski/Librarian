@@ -3,8 +3,6 @@ package pl.sda.library.infrastructure.jpa;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.Author;
-import pl.sda.library.domain.model.exception.AuthorAlreadyExistException;
-import pl.sda.library.domain.model.exception.AuthorDoesNotExistException;
 import pl.sda.library.domain.port.AuthorRepository;
 
 import java.util.ArrayList;
@@ -19,9 +17,6 @@ public class AuthorRepositoryAdapter implements AuthorRepository {
 
     @Override
     public Long addAuthor(Author author) {
-        if(isExistByFirstNameAndLastName(author.getFirstName(), author.getLastName())){
-            throw new AuthorAlreadyExistException();
-        }
         return authorDtoRepository.save(AuthorDto.fromDomain(author)).getId();
     }
 
@@ -43,9 +38,6 @@ public class AuthorRepositoryAdapter implements AuthorRepository {
 
     @Override
     public void deleteAuthor(long id) {
-        if(!isExistById(id)){
-            throw new AuthorDoesNotExistException(id);
-        }
         authorDtoRepository.deleteById(id);
     }
 
@@ -54,11 +46,13 @@ public class AuthorRepositoryAdapter implements AuthorRepository {
         return Optional.of(authorDtoRepository.save(AuthorDto.fromDomain(author)).toModel());
     }
 
-    boolean isExistById(Long id) {
+    @Override
+    public boolean isExistById(Long id) {
         return authorDtoRepository.findById(id).isPresent();
     }
 
-    boolean isExistByFirstNameAndLastName(String firstName, String lastName) {
+    @Override
+    public boolean isExistByFirstNameAndLastName(String firstName, String lastName) {
         return authorDtoRepository.findAuthorDtoByFirstNameAndLastName(firstName, lastName).isPresent();
     }
 }

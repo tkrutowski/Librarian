@@ -19,4 +19,7 @@ public interface  AuthorRepository {
 
     Optional<Author> editAuthor(Author author);
 
+    boolean isExistByFirstNameAndLastName(String firstName, String lastName);
+
+    boolean isExistById(Long id);
 }
