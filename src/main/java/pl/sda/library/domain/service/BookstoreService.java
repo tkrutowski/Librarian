@@ -24,16 +24,16 @@ public class BookstoreService {
         return bookstoreRepository.add(bookstore);
     }
 
-    public Bookstore editBookstore(Bookstore bookstoreToEdit) {
-        Optional<Bookstore> bookstoreById = bookstoreRepository.findById(bookstoreToEdit.getIdBookstore());
+    public Bookstore editBookstore(Bookstore bookstoreToEdit, Long id) {
+        Optional<Bookstore> bookstoreById = bookstoreRepository.findById(id);
         if (!bookstoreById.isPresent()) {
-            throw new BookstoreDoesNotExistException(bookstoreToEdit.getIdBookstore());
+            throw new BookstoreDoesNotExistException(id);
         }
-        Bookstore bookstoreTemp = bookstoreById.get();
-        bookstoreTemp.setUrl(bookstoreToEdit.getUrl());
-        bookstoreTemp.setName(bookstoreToEdit.getName());
 
-        return bookstoreRepository.edit(bookstoreTemp).get();
+        bookstoreById.get().setName(bookstoreToEdit.getName());
+        bookstoreById.get().setUrl(bookstoreToEdit.getUrl());
+
+        return bookstoreRepository.edit(bookstoreById.get()).get();
     }
 
     public void deleteBookstore(Long id) {

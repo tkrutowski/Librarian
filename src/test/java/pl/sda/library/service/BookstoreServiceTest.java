@@ -77,13 +77,13 @@ public class BookstoreServiceTest {
         Bookstore bookstore = new Bookstore(null, "Arsenał2", "www.arsenal.com");
         Long id = bookstoreService.addBookstore(bookstore);
         Bookstore toEdit = bookstoreService.findBookstore(id);
-        toEdit.setName("Arsenał2");
+        toEdit.setName("Arsenał_update");
 
         //given
-        Bookstore afterEdit = bookstoreService.editBookstore(toEdit);
+        Bookstore afterEdit = bookstoreService.editBookstore(toEdit, id);
 
         //then
-        assertEquals("Arsenał2", afterEdit.getName());
+        assertEquals("Arsenał_update", afterEdit.getName());
     }
 
     @Test
@@ -92,12 +92,12 @@ public class BookstoreServiceTest {
         Bookstore bookstore = new Bookstore(null, "Arsenał", "www.arsenal.com");
         Long id = bookstoreService.addBookstore(bookstore);
         Bookstore toEdit = bookstoreService.findBookstore(id);
-
+        Long notExistID = 0L;
         toEdit.setIdBookstore(0L);
-        toEdit.setName("Arsenał2");
+        toEdit.setName("Arsenał22");
 
         //then
-        assertThrows(BookstoreDoesNotExistException.class, () -> bookstoreService.editBookstore(toEdit));
+        assertThrows(BookstoreDoesNotExistException.class, () -> bookstoreService.editBookstore(toEdit, notExistID));
     }
 
     @Test
@@ -110,7 +110,7 @@ public class BookstoreServiceTest {
 
 
         //given
-        Bookstore afterEdit = bookstoreService.editBookstore(toEdit);
+        Bookstore afterEdit = bookstoreService.editBookstore(toEdit, id);
 
         //then
         assertEquals("www.gandalf.com.pl", afterEdit.getUrl());

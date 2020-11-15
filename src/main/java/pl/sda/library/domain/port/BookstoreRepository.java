@@ -13,7 +13,7 @@ public interface BookstoreRepository {
 
     Optional<Bookstore> edit(Bookstore bookstore);
 
-    boolean delete(Long id);
+    void delete(Long id);
 
     List<Bookstore> findAll();
 

@@ -26,29 +26,28 @@ public class BookstoreRepositoryAdapter implements BookstoreRepository {
     }
 
     @Override
-    public boolean delete(Long id) {
-        try {
-            bookstoreDtoRepository.deleteById(id);
-            return true;
-        } catch (Exception ex) {
-            return false;
-        }
+    public void delete(Long id) {
+        bookstoreDtoRepository.deleteById(id);
     }
 
     @Override
     public Optional<Bookstore> findById(Long id) {
-        return bookstoreDtoRepository.findById(id).map(bookstoreDto -> bookstoreDto.toDomain());
+        return bookstoreDtoRepository.findById(id)
+                .map(bookstoreDto -> bookstoreDto.toDomain());
     }
 
     @Override
     public Optional<Bookstore> findByName(String name) {
-        return bookstoreDtoRepository.findBookstoreDtoByName(name).map(bookstoreDto -> bookstoreDto.toDomain());
+        return bookstoreDtoRepository.findBookstoreDtoByName(name)
+                .map(bookstoreDto -> bookstoreDto.toDomain());
     }
 
     @Override
     public List<Bookstore> findAll() {
         List<Bookstore> bookstoreList = new ArrayList<>();
-        bookstoreDtoRepository.findAll().iterator().forEachRemaining(bookstoreDto -> bookstoreList.add(bookstoreDto.toDomain()));
+        bookstoreDtoRepository.findAll()
+                .iterator()
+                .forEachRemaining(bookstoreDto -> bookstoreList.add(bookstoreDto.toDomain()));
         return bookstoreList;
     }
 }
