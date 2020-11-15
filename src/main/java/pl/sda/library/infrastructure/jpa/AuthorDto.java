@@ -23,7 +23,7 @@ class AuthorDto {
     @Column(name = "last_name")
     private String lastName;
 
-    Author toModel() {
+    Author toDomain() {
         Author author = new Author();
         author.setId(getId());
         author.setFirstName(getFirstName());

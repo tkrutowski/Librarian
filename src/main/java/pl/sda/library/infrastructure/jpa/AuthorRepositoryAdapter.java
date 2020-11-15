@@ -21,29 +21,31 @@ public class AuthorRepositoryAdapter implements AuthorRepository {
     }
 
     @Override
-    public Optional<Author> getById(Long id) {
-        return authorDtoRepository.findById(id).map(authorDto -> authorDto.toModel());
+    public Optional<Author> findById(Long id) {
+        return authorDtoRepository.findById(id).map(authorDto -> authorDto.toDomain());
     }
 
     @Override
-    public List<Author> getAll() {
+    public List<Author> findAll() {
         List<Author> authorList = new ArrayList<>();
-        authorDtoRepository.findAll().iterator().forEachRemaining(authorDto -> authorList.add(authorDto.toModel()));
+        authorDtoRepository.findAll().iterator().forEachRemaining(authorDto -> authorList.add(authorDto.toDomain()));
         return authorList;
     }
 
     @Override
     public void delete(Long id) {
+
         authorDtoRepository.deleteById(id);
     }
 
     @Override
     public Optional<Author> edit(Author author) {
-        return Optional.of(authorDtoRepository.save(AuthorDto.fromDomain(author)).toModel());
+        return Optional.of(authorDtoRepository.save(AuthorDto.fromDomain(author)).toDomain());
     }
 
     @Override
-    public Optional<Author> getByFirstNameAndLastName(String firstName, String lastName) {
-        return authorDtoRepository.findAuthorDtoByFirstNameAndLastName(firstName, lastName).map(authorDto -> authorDto.toModel());
+    public Optional<Author> findByFirstNameAndLastName(String firstName, String lastName) {
+        return authorDtoRepository.findAuthorDtoByFirstNameAndLastName(firstName, lastName)
+                .map(authorDto -> authorDto.toDomain());
     }
 }

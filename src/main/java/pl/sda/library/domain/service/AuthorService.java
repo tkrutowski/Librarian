@@ -17,25 +17,26 @@ public class AuthorService {
     private AuthorRepository authorRepository;
 
     public Long addAuthor(Author author) {
-        if (authorRepository.getByFirstNameAndLastName(author.getFirstName(), author.getLastName()).isPresent()) {
-            throw new AuthorAlreadyExistException();
+        Optional<Author> optionalAuthor = authorRepository.findByFirstNameAndLastName(author.getFirstName(), author.getLastName());
+        if (optionalAuthor.isPresent()) {
+            throw new AuthorAlreadyExistException(author);
         }
         return authorRepository.add(author);
     }
 
-    public List<Author> getAllAuthors() {
-        return authorRepository.getAll();
+    public List<Author> findAllAuthors() {
+        return authorRepository.findAll();
     }
 
     public void deleteAuthor(Long id) {
-        if (!authorRepository.getById(id).isPresent()) {
+        if (!authorRepository.findById(id).isPresent()) {
             throw new AuthorDoesNotExistException(id);
         }
         authorRepository.delete(id);
     }
 
     public Author editAuthor(Author author) {
-        Optional<Author> authorById = authorRepository.getById(author.getId());
+        Optional<Author> authorById = authorRepository.findById(author.getId());
         if (!authorById.isPresent()) {
             throw new AuthorDoesNotExistException(author.getId());
         }
@@ -47,8 +48,8 @@ public class AuthorService {
         return authorRepository.edit(authorTemp).get();
     }
 
-    public Author getAuthor(Long id) {
-        Optional<Author> authorById = authorRepository.getById(id);
+    public Author findAuthor(Long id) {
+        Optional<Author> authorById = authorRepository.findById(id);
         if (!authorById.isPresent()) {
             throw new AuthorDoesNotExistException(id);
         }

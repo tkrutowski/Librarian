@@ -15,7 +15,7 @@ public class AuthorController {
 
     @GetMapping
     public List<Author> getAllAuthors() {
-        return authorService.getAllAuthors();
+        return authorService.findAllAuthors();
     }
 
     @PostMapping
@@ -30,7 +30,7 @@ public class AuthorController {
 
     @GetMapping("/{id}")
     public Author getAuthor(@PathVariable Long id) {
-        return authorService.getAuthor(id);
+        return authorService.findAuthor(id);
     }
 
     @DeleteMapping("/{id}")
