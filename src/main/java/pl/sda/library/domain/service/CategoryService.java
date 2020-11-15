@@ -3,6 +3,8 @@ package pl.sda.library.domain.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.library.domain.model.Category;
+import pl.sda.library.domain.model.exception.CategoryAleradyExistException;
+import pl.sda.library.domain.model.exception.CategoryDoesNotExistException;
 import pl.sda.library.domain.port.CategoryRepository;
 
 import java.util.List;
