@@ -1,0 +1,59 @@
+package pl.sda.library.infrastructure.jpa;
+
+import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Component;
+import pl.sda.library.domain.model.Series;
+import pl.sda.library.domain.port.SeriesRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Component
+@AllArgsConstructor
+public class SeriesRepositoryAdapter implements SeriesRepository {
+
+    private SeriesDtoRepository seriesDtoRepository;
+
+    @Override
+    public Long add(Series series) {
+        return seriesDtoRepository.save(SeriesDto.fromDomain(series)).getId();
+    }
+
+    @Override
+    public Optional<Series> edit(Series series) {
+        return Optional.of(seriesDtoRepository.save(SeriesDto.fromDomain(series)).toDomain());
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        try {
+            seriesDtoRepository.deleteById(id);
+            return true;
+        } catch (EmptyResultDataAccessException ex) {
+            return false;
+        }
+    }
+
+    @Override
+    public Optional<Series> getById(Long id) {
+        return seriesDtoRepository.findById(id)
+                .map(seriesDto -> seriesDto.toDomain());
+    }
+
+    @Override
+    public Optional<Series> findByTitle(String title) {
+        return seriesDtoRepository.findSeriesDtoByTitle(title)
+                .map(seriesDto -> seriesDto.toDomain());
+    }
+
+    @Override
+    public List<Series> getAll() {
+        List<Series> seriesList = new ArrayList<>();
+        seriesDtoRepository.findAll()
+                .iterator()
+                .forEachRemaining(seriesDto -> seriesList.add(seriesDto.toDomain()));
+        return seriesList;
+    }
+}

@@ -63,7 +63,7 @@ public class SeriesServiceTest {
         Long id =   seriesService.addSeries(series);
         Series toEdit = seriesService.getSeries(id);
         toEdit.setTitle("Piraci z karaibów");
-        toEdit.setIdSeries(0L);
+        toEdit.setId(0L);
 
         //then
         assertThrows(ObjectDoesNotExistException.class, () -> seriesService.editSeries(toEdit));
