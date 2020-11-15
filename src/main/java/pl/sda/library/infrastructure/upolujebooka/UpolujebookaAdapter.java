@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UpolujebookaAdapter {//implements ProductRepository {
+public class UpolujebookaAdapter {
 
     //@Override
     public List<Book> findByPhrase(String phrase) {
@@ -36,15 +36,6 @@ public class UpolujebookaAdapter {//implements ProductRepository {
         }
         return  dtos;
     }
-
-    /*
-    * private String bookstore; //nazwa księgarni np. Empik
-    * private String authors; //autorzy: imie nazwisko            !!!!!!!!!!!
-    * private String title; //tytuł                                 !!!!!!!!!!
-    * private String description; //krótki opis książki           !!!!!!!!!!
-    * private String cover; //link do okładki                     !!!!!!!!!
-    * private EditionType editionType; //typ: EBOOK, AUDIOBOOK lub BOOK   !!!!!!!!!!!!
-    * private String isbn;  */
 
     private List<Book> toDomain(List<UpolujebookaProductDto> dto) {
         return dto.stream()
