@@ -1,6 +1,8 @@
 package pl.sda.library.infrastructure.jpa;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.sda.library.domain.model.Author;
 
 import javax.persistence.Column;
@@ -10,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "authors")

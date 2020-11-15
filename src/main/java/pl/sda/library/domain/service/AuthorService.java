@@ -28,11 +28,8 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
-    public void deleteAuthor(Long id) {
-        if (!authorRepository.findById(id).isPresent()) {
-            throw new AuthorDoesNotExistException(id);
-        }
-        authorRepository.delete(id);
+    public boolean deleteAuthor(Long id) {
+        return authorRepository.delete(id);
     }
 
     public Author editAuthor(Author author) {

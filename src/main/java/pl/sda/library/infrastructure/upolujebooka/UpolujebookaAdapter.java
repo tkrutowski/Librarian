@@ -1,16 +1,16 @@
 package pl.sda.library.infrastructure.upolujebooka;
 
 import pl.sda.library.domain.model.Book;
-import pl.sda.library.model.ProductRepository;
+//import pl.sda.library.model.ProductRepositoryory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UpolujebookaAdapter implements ProductRepository {
+public class UpolujebookaAdapter {//implements ProductRepository {
 
-    @Override
+    //@Override
     public List<Book> findByPhrase(String phrase) {
         List<UpolujebookaProductDto> dto = adaptItemsFromScrapper(phrase);
         return toDomain(dto);

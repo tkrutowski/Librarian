@@ -22,30 +22,31 @@ public class AuthorServiceTest {
     private AuthorService authorService;
 
     @Test
-    public void should_return_id_bigger_than_zero_when_author_added()   {
+    public void should_return_id_bigger_than_zero_when_author_added() {
         //when
-        Author author=new Author(null,"Johnny","Doo");
+        Author author = new Author(null, "Johnny", "Doo");
 
         //given
         Long id = authorService.addAuthor(author);
 
         //then
-        assertNotEquals(java.util.Optional.of(0L),id);
+        assertNotEquals(java.util.Optional.of(0L), id);
     }
+
     @Test
-    public void should_throw_ObjectAlreadyExistException_when_author_already_exist()   {
+    public void should_throw_ObjectAlreadyExistException_when_author_already_exist() {
         //when
-        Author author=new Author(null,"John","Doo");
+        Author author = new Author(null, "John", "Doo");
         authorService.addAuthor(author);
 
         //then
-        assertThrows(ObjectAlreadyExistException.class, () ->authorService.addAuthor(author));
+        assertThrows(ObjectAlreadyExistException.class, () -> authorService.addAuthor(author));
     }
 
     @Test
-    public void should_return_changed_firstName_while_edit()  {
+    public void should_return_changed_firstName_while_edit() {
         //when
-        Author author=new Author(null,"John2","Doo2");
+        Author author = new Author(null, "John2", "Doo2");
         Long id = authorService.addAuthor(author);
         Author toEdit = authorService.findAuthor(id);
         toEdit.setFirstName("JohnEdit");
@@ -56,10 +57,11 @@ public class AuthorServiceTest {
         //then
         assertEquals("JohnEdit", afterEdit.getFirstName());
     }
+
     @Test
-    public void should_throw_ObjectDoesNotExistException()   {
+    public void should_throw_ObjectDoesNotExistException() {
         //when
-        Author author=new Author(null,"John2","Doo2");
+        Author author = new Author(null, "John2", "Doo2");
         Long id = authorService.addAuthor(author);
         Author toEdit = authorService.findAuthor(id);
         toEdit.setId(0L);
@@ -70,9 +72,9 @@ public class AuthorServiceTest {
     }
 
     @Test
-    public void should_return_changed_lastName_while_edit()  {
+    public void should_return_changed_lastName_while_edit() {
         //when
-        Author author=new Author(null,"John3","Doo3");
+        Author author = new Author(null, "John3", "Doo3");
         Long id = authorService.addAuthor(author);
         Author toEdit = authorService.findAuthor(id);
         toEdit.setLastName("DooEdit");
@@ -85,32 +87,35 @@ public class AuthorServiceTest {
     }
 
     @Test
-    public void should_throw_AuthorDoesNotExistException_when_author_does_not_exist()  {
+    public void should_return_falsa_when_author_does_not_exist() {
         //when
-        Author author=new Author(null,"John3","Doo3");
+        Author author = new Author(null, "John3", "Doo3");
         Long id = authorService.addAuthor(author);
         authorService.deleteAuthor(id);
 
+        //given
+        boolean result = authorService.deleteAuthor(id);
+
         //then
-        assertThrows(AuthorDoesNotExistException.class, () -> authorService.deleteAuthor(id));
+        assertFalse(result);
     }
 
     @Test
-    public void should_throw_AuthorDoesNotExistException_while_delete_no_exist_author()  {
+    public void should_throw_AuthorDoesNotExistException_while_delete_no_exist_author() {
         //when
-        Long id=0L;
+        Long id = 0L;
 
         //then
         assertThrows(AuthorDoesNotExistException.class, () -> authorService.findAuthor(id));
     }
 
     @Test
-    public void should_return_size__plus_3_when_3_authors_added()   {
+    public void should_return_size__plus_3_when_3_authors_added() {
         //when
         final int SIZE = authorService.findAllAuthors().size() + 3;
-        authorService.addAuthor(new Author(10L,"John","Boo"));
-        authorService.addAuthor(new Author(20L,"Jack","Browm"));
-        authorService.addAuthor(new Author(30L,"Jim","Carey"));
+        authorService.addAuthor(new Author(10L, "John", "Boo"));
+        authorService.addAuthor(new Author(20L, "Jack", "Browm"));
+        authorService.addAuthor(new Author(30L, "Jim", "Carey"));
 
         //given
         int result = authorService.findAllAuthors().size();
@@ -118,10 +123,11 @@ public class AuthorServiceTest {
         //then
         assertEquals(SIZE, result);
     }
+
     @Test
     public void should_return_size__minus_1_when_one_author_deleted() {
         //when
-        final int SIZE = authorService.findAllAuthors().size() -1;
+        final int SIZE = authorService.findAllAuthors().size() - 1;
         authorService.deleteAuthor(3L);
 
         //given

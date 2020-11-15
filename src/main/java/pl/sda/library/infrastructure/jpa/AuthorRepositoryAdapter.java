@@ -33,9 +33,13 @@ public class AuthorRepositoryAdapter implements AuthorRepository {
     }
 
     @Override
-    public void delete(Long id) {
-
-        authorDtoRepository.deleteById(id);
+    public boolean delete(Long id) {
+        try {
+            authorDtoRepository.deleteById(id);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     @Override
