@@ -10,9 +10,13 @@ import java.util.Optional;
 @Component
 public interface BookRepository {
 
+    boolean add(Book book);
+
+    Optional<Book> edit(Book book);
+
+    void delete(Long id);
+
+    List<Book> findAllByUser(User user);
+
     Optional<Book> findById(Long id);
-
-    boolean addBook(Book book);
-
-    List<Book> findAllBooksByUser(User user);
 }
