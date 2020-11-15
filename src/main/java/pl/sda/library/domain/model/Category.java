@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Category {
-    private Long idCategory;
+    private Long id;
     private String name;
 }

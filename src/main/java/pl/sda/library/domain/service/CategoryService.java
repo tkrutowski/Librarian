@@ -4,48 +4,49 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.library.domain.model.Category;
 import pl.sda.library.domain.port.CategoryRepository;
-import pl.sda.library.domain.model.exception.ObjectAlreadyExistException;
-import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class CategoryService {
 
-
-    private CategoryRepository categoryRepository;
+    CategoryRepository categoryRepository;
 
     public Long addCategory(Category category) {
-        if(alreadyExist(category))
-            throw new ObjectAlreadyExistException("Podana categoria już istnieje w bazie danych.");
-        Long id = categoryRepository.addCategory(category);
-        return id;
+        Optional<Category> optionalCategory = categoryRepository.findByName(category.getName());
+        if (optionalCategory.isPresent()) {
+            throw new CategoryAleradyExistException(category);
+        }
+        return categoryRepository.add(category);
     }
 
-    public List<Category> getAllCategories() {
-        return categoryRepository.getAllCategories();
+    public Category editCategory(Category categoryToEdit, Long id) {
+        Optional<Category> categoryById = categoryRepository.findById(id);
+        if (!categoryById.isPresent()) {
+            throw new CategoryDoesNotExistException(id);
+        }
+
+        categoryById.get().setName(categoryToEdit.getName());
+
+        return categoryRepository.edit(categoryById.get()).get();
     }
 
-    public void delCategory(long id) {
-        categoryRepository.delCategory(id);
+    public void deleteCategory(long id) {
+        categoryRepository.delete(id);
     }
 
-    private boolean alreadyExist(Category category) {
-        return categoryRepository.isExist(category.getName());
+    public Category findCategory(Long id) {
+        Optional<Category> categoryById = categoryRepository.findById(id);
+        if (!categoryById.isPresent()) {
+            throw new CategoryDoesNotExistException(id);
+        }
+        return categoryById.get();
     }
 
-    public Category getCategory(Long id) {
-        return categoryRepository.getCategoryById(id);
+    public List<Category> findAllCategories() {
+        return categoryRepository.findAll();
     }
 
-    public Category editCategory(Category category) {
-        Category categoryById = categoryRepository.getCategoryById(category.getIdCategory());
-        if(categoryById.getIdCategory() == null)
-            throw new ObjectDoesNotExistException("Podana kategoria nie istnieje w bazie danych.");
-
-        categoryById.setName(category.getName());
-
-        return categoryRepository.editCategory(categoryById);
-    }
 }
