@@ -27,7 +27,8 @@ public class BookstoreRepositoryAdapter implements BookstoreRepository {
 
     @Override
     public void delete(Long id) {
-        bookstoreDtoRepository.deleteById(id);
+        bookstoreDtoRepository.findById(id)
+                .ifPresent(bookstore -> bookstoreDtoRepository.delete(bookstore));
     }
 
     @Override
