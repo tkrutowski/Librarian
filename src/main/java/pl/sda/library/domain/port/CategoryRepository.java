@@ -8,18 +8,15 @@ import java.util.Optional;
 
 @Component
 public interface CategoryRepository {
+    Long add(Category category);
 
-    Long addCategory(Category category);
+    Optional<Category> edit(Category category);
 
-    List<Category> getAllCategories();
+    boolean deleteCategory(long id);
 
-    void deleteCategory(long id);
+    List<Category> findAll();
 
-    boolean isExist(String name);
+    Optional<Category> findById(Long id);
 
-    boolean isExistById(Long id);
-
-    Optional<Category> getCategoryById(Long id);
-
-    Optional<Category> editCategory(Category category);
+    Optional<Category> findByName(String name);
 }
