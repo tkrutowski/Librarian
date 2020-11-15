@@ -7,14 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public
-interface BookstoreRepository {
+public interface BookstoreRepository {
 
     Long add(Bookstore bookstore);
 
     Optional<Bookstore> edit(Bookstore bookstore);
 
-    boolean delete(long id);
+    boolean delete(Long id);
 
     List<Bookstore> findAll();
 
