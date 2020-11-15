@@ -73,12 +73,12 @@ public class SeriesServiceTest {
     @Test
     public void should_return_size__plus_2_when_2_serieses_added() {
         //when
-        final int SIZE = seriesService.findAllSerieses().size() + 2;
+        final int SIZE = seriesService.findAllSeries().size() + 2;
         seriesService.addSeries(new Series(null, "Niezniszczalni", "Doo"));
         seriesService.addSeries(new Series(null, "Powrót do przyszłości", "Browm"));
 
         //given
-        int result = seriesService.findAllSerieses().size();
+        int result = seriesService.findAllSeries().size();
 
         //then
         assertEquals(SIZE, result);
@@ -87,11 +87,11 @@ public class SeriesServiceTest {
     @Test
     public void should_return_size__minus_1_when_one_series_deleted() {
         //when
-        final int SIZE = seriesService.findAllSerieses().size() - 1;
+        final int SIZE = seriesService.findAllSeries().size() - 1;
         seriesService.deleteSeries(2L);
 
         //given
-        int result = seriesService.findAllSerieses().size();
+        int result = seriesService.findAllSeries().size();
 
         //then
         assertEquals(SIZE, result);

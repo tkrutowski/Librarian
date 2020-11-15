@@ -47,7 +47,7 @@ public class SeriesService {
         return seriesOptional.get();
     }
 
-    public List<Series> findAllSerieses() {
+    public List<Series> findAllSeries() {
         return seriesRepository.findAll();
     }
 }

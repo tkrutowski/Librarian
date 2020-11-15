@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Series {
-    private Long idSeries;
+    private Long id;
     private String title;
     private String description;
 }

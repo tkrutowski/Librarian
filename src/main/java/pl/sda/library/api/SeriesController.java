@@ -25,16 +25,16 @@ public class SeriesController {
 
     @DeleteMapping("/{id}")
     public void deleteSeries(@PathVariable Long id) {
-        seriesService.delSeries(id);
+        seriesService.deleteSeries(id);
     }
 
     @GetMapping("/{id}")
     public Series getSeries(@PathVariable Long id) {
-        return seriesService.getSeries(id);
+        return seriesService.findSeries(id);
     }
 
     @GetMapping
     public List<Series> getAllSeries() {
-        return seriesService.getAllSerieses();
+        return seriesService.findAllSeries();
     }
 }
