@@ -117,11 +117,5 @@ public class DtoFactory {
         return categoryDto;
     }
 
-    public SeriesDto createSeriesDto(Series series) {
-        SeriesDto seriesDto = new SeriesDto();
-        seriesDto.setIdSeries(series.getIdSeries());
-        seriesDto.setTitle(series.getTitle());
-        seriesDto.setDescription(series.getDescription());
-        return seriesDto;
-    }
+
 }
