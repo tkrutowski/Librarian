@@ -1,13 +1,14 @@
 package pl.sda.library.domain.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+@Data
 public class Bookstore {
     private Long idBookstore;
     private String name;
-    private String www;
+    private String url;
 }

@@ -7,17 +7,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-interface BookstoreRepository {
+public interface BookstoreRepository {
 
-    Long addBookstore(Bookstore bookstore);
+    Long add(Bookstore bookstore);
 
-    List<Bookstore> getAllBookstores();
+    Optional<Bookstore> edit(Bookstore bookstore);
 
-    void deleteBookstore(long id);
+    void delete(Long id);
 
-    Optional<Bookstore> getBookstoreById(Long id);
+    List<Bookstore> findAll();
 
-    Optional<Bookstore> editBookstore(Bookstore bookstore);
+    Optional<Bookstore> findById(Long id);
 
-    boolean isExist(String name);
+    Optional<Bookstore> findByName(String name);
 }

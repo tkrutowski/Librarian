@@ -15,8 +15,8 @@
        INSERT INTO series(title, description) VALUES('Jack Reacher','dsfsdfs dfsfds ds sd s' );
        INSERT INTO series(title, description) VALUES('The Frontires Saga','d55435 grtet sfsdfs dfsfds ds sd s' );
 
-       INSERT INTO bookstores(name, www) VALUES('Empik','www.empik.com' );
-       INSERT INTO bookstores(name, www) VALUES('PWN','www.pwn.pl' );
+       INSERT INTO bookstores(name, url) VALUES('Empik','www.empik.com' );
+       INSERT INTO bookstores(name, url) VALUES('PWN','www.pwn.pl' );
 
 --
 --     INSERT INTO books(id_user,id_bookstore,id_series,title,subtitle,description,cover,edition_type,reading_status,ownership_status,read_from,read_to,info,is_read,isbn,volume)

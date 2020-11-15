@@ -25,7 +25,7 @@ public class DtoFactory {
     private CategoryDtoRepository categoryDtoRepository;
 
     public BookDto createBookDto(Book book) {
-        BookDto bookDto=new BookDto();
+        BookDto bookDto = new BookDto();
         bookDto.setIdBook(book.getIdBook());
         bookDto.setUser(getUserFromString(book.getUserLogin()));
         bookDto.setBookstore(getBookstoreFromString(book.getBookstore()));
@@ -48,8 +48,8 @@ public class DtoFactory {
         return bookDto;
     }
 
-    public UserDto createUserDto(User user){
-        UserDto userDto=new UserDto();
+    public UserDto createUserDto(User user) {
+        UserDto userDto = new UserDto();
         userDto.setIdUser(user.getIdUser());
         userDto.setName(user.getName());
         userDto.setLogin(user.getLogin());
@@ -61,34 +61,34 @@ public class DtoFactory {
     private Set<AuthorDto> getAuthorsFromString(String authors) {
         Set<AuthorDto> authorDtos = new HashSet<>();
         String[] authorsList = authors.trim().split(",");
-        for (String author : authorsList ) {
+        for (String author : authorsList) {
             String[] authorsSplit = author.trim().split(" ");
             Optional<AuthorDto> authorDtoByFirstNameAndLastName = authorDtoRepository.findAuthorDtoByFirstNameAndLastName(authorsSplit[0], authorsSplit[1]);
-            if(authorDtoByFirstNameAndLastName.isPresent())
+            if (authorDtoByFirstNameAndLastName.isPresent())
                 authorDtos.add(authorDtoByFirstNameAndLastName.get());
-//            else
-//                authorDtos.add(authorDtoRepository.save(new AuthorDto(null, authorsSplit[0],authorsSplit[1])));
+            else
+                authorDtos.add(authorDtoRepository.save(new AuthorDto(null, authorsSplit[0], authorsSplit[1])));
         }
         return authorDtos;
     }
 
     private SeriesDto getSeriesFromString(String series) {
         Optional<SeriesDto> seriesDtoByTitle = seriesRepository.findSeriesDtoByTitle(series);
-        if(seriesDtoByTitle.isPresent())
+        if (seriesDtoByTitle.isPresent())
             return seriesDtoByTitle.get();
         return new SeriesDto();
     }
 
     private BookstoreDto getBookstoreFromString(String bookstore) {
         Optional<BookstoreDto> bookstoreDtoByName = bookstoreRepository.findBookstoreDtoByName(bookstore);
-        if(bookstoreDtoByName.isPresent())
+        if (bookstoreDtoByName.isPresent())
             return bookstoreDtoByName.get();
         return new BookstoreDto();
     }
 
     private UserDto getUserFromString(String userLogin) {
         Optional<UserDto> userDtoByLogin = userRepository.findUserDtoByLogin(userLogin);
-        if(userDtoByLogin.isPresent())
+        if (userDtoByLogin.isPresent())
             return userDtoByLogin.get();
 
         return new UserDto();
@@ -98,26 +98,20 @@ public class DtoFactory {
 
         Set<CategoryDto> categoryDtos = new HashSet<>();
         String[] categoriesList = categories.trim().split(",");
-        for (String category : categoriesList ) {
+        for (String category : categoriesList) {
             Optional<CategoryDto> categoryDtoByName = categoryDtoRepository.findCategoryDtoByName(category);
-            if(categoryDtoByName.isPresent())
+            if (categoryDtoByName.isPresent())
                 categoryDtos.add(categoryDtoByName.get());
             else
-                categoryDtos.add(categoryDtoRepository.save(new CategoryDto(null,category)));
+                categoryDtos.add(categoryDtoRepository.save(new CategoryDto(null, category)));
         }
         return categoryDtos;
     }
 
-    public BookstoreDto createBookstoreDto(Bookstore bookstore) {
-        BookstoreDto bookstoreDto = new BookstoreDto();
-        bookstoreDto.setIdBookstore(bookstore.getIdBookstore());
-        bookstoreDto.setName(bookstore.getName());
-        bookstoreDto.setWww(bookstore.getWww());
-        return bookstoreDto;
-    }
+
 
     public CategoryDto createCategoryDto(Category category) {
-        CategoryDto categoryDto=new CategoryDto();
+        CategoryDto categoryDto = new CategoryDto();
         categoryDto.setIdCategory(category.getIdCategory());
         categoryDto.setName(category.getName());
         return categoryDto;

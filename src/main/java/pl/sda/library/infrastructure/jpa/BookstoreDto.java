@@ -1,14 +1,20 @@
 package pl.sda.library.infrastructure.jpa;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.sda.library.domain.model.Bookstore;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+@Data
 @Entity
 @Table(name = "bookstores")
 class BookstoreDto {
@@ -17,16 +23,21 @@ class BookstoreDto {
     @Column(name = "id_bookstore")
     private Long idBookstore;
     private String name;
-    private String www;
+    private String url;
 
-    public Bookstore toModel() {
+    Bookstore toDomain() {
         Bookstore bookstore = new Bookstore();
         bookstore.setIdBookstore(getIdBookstore());
         bookstore.setName(getName());
-        bookstore.setWww(getWww());
+        bookstore.setUrl(getUrl());
         return bookstore;
     }
-//
-//    @OneToMany(mappedBy = "books", fetch = FetchType.LAZY)
-//    private Set<BookEntity> books = new HashSet<>();
+
+    static BookstoreDto fromDomain(Bookstore bookstore) {
+        BookstoreDto bookstoreDto = new BookstoreDto();
+        bookstoreDto.setIdBookstore(bookstore.getIdBookstore());
+        bookstoreDto.setName(bookstore.getName());
+        bookstoreDto.setUrl(bookstore.getUrl());
+        return bookstoreDto;
+    }
 }
