@@ -2,12 +2,13 @@ package pl.sda.library.domain.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.sda.library.domain.model.exception.ObjectAlreadyExistException;
-import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
+import pl.sda.library.domain.model.exception.AuthorAlreadyExistException;
+import pl.sda.library.domain.model.exception.AuthorDoesNotExistException;
 import pl.sda.library.domain.model.Author;
 import pl.sda.library.domain.port.AuthorRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -15,41 +16,40 @@ public class AuthorService {
 
     private AuthorRepository authorRepository;
 
-    public Long addAuthor(Author author)   {
-        if(alreadyExist(author))
-           throw new ObjectAlreadyExistException("Podany autor już istnieje w bazie danych.");
-        Long id = authorRepository.add(author);
-        return id;
+    public Long addAuthor(Author author) {
+        Optional<Author> optionalAuthor = authorRepository.findByFirstNameAndLastName(author.getFirstName(), author.getLastName());
+        if (optionalAuthor.isPresent()) {
+            throw new AuthorAlreadyExistException(author);
+        }
+        return authorRepository.add(author);
     }
 
-    private boolean alreadyExist(Author author) {
-        return authorRepository.isExist(author.getFirstName(),author.getLastName());
+    public List<Author> findAllAuthors() {
+        return authorRepository.findAll();
     }
 
-    public List<Author> getAllAuthors(){
-        return authorRepository.getAllAuthors();
+    public boolean deleteAuthor(Long id) {
+        return authorRepository.delete(id);
     }
 
-    public void delAuthor(long id) {
-        authorRepository.deleteAuthor(id);
+    public Author editAuthor(Author author) {
+        Optional<Author> authorById = authorRepository.findById(author.getId());
+        if (!authorById.isPresent()) {
+            throw new AuthorDoesNotExistException(author.getId());
+        }
+
+        Author authorTemp = authorById.get();
+        authorTemp.setLastName(author.getLastName());
+        authorTemp.setFirstName(author.getFirstName());
+
+        return authorRepository.edit(authorTemp).get();
     }
 
-    public Author editAuthor(Author author)   {
-        Author authorById = authorRepository.getAuthorById(author.getId());
-        if(authorById.getId() == null)
-            throw new ObjectDoesNotExistException("Podany autor nie istnieje w bazie danych.");
-
-        authorById.setLastName(author.getLastName());
-        authorById.setFirstName(author.getFirstName());
-
-        return authorRepository.editAuthor(authorById);
-    }
-
-    public Author getAuthor(Long id) {
-        Author authorById = authorRepository.getAuthorById(id);
-        if(authorById.getId() == null)
-            throw new ObjectDoesNotExistException("Podany autor nie istnieje w bazie danych.");
-        else
-            return authorById;
+    public Author findAuthor(Long id) {
+        Optional<Author> authorById = authorRepository.findById(id);
+        if (!authorById.isPresent()) {
+            throw new AuthorDoesNotExistException(id);
+        }
+        return authorById.get();
     }
 }

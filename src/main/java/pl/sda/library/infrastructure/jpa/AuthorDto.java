@@ -1,17 +1,20 @@
 package pl.sda.library.infrastructure.jpa;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import pl.sda.library.domain.model.Author;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "authors")
 class AuthorDto {
@@ -24,11 +27,19 @@ class AuthorDto {
     @Column(name = "last_name")
     private String lastName;
 
-    public Author toModel() {
+    Author toDomain() {
         Author author = new Author();
         author.setId(getId());
         author.setFirstName(getFirstName());
         author.setLastName(getLastName());
         return author;
+    }
+
+    static AuthorDto fromDomain(Author author) {
+        AuthorDto authorDto = new AuthorDto();
+        authorDto.setId(author.getId());
+        authorDto.setFirstName(author.getFirstName());
+        authorDto.setLastName(author.getLastName());
+        return authorDto;
     }
 }

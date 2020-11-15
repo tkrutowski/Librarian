@@ -3,12 +3,11 @@ package pl.sda.library.infrastructure.jpa;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.sda.library.domain.model.*;
-import pl.sda.library.infrastructure.jpa.*;
-import pl.sda.library.repository.SeriesDto;
-import pl.sda.library.repository.SeriesDtoRepository;
-import pl.sda.library.repository.UserDto;
-import pl.sda.library.repository.UserDtoRepository;
+import pl.sda.library.domain.model.Book;
+import pl.sda.library.domain.model.Bookstore;
+import pl.sda.library.domain.model.Category;
+import pl.sda.library.domain.model.Series;
+import pl.sda.library.domain.model.User;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -59,13 +58,6 @@ public class DtoFactory {
         return userDto;
     }
 
-    public AuthorDto createAuthorDto(Author author){
-        AuthorDto authorDto=new AuthorDto();
-        authorDto.setId(author.getId());
-        authorDto.setFirstName(author.getFirstName());
-        authorDto.setLastName(author.getLastName());
-        return authorDto;
-    }
     private Set<AuthorDto> getAuthorsFromString(String authors) {
         Set<AuthorDto> authorDtos = new HashSet<>();
         String[] authorsList = authors.trim().split(",");
@@ -74,8 +66,8 @@ public class DtoFactory {
             Optional<AuthorDto> authorDtoByFirstNameAndLastName = authorDtoRepository.findAuthorDtoByFirstNameAndLastName(authorsSplit[0], authorsSplit[1]);
             if(authorDtoByFirstNameAndLastName.isPresent())
                 authorDtos.add(authorDtoByFirstNameAndLastName.get());
-            else
-                authorDtos.add(authorDtoRepository.save(new AuthorDto(null, authorsSplit[0],authorsSplit[1])));
+//            else
+//                authorDtos.add(authorDtoRepository.save(new AuthorDto(null, authorsSplit[0],authorsSplit[1])));
         }
         return authorDtos;
     }

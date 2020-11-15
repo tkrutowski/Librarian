@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.Author;
 import pl.sda.library.domain.port.AuthorRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,40 +13,43 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AuthorRepositoryAdapter implements AuthorRepository {
 
-    private  AuthorDtoRepository authorDtoRepository;
+    private AuthorDtoRepository authorDtoRepository;
 
     @Override
-    public Long addAuthor(Author author) {
-        return null;
+    public Long add(Author author) {
+        return authorDtoRepository.save(AuthorDto.fromDomain(author)).getId();
     }
 
     @Override
-    public Optional<Author> getAuthorById(Long id) {
-        return Optional.empty();
+    public Optional<Author> findById(Long id) {
+        return authorDtoRepository.findById(id).map(authorDto -> authorDto.toDomain());
     }
 
     @Override
-    public List<Author> getAllAuthors() {
-        return null;
+    public List<Author> findAll() {
+        List<Author> authorList = new ArrayList<>();
+        authorDtoRepository.findAll().iterator().forEachRemaining(authorDto -> authorList.add(authorDto.toDomain()));
+        return authorList;
     }
 
     @Override
-    public void deleteAuthor(long id) {
-
+    public boolean delete(Long id) {
+        try {
+            authorDtoRepository.deleteById(id);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     @Override
-    public Author editAuthor(Author author) {
-        return null;
+    public Optional<Author> edit(Author author) {
+        return Optional.of(authorDtoRepository.save(AuthorDto.fromDomain(author)).toDomain());
     }
 
     @Override
-    public boolean isExistById(Long id) {
-        return false;
-    }
-
-    @Override
-    public boolean isExist(String firstName, String lastName) {
-        return false;
+    public Optional<Author> findByFirstNameAndLastName(String firstName, String lastName) {
+        return authorDtoRepository.findAuthorDtoByFirstNameAndLastName(firstName, lastName)
+                .map(authorDto -> authorDto.toDomain());
     }
 }

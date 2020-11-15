@@ -9,32 +9,32 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/authors")
+@RequestMapping("/api/authors")
 public class AuthorController {
     AuthorService authorService;
 
-    @GetMapping("/all")
-    public List<Author> getAllAuthors(){
-        return authorService.getAllAuthors();
+    @GetMapping
+    public List<Author> getAllAuthors() {
+        return authorService.findAllAuthors();
     }
 
-    @PostMapping("/add")
-    public Long addAuthor(@RequestBody Author author)  {
+    @PostMapping
+    public Long addAuthor(@RequestBody Author author) {
         return authorService.addAuthor(author);
     }
 
-    @PutMapping("/edit")
-    public Author editAuthor(@RequestBody Author author)  {
+    @PutMapping
+    public Author editAuthor(@RequestBody Author author) {
         return authorService.editAuthor(author);
     }
 
     @GetMapping("/{id}")
-    public Author getAuthor(@PathVariable Long id){
-        return authorService.getAuthor(id);
+    public Author getAuthor(@PathVariable Long id) {
+        return authorService.findAuthor(id);
     }
 
     @DeleteMapping("/{id}")
-    public void delAuthor(@PathVariable Long id){
-        authorService.delAuthor(id);
+    public void delAuthor(@PathVariable Long id) {
+        authorService.deleteAuthor(id);
     }
 }
