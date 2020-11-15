@@ -13,11 +13,11 @@ public interface SeriesRepository {
 
     Optional<Series> edit(Series series);
 
-    boolean delete(Long id);
+    void delete(Long id);
 
-    Optional<Series> getById(Long idSeries);
+    Optional<Series> findById(Long id);
 
-    Optional<Series> findByName(String name);
+    Optional<Series> findByTitle(String title);
 
-    List<Series> getAll();
+    List<Series> findAll();
 }

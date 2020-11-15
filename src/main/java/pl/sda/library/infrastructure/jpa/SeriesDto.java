@@ -20,14 +20,14 @@ import javax.persistence.Table;
 class SeriesDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_series")
-    private Long idSeries;
+    @Column(name = "id")
+    private Long id;
     private String title;
     private String description;
 
     Series toDomain() {
         Series series = new Series();
-        series.setIdSeries(getIdSeries());
+        series.setId(getId());
         series.setTitle(getTitle());
         series.setDescription(getDescription());
         return series;
@@ -35,7 +35,7 @@ class SeriesDto {
 
     static SeriesDto fromDomain(Series series) {
         SeriesDto seriesDto = new SeriesDto();
-        seriesDto.setIdSeries(series.getIdSeries());
+        seriesDto.setId(series.getId());
         seriesDto.setTitle(series.getTitle());
         seriesDto.setDescription(series.getDescription());
         return seriesDto;

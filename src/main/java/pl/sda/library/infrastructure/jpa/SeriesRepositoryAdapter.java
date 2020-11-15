@@ -27,17 +27,13 @@ public class SeriesRepositoryAdapter implements SeriesRepository {
     }
 
     @Override
-    public boolean delete(Long id) {
-        try {
-            seriesDtoRepository.deleteById(id);
-            return true;
-        } catch (EmptyResultDataAccessException ex) {
-            return false;
-        }
+    public void delete(Long id) {
+        seriesDtoRepository.findById(id)
+                .ifPresent(seriesDto -> seriesDtoRepository.delete(seriesDto));
     }
 
     @Override
-    public Optional<Series> getById(Long id) {
+    public Optional<Series> findById(Long id) {
         return seriesDtoRepository.findById(id)
                 .map(seriesDto -> seriesDto.toDomain());
     }
@@ -49,7 +45,7 @@ public class SeriesRepositoryAdapter implements SeriesRepository {
     }
 
     @Override
-    public List<Series> getAll() {
+    public List<Series> findAll() {
         List<Series> seriesList = new ArrayList<>();
         seriesDtoRepository.findAll()
                 .iterator()
