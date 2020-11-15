@@ -12,7 +12,7 @@ public interface CategoryRepository {
 
     Optional<Category> edit(Category category);
 
-    boolean deleteCategory(long id);
+    boolean delete(Long id);
 
     List<Category> findAll();
 
