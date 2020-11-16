@@ -9,17 +9,14 @@ import java.util.Optional;
 @Component
 public interface UserRepository {
 
-    Long addUser(User user);
+    Long add(User user);
 
-    List<User> getAllUsers();
+    Optional<User> edit(User user);
 
-    void deleteUser(long id);
+    void delete(Long id);
 
-    Optional<User> getUserById(Long idUser);
+    List<User> findAll();
 
-    boolean isExistById(Long id);
+    Optional<User> findById(Long id);
 
-    boolean isExist(String login);
-
-    Optional<User> editUser(User user);
 }
