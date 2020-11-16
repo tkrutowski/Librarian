@@ -22,21 +22,21 @@ import javax.persistence.Table;
 class CategoryDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_category")
-    private Long idCategory;
+    @Column(name = "id")
+    private Long id;
     private String name;
 
-    public Category toDomain() {
-        Category category = new Category();
-        category.setIdCategory(getIdCategory());
-        category.setName(getName());
-        return category;
-    }
-
-    public CategoryDto fromDomain(Category category) {
+    static CategoryDto fromDomain(Category category) {
         CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setIdCategory(category.getIdCategory());
+        categoryDto.setId(category.getId());
         categoryDto.setName(category.getName());
         return categoryDto;
+    }
+
+    Category toDomain() {
+        Category category = new Category();
+        category.setId(getId());
+        category.setName(getName());
+        return category;
     }
 }

@@ -14,7 +14,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CategoryService {
 
-    CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     public Long addCategory(Category category) {
         Optional<Category> optionalCategory = categoryRepository.findByName(category.getName());
@@ -29,13 +29,12 @@ public class CategoryService {
         if (!categoryById.isPresent()) {
             throw new CategoryDoesNotExistException(id);
         }
-
         categoryById.get().setName(categoryToEdit.getName());
 
         return categoryRepository.edit(categoryById.get()).get();
     }
 
-    public void deleteCategory(long id) {
+    public void deleteCategory(Long id) {
         categoryRepository.delete(id);
     }
 
