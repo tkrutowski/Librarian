@@ -4,9 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.sda.library.domain.model.Role;
 import pl.sda.library.domain.model.User;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,18 +30,26 @@ class UserDto {
     private String login;
     private String password;
     private String name;
-    @Column(name = "is_admin")
-    private Boolean isAdmin;
-    //@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)//relacja dwukierunkowa
-    //private Set<BookEntity> books;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    User toModel(){
-        User user=new User();
+    User toDomain() {
+        User user = new User();
         user.setIdUser(getIdUser());
         user.setLogin(getLogin());
         user.setPassword(getPassword());
         user.setName(getName());
-        user.setIsAdmin(getIsAdmin());
+        user.setRole(getRole());
         return user;
+    }
+
+    static UserDto fromDomain(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setIdUser(user.getIdUser());
+        userDto.setName(user.getName());
+        userDto.setLogin(user.getLogin());
+        userDto.setPassword(user.getPassword());
+        userDto.setRole(user.getRole());
+        return userDto;
     }
 }
