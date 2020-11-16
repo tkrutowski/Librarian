@@ -1,5 +1,5 @@
-   INSERT INTO users(login,password,name,is_admin) VALUES('admin','1234','administrator',1);
-    INSERT INTO users(login,password,name,is_admin) VALUES('test@gmail.com','12345','tom kru',0);
+   INSERT INTO users(login,password,name, role) VALUES('admin','1234','administrator', 'ADMIN');
+    INSERT INTO users(login,password,name, role) VALUES('test@gmail.com','12345','tom kru','USER');
 
       INSERT INTO categories(name) VALUES('Thriller');
         INSERT INTO categories(name) VALUES('Sensacja');
