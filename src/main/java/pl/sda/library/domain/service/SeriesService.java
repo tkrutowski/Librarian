@@ -3,11 +3,12 @@ package pl.sda.library.domain.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.library.domain.model.Series;
+import pl.sda.library.domain.model.exception.SeriesAlreadyExistException;
+import pl.sda.library.domain.model.exception.SeriesDoesNotExistException;
 import pl.sda.library.domain.port.SeriesRepository;
-import pl.sda.library.domain.model.exception.ObjectAlreadyExistException;
-import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -15,41 +16,38 @@ public class SeriesService {
 
     private SeriesRepository seriesRepository;
 
-    public Long addSeries(Series series){
-        if(alreadyExist(series))
-            throw new ObjectAlreadyExistException("Podany autor już istnieje w bazie danych.");
-        Long id = seriesRepository.addSeries(series);
-        return id;
+    public Long addSeries(Series series) {
+        Optional<Series> optionalSeries = seriesRepository.findByTitle(series.getTitle());
+        if (optionalSeries.isPresent()) {
+            throw new SeriesAlreadyExistException(series);
+        }
+        return seriesRepository.add(series);
     }
 
-    private boolean alreadyExist(Series series) {
-        return seriesRepository.isExist(series.getTitle());
+    public Series editSeries(Series series, Long id) {
+        Optional<Series> seriesById = seriesRepository.findById(id);
+        if (!seriesById.isPresent()) {
+            throw new SeriesDoesNotExistException(id);
+        }
+        seriesById.get().setTitle(series.getTitle());
+        seriesById.get().setDescription(series.getDescription());
+
+        return seriesRepository.edit(seriesById.get()).get();
     }
 
-    public List<Series> getAllSerieses(){
-        return seriesRepository.getAllSerieses();
+    public void deleteSeries(Long id) {
+        seriesRepository.delete(id);
     }
 
-    public void delSeries(long id) {
-        seriesRepository.deleteSeries(id);
+    public Series findSeries(Long id) {
+        Optional<Series> seriesOptional = seriesRepository.findById(id);
+        if (!seriesOptional.isPresent()) {
+            throw new SeriesDoesNotExistException(id);
+        }
+        return seriesOptional.get();
     }
 
-    public Series editSeries(Series series)   {
-        Series seriesById = seriesRepository.getSeriesById(series.getIdSeries());
-        if(seriesById.getIdSeries() == null)
-            throw new ObjectDoesNotExistException("Podany cykl nie istnieje w bazie danych.");
-
-        seriesById.setTitle(series.getTitle());
-        seriesById.setDescription(series.getDescription());
-
-        return seriesRepository.editSeries(seriesById);
-    }
-
-    public Series getSeries(Long id) {
-        Series byId = seriesRepository.getSeriesById(id);
-        if(byId.getIdSeries() == null)
-            throw new ObjectDoesNotExistException("Podany cykl nie istnieje w bazie danych.");
-        else
-            return byId;
+    public List<Series> findAllSeries() {
+        return seriesRepository.findAll();
     }
 }

@@ -9,17 +9,15 @@ import java.util.Optional;
 @Component
 public interface SeriesRepository {
 
-    Long addSeries(Series series);
+    Long add(Series series);
 
-    List<Series> getAllSerieses();
+    Optional<Series> edit(Series series);
 
-    void deleteSeries(long id);
+    void delete(Long id);
 
-    boolean isExist(String title);
+    Optional<Series> findById(Long id);
 
-    Optional<Series> getSeriesById(Long idSeries);
+    Optional<Series> findByTitle(String title);
 
-    Optional<Series> editSeries(Series series);
-
-    boolean isExistById(Long id);
+    List<Series> findAll();
 }
