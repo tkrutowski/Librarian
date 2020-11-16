@@ -44,39 +44,39 @@ public class CategoryServiceTest {
     public void should_return_changed_Name_while_edit()  {
         //when
         Category category = new Category(null,"Fantasy");
-        Long id =  categoryService.addCategory(category);
-        Category toEdit = categoryService.getCategory(id);
+        Long id = categoryService.addCategory(category);
+        Category toEdit = categoryService.findCategory(id);
         toEdit.setName("Fantazja");
 
         //given
-        Category afterEdit = categoryService.editCategory(toEdit);
+        Category afterEdit = categoryService.editCategory(toEdit, id);
 
         //then
         assertEquals("Fantazja", afterEdit.getName());
     }
 
     @Test
-    public void should_throw_ObjectDoesNotExistException()   {
+    public void should_throw_ObjectDoesNotExistException() {
         //when
-        Category category = new Category(null,"SF");
-        Long id =  categoryService.addCategory(category);
-        Category toEdit = categoryService.getCategory(id);
-        toEdit.setIdCategory(0L);
+        Category category = new Category(null, "SF");
+        Long id = categoryService.addCategory(category);
+        Category toEdit = categoryService.findCategory(id);
+        toEdit.setId(0L);
         toEdit.setName("Science fiction");
 
         //then
-        assertThrows(ObjectDoesNotExistException.class, () -> categoryService.editCategory(toEdit));
+        assertThrows(ObjectDoesNotExistException.class, () -> categoryService.editCategory(toEdit, 0L));
     }
 
     @Test
     public void should_return_size__plus_2_when_2_categories_added() {
         //when
-        final int SIZE = categoryService.getAllCategories().size() + 2;
+        final int SIZE = categoryService.findAllCategories().size() + 2;
         categoryService.addCategory(new Category(null,"Horror"));
         categoryService.addCategory(new Category(null,"Historyczny"));
 
         //given
-        int result = categoryService.getAllCategories().size();
+        int result = categoryService.findAllCategories().size();
 
         //then
         assertEquals(SIZE, result);
@@ -85,11 +85,11 @@ public class CategoryServiceTest {
     @Test
     public void should_return_size__minus_1_when_one_category_deleted() {
         //when
-        final int SIZE = categoryService.getAllCategories().size() -1;
-        categoryService.delCategory(3L);
+        final int SIZE = categoryService.findAllCategories().size() - 1;
+        categoryService.deleteCategory(3L);
 
         //given
-        int result = categoryService.getAllCategories().size();
+        int result = categoryService.findAllCategories().size();
 
         //then
         assertEquals(SIZE, result);

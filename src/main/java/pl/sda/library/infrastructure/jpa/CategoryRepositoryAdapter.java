@@ -25,13 +25,9 @@ public class CategoryRepositoryAdapter implements CategoryRepository {
     }
 
     @Override
-    public boolean delete(Long id) {
-        try {
-            categoryDtoRepository.deleteById(id);
-            return true;
-        } catch (Exception ex) {
-            return false;
-        }
+    public void delete(Long id) {
+        categoryDtoRepository.findById(id)
+                .ifPresent(categoryDto -> categoryDtoRepository.delete(categoryDto));
     }
 
     @Override
