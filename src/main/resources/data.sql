@@ -1,8 +1,11 @@
    INSERT INTO users(login,password,name,is_admin) VALUES('admin','1234','administrator',1);
     INSERT INTO users(login,password,name,is_admin) VALUES('test@gmail.com','12345','tom kru',0);
 
-      INSERT INTO categories(name) VALUES('Thriler');
+      INSERT INTO categories(name) VALUES('Thriller');
         INSERT INTO categories(name) VALUES('Sensacja');
+        INSERT INTO categories(name) VALUES('Fantastyka');
+        INSERT INTO categories(name) VALUES('Science fiction');
+        INSERT INTO categories(name) VALUES('Kryminał');
 
 
           INSERT INTO authors(first_name, last_name) VALUES('Lee','Child' );
@@ -10,10 +13,13 @@
     INSERT INTO authors(first_name, last_name) VALUES('Tom','Clancy' );
     INSERT INTO authors(first_name, last_name) VALUES('Ryk','Brown' );
     INSERT INTO authors(first_name, last_name) VALUES('Remigiusz','Mróz' );
+    INSERT INTO authors(first_name, last_name) VALUES('Michael', 'Connelly' );
+    INSERT INTO authors(first_name, last_name) VALUES('Evan', 'Currie' );
 
 
        INSERT INTO series(title, description) VALUES('Jack Reacher','dsfsdfs dfsfds ds sd s' );
        INSERT INTO series(title, description) VALUES('The Frontires Saga','d55435 grtet sfsdfs dfsfds ds sd s' );
+       INSERT INTO series(title, description) VALUES('Odyssey One','d55435 grtet sfsdfs dfsfds ds sd s' );
 
        INSERT INTO bookstores(name, url) VALUES('Empik','www.empik.com' );
        INSERT INTO bookstores(name, url) VALUES('PWN','www.pwn.pl' );
