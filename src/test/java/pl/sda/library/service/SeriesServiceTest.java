@@ -11,7 +11,9 @@ import pl.sda.library.domain.model.exception.SeriesAlreadyExistException;
 import pl.sda.library.domain.model.exception.SeriesDoesNotExistException;
 import pl.sda.library.domain.service.SeriesService;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = LibraryApplication.class)
