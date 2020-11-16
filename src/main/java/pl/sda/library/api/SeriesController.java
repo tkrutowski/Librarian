@@ -29,12 +29,12 @@ public class SeriesController {
     }
 
     @GetMapping("/{id}")
-    public Series getSeries(@PathVariable Long id) {
+    public Series findSeries(@PathVariable Long id) {
         return seriesService.findSeries(id);
     }
 
     @GetMapping
-    public List<Series> getAllSeries() {
+    public List<Series> findAllSeries() {
         return seriesService.findAllSeries();
     }
 }
