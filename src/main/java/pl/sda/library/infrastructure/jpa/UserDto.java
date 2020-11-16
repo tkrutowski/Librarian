@@ -25,8 +25,8 @@ import javax.persistence.Table;
 class UserDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
-    private Long idUser;
+    @Column(name = "id")
+    private Long id;
     private String login;
     private String password;
     private String name;
@@ -35,7 +35,7 @@ class UserDto {
 
     User toDomain() {
         User user = new User();
-        user.setIdUser(getIdUser());
+        user.setId(getId());
         user.setLogin(getLogin());
         user.setPassword(getPassword());
         user.setName(getName());
@@ -45,7 +45,7 @@ class UserDto {
 
     static UserDto fromDomain(User user) {
         UserDto userDto = new UserDto();
-        userDto.setIdUser(user.getIdUser());
+        userDto.setId(user.getId());
         userDto.setName(user.getName());
         userDto.setLogin(user.getLogin());
         userDto.setPassword(user.getPassword());
