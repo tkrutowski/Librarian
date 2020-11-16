@@ -16,7 +16,7 @@ public class UserController {
 
     @GetMapping("/all")
     public List<User> getAllUsers(){
-        return userService.getAllUsers();
+        return userService.findAllUsers();
     }
 
     @PostMapping("/add")
@@ -25,17 +25,17 @@ public class UserController {
     }
 
     @PutMapping("/edit")
-    public User editUser(@RequestBody User user)  {
-        return userService.editUser(user);
+    public User editUser(@RequestBody User user, @PathVariable Long id)  {
+        return userService.editUser(user, id);
     }
 
     @GetMapping("/{id}")
     public User getUser(@PathVariable Long id){
-        return userService.getUser(id);
+        return userService.findUser(id);
     }
 
     @DeleteMapping("/{id}")
     public void delUser(@PathVariable Long id){
-        userService.delUser(id);
+        userService.deleteUser(id);
     }
 }
