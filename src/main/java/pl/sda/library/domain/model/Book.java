@@ -1,32 +1,46 @@
 package pl.sda.library.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import lombok.*;
-
-import java.time.LocalDate;
+import java.util.Objects;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 public class Book {
     private Long idBook;
-    private String userLogin;
-    private String bookstore; //nazwa księgarni np. Empik
-    private String series; //cykl książek np 'Jack Reacher'   !!!!!!!!!!
-    private String authors; //autorzy: imie nazwisko            !!!!!!!!!!!
-    private String categories; //kategorie np. Thriller, kryminał  !!!!!!!!!
-    private String title; //tytuł                                 !!!!!!!!!!
-    private String subtitle;//podtytuł jeżęli jest              !!!!!!!!!!
-    private String description; //krótki opis książki           !!!!!!!!!!
-    private String cover; //link do okładki                     !!!!!!!!!
-    private EditionType editionType; //typ: EBOOK, AUDIOBOOK lub BOOK   !!!!!!!!!!!!
-    private ReadingStatus readingStatus;
-    private OwnershipStatus ownershipStatus;
-    private LocalDate readFrom; //zaczęto czytać
-    private LocalDate readTo; //skończono czytać
-    private String info; //jakieś swoje zapiski
-    private Boolean isRead;//czy przeczytana
-    private String isbn;  //                    !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    private int volume;
+    private String series;
+    private String authors;
+    private String categories;
+    private String title;
+    private String subtitle;
+    private String description;
+    private String cover;
+    private int bookInSeriesNo;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return getBookInSeriesNo() == book.getBookInSeriesNo() &&
+                Objects.equals(getSeries(), book.getSeries()) &&
+                getAuthors().equals(book.getAuthors()) &&
+                getTitle().equals(book.getTitle()) &&
+                Objects.equals(getSubtitle(), book.getSubtitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSeries(), getAuthors(), getTitle(), getSubtitle(), getBookInSeriesNo());
+    }
 }
+
