@@ -3,11 +3,12 @@ package pl.sda.library.domain.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.library.domain.model.User;
+import pl.sda.library.domain.model.exception.UserAlreadyExistException;
+import pl.sda.library.domain.model.exception.UserDoesNotExistException;
 import pl.sda.library.domain.port.UserRepository;
-import pl.sda.library.domain.model.exception.ObjectAlreadyExistException;
-import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -16,43 +17,39 @@ public class UserService {
     private UserRepository userRepository;
 
     public Long addUser(User user){
-        if(alreadyExist(user))
-            throw new ObjectAlreadyExistException("Podany autor już istnieje w bazie danych.");
-        Long id = userRepository.addUser(user);
-        return id;
+        Optional<User> optionalUser = userRepository.findByLogin(user.getLogin());
+        if (optionalUser.isPresent()) {
+            throw new UserAlreadyExistException(user);
+        }
+        return userRepository.add(user);
     }
 
-    private boolean alreadyExist(User user) {
-        return userRepository.isExist(user.getLogin());
+    //TODO zastanowić się nad edycją hasło w osobnej metodzie
+    public User editUser(User userToEdit, Long id) {
+        Optional<User> userById = userRepository.findById(id);
+        if (!userById.isPresent()) {
+            throw new UserDoesNotExistException(id);
+        }
+
+        userById.get().setName(userToEdit.getName());
+        userById.get().setPassword(userToEdit.getPassword());
+
+        return userRepository.edit(userById.get()).get();
     }
 
-    public List<User> getAllUsers(){
-        return userRepository.getAllUsers();
+    public void deleteUser(Long id) {
+        userRepository.delete(id);
     }
 
-    public void delUser(long id) {
-        userRepository.deleteUser(id);
+    public User findUser(Long id) {
+        Optional<User> userById = userRepository.findById(id);
+        if (!userById.isPresent()) {
+            throw new UserDoesNotExistException(id);
+        }
+            return userById.get();
     }
 
-    public User getUser(Long id) {
-        User userById = userRepository.getUserById(id);
-        if(userById.getIdUser() == null)
-            throw new ObjectDoesNotExistException("Podany użytkownik nie istnieje w bazie danych.");
-        else
-            return userById;
-    }
-
-    public User editUser(User user) {
-        User userById = userRepository.getUserById(user.getIdUser());
-        if(userById.getIdUser() == null)
-            throw new ObjectDoesNotExistException("Podany użytkownik nie istnieje w bazie danych.");
-
-        userById.setName(user.getName());
-        //TODO zastanowić się nad edycją hasło w osobnej metodzie
-        userById.setPassword(user.getPassword());
-        //TODO zastanowić się nad edycją isAdmin w osobnej metodzie
-        userById.setIsAdmin(user.getIsAdmin());
-
-        return userRepository.editUser(userById);
+    public List<User> findAllUsers(){
+        return userRepository.findAll();
     }
 }
