@@ -24,11 +24,11 @@ public class BookController {
     BookService bookService;
 
     @PostMapping
-    public Boolean addBook(@RequestBody Book book){
+    public Book addBook(@RequestBody Book book){
         return bookService.addBook(book);
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public Book editBookstore(@RequestBody Book book, @PathVariable Long id) {
         return bookService.editBook(book, id);
     }
