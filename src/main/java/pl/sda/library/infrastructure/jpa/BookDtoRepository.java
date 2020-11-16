@@ -4,5 +4,5 @@ import org.springframework.data.repository.CrudRepository;
 
 interface BookDtoRepository extends CrudRepository<BookDto, Long> {
 
-    Iterable<BookDto> findAllByUser(UserDto userDto);
+    Iterable<BookDto> findAllByTitle(String title);
 }
