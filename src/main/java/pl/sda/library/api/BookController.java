@@ -47,13 +47,4 @@ public class BookController {
     public List<Book> getAllBooks() {
         return bookService.findAllBooks();
     }
-
-    //TODO - to powinno iść do servisu
-    @GetMapping("/upolujebooka/{name}")
-    public List<Book> getBook(@PathVariable String name){
-        List<Book> getBooksFromUpolujEbooka = new ArrayList<>();
-        UpolujebookaAdapter upolujebookaAdapter = new UpolujebookaAdapter();
-        getBooksFromUpolujEbooka = upolujebookaAdapter.findByPhrase(name);
-        return getBooksFromUpolujEbooka;
-    }
 }
