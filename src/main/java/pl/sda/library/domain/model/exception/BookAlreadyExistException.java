@@ -4,6 +4,6 @@ import pl.sda.library.domain.model.Book;
 
 public class BookAlreadyExistException extends ObjectAlreadyExistException {
     public BookAlreadyExistException(Book book) {
-        super("Bookstore already exists: " + book.toString());
+        super("Book already exists: " + book.toString());
     }
 }
