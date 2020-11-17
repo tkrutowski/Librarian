@@ -25,8 +25,9 @@
        INSERT INTO bookstores(name, url) VALUES('PWN','www.pwn.pl' );
 
 --
---     INSERT INTO books(id_user,id_bookstore,id_series,title,subtitle,description,cover,edition_type,reading_status,ownership_status,read_from,read_to,info,is_read,isbn,volume)
---     VALUES(1,1,1,'Burza',null,'brak opisu',NULL,'EBOOK','NOT_READ','READ_ONLY',null,null,'info1',0,'789-987',1);
---     INSERT INTO books(id_user,id_bookstore,id_series,title,subtitle,description,cover,edition_type,reading_status,ownership_status,is_read)
---     VALUES(2,0,1,'Sztorm',null,'brak opisu',NULL,'AUDIOBOOK','READ','READ_ONLY',null,null,'info2',0);
-
+    INSERT INTO books(id_series,title,subtitle,description,cover,book_in_series_no)
+    VALUES(3,'Odyssey One', 'Ostatni bastion','Trzeci tom pasjonującego cyklu SF Evana Curie.','adresURL', 3);
+      INSERT INTO books(id_series,title,subtitle,description,cover,book_in_series_no)
+    VALUES(3,'Odyssey One', 'W ogniu wojny','Trzeci tom pasjonującego cyklu SF Evana Curie.','adresURL_inny', 4);
+      INSERT INTO books(id_series,title,subtitle,description,cover,book_in_series_no)
+    VALUES(3,'Odyssey One', 'Król Wojowników','Trzeci tom pasjonującego cyklu SF Evana Curie.','adresURL_jesczczeInny', 5);
