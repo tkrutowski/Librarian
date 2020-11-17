@@ -17,7 +17,6 @@ public class UserBookService {
     private UserBookRepository userBookRepository;
 
     public UserBook addUserBook(UserBook userBook) {
-        int i=0;
         if (isUserBookExist(userBook))
             throw new UserBookAlreadyExistException(userBook);
 

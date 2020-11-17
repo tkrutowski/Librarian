@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,15 +35,15 @@ public class UserBookDto {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_book")
     private BookDto book;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user")
     private UserDto user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_bookstore")
     private BookstoreDto bookstore;
 
@@ -73,7 +74,7 @@ public class UserBookDto {
         UserBook userBook = new UserBook();
         userBook.setId(getId());
         userBook.setIdBook(book.getId());
-        userBook.setUserLogin(getUser().getLogin());
+        userBook.setIdUser(getUser().getId());
         userBook.setBookstore(getBookstore().getName());
         userBook.setEditionType(getEditionType());
         userBook.setReadingStatus(getReadingStatus());

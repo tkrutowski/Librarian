@@ -12,12 +12,14 @@ public class UserBookDtoCreator {
 
     private BookstoreDtoRepository bookstoreDtoRepository;
     private BookDtoRepository bookDtoRepository;
+    private UserDtoRepository userDtoRepository;
 
 
     UserBookDto fromDomain(UserBook userBook) {
         UserBookDto userBookDto = new UserBookDto();
         userBookDto.setId(userBook.getId());
         userBookDto.setBook(getBookById(userBook.getIdBook()));
+        userBookDto.setUser(getUser(userBook.getIdUser()));
         userBookDto.setBookstore(getBookstoreFromString(userBook.getBookstore()));
         userBookDto.setEditionType(userBook.getEditionType());
         userBookDto.setReadingStatus(userBook.getReadingStatus());
@@ -43,5 +45,13 @@ public class UserBookDtoCreator {
             return byId.get();
         }
         return new BookDto();
+    }
+
+    private UserDto getUser(Long id) {
+        Optional<UserDto> userDto = userDtoRepository.findById(id);
+        if (userDto.isPresent())
+            return userDto.get();
+
+        return new UserDto();
     }
 }

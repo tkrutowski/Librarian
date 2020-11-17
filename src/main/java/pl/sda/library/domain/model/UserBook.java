@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class UserBook {
         private Long id;
         private Long idBook;
-        private String userLogin;
+        private Long idUser;
         private String bookstore;
         private EditionType editionType;
         private ReadingStatus readingStatus;

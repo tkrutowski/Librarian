@@ -17,6 +17,8 @@ public interface UserBookRepository {
 
     List<UserBook> findAll();
 
+    List<UserBook> findAllByIdBook(Long idBook);
+
     Optional<UserBook> findById(Long id);
 
 }
