@@ -3,6 +3,7 @@ package pl.sda.library.infrastructure.jpa;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.Book;
+import pl.sda.library.domain.model.UserBook;
 
 import java.util.HashSet;
 import java.util.Optional;

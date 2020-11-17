@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 public class UserBook {
-        private Long idUserBook;
+        private Long id;
         private Long idBook;
         private String userLogin;
         private String bookstore;
