@@ -1,4 +1,4 @@
-package pl.sda.library.controllers;
+package pl.sda.library.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,6 @@ public class WebAuthorController {
 
     @RequestMapping(value="/delete/{authorId}",method = RequestMethod.GET)
     public String delAuthor(@PathVariable String authorId) {
-        System.out.println(authorId);
         authorService.deleteAuthor(Long.parseLong(authorId));
         return "redirect:/authors";
     }
