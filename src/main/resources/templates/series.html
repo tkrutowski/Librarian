@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="table.css">
+    <title>Series list</title>
+</head>
+<style>
+
+</style>
+<body>
+
+<h2>Add series</h2>
+<form action="#" th:object="${series}" method="post">
+    <input type="hidden" />
+    <p>Series title: <input type="text" th:field="*{title}" required/></p>
+    <p>Series description: <input type="text" th:field="*{description}" required/></p>
+    <input type="submit" value="submit"/>
+    <input type="reset" value="reset" />
+</form>
+<h1>Series list</h1>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th style="width: 30px;" align="left">Id</th>
+            <th style="width: 200px;" align="left">Series name</th>
+            <th style="width: 200px;" align="left">Series description</th>
+            <th style="width: 30;" align="left">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="element: ${seriesList}">
+        <td th:text="${element.id}"></td>
+        <td th:text="${element.title}"></td>
+        <td th:text="${element.description}"></td>
+        <td><a th:href="@{/series/delete/{id}(id=${element.id})}" class="btn btn-danger">delete</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
