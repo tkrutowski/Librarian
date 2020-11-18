@@ -1,16 +1,14 @@
 package pl.sda.library.infrastructure.empik;
 
 import pl.sda.library.domain.model.Book;
-import pl.sda.library.model.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EmpikAdapter implements ProductRepository {
+public class EmpikAdapter {
 
-    @Override
     public List<Book> findByPhrase(String phrase) {
         List<EmpikProductDto> dto = adaptItemsFromScrapper(phrase);
         return toDomain(dto);
