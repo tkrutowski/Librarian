@@ -1,68 +1,65 @@
 <!DOCTYPE html>
-<html lang="pl"  xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Dodawanie użytkownika</title>
 </head>
 <body>
- <h2>Dodawanie użytkownika</h2>
-<!--<p th:text="${usersList[0].getName()}"></p>-->
-<!-- Hello <span th:text="${usersList[0].getName()}">Stranger</span>!-->
-<!-- Hello <span th:text="${}">Stranger</span>!-->
- <br>
-<!-- Hello <span >Stranger</span>!-->
+<h2>Dodawanie użytkownika</h2>
+<br>
 
- <form th:object="${user}" method="post">
+<form th:object="${user}" method="post">
+
+    <label for="login">Login: </label>
+    <input id="login" type="text" required th:field="*{login}"/>
+    <br>
+    <br>
+
+    <label for="password">Password: </label>
+    <input id="password" type="password" required
+           th:field="*{password}"/>
+    <br>
+    <br>
 
 
+    <label for="name">Nazwa: </label>
+    <input id="name" type="text" required th:field="*{name}"/>
+    <br>
+    <br>
 
+    <label for="role">Rola: </label>
+    <select id="role" required th:field="*{role}">
+        <option th:each="role1 : ${roles}" th:value="${role1}" th:text="${role1}"></option>
+    </select>
+    <br>
+    <br>
 
-     <label for="login">Login: </label>
-     <input id="login" type="text" required th:field="*{login}"/>
-     <br>
+    <input type="submit" value="Dodaj"/>
+</form>
+<br>
+<br>
+<br>
 
-     <label for="password">Password: </label>
-     <input id="password" type="password" required
-            th:field="*{password}"/>
-     <br>
-
-     <label for="name" >Nazwa: </label>
-     <input id="name" type="text" required th:field="*{name}"/>
-     <br>
-
-     <label for="role">Rola: </label>
-     <select id="role" required th:field="*{role}">
-         <option th:each="role1 : ${roles}" th:value="${role1}" th:text="${role1}" ></option>
-<!--         <option value="volvo" th:field="*{role.USER}"></option>-->
-     </select>
-     <br>
-
-     <input type="submit" value="Add"/>
- </form>
- <br>
- <br>
- <br>
-
- <table border="1">
-     <thead>
-     <tr>
-         <th>Id</th>
-         <th>Login</th>
-         <th>Hasło</th>
-         <th>Nazwa</th>
-         <th>Rola</th>
-     </tr>
-     </thead>
-     <tbody>
-     <tr th:each="u: ${usersList}">
-         <td th:text="${u.id}">1</td>
-         <td th:text="${u.login}">Fabulous</td>
-         <td th:text="${u.password}">4</td>
-         <td th:text="${u.name}">4</td>
-         <td th:text="${u.role}">4</td>
-     </tr>
-     </tbody>
- </table>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Login</th>
+        <th>Hasło</th>
+        <th>Nazwa</th>
+        <th>Rola</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="u: ${usersList}">
+        <td th:text="${u.id}">1</td>
+        <td th:text="${u.login}">Fabulous</td>
+        <td th:text="${u.password}">4</td>
+        <td th:text="${u.name}">4</td>
+        <td th:text="${u.role}">4</td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

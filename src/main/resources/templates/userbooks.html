@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl"  xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Książki użytkownika</title>
@@ -11,123 +11,118 @@
 
     <label for="user">Użytkownik: </label>
     <select id="user" required th:field="*{idUser}">
-        <option th:each="u : ${userList}" th:value="${u.getId()}" th:text="${u.getName()}" ></option>
+        <option th:each="u : ${userList}" th:value="${u.getId()}" th:text="${u.getName()}"></option>
     </select>
     <br>
     <br>
+
+
     <label for="book">Książka: </label>
     <select id="book" required th:field="*{idBook}">
-        <option th:each="b : ${bookList}" th:value="${b.getIdBook()}" th:text="${b.getTitle()}" ></option>
-        <!--         <option value="volvo" th:field="*{role.USER}"></option>-->
+        <option th:each="b : ${bookList}" th:value="${b.idBook}"
+                th:text="${b.title + ', ' + b.subtitle + ' Autor: ' + b.authors}"></option>
     </select>
-<!--    <label for="findBook" > </label>-->
     <input id="findBook" type="button" value="Wyszukaj"/>
     <br>
     <br>
+
+
     <label for="bookstore">Księgarnia: </label>
     <select id="bookstore" required th:field="*{bookstore}">
-        <option th:each="bs : ${booksoreList}" th:value="${bs}" th:text="${bs.getName()}" ></option>
-        <!--         <option value="volvo" th:field="*{role.USER}"></option>-->
+        <option th:each="bs : ${bookstoreList}" th:value="${bs.name}" th:text="${bs.name}"></option>
     </select>
+    <td><a th:href="@{/bookstores}" >Dodaj</a></td>
     <br>
     <br>
+
 
     <label for="owner">Własność: </label>
     <select id="owner" required th:field="*{ownershipStatus}">
-        <option th:each="o : ${ownershipStatus}" th:value="${o}" th:text="${o}" ></option>
-        <!--         <option value="volvo" th:field="*{role.USER}"></option>-->
+        <option th:each="o : ${ownershipStatus}" th:value="${o}" th:text="${o.getDescription()}"></option>
     </select>
     <br>
     <br>
+
 
     <label for="edition">Edycja: </label>
     <select id="edition" required th:field="*{editionType}">
-        <option th:each="e : ${editionTypes}" th:value="${e}" th:text="${e}" ></option>
+        <option th:each="e : ${editionTypes}" th:value="${e}" th:text="${e}"></option>
     </select>
     <br>
     <br>
 
-    <label for="status">Edycja: </label>
+
+    <label for="status">Stan czytania: </label>
     <select id="status" required th:field="*{readingStatus}">
-        <option th:each="s : ${readingStatus}" th:value="${s}" th:text="${s}" ></option>
+        <option th:each="s : ${readingStatus}" th:value="${s}" th:text="${s.getDescription()}"></option>
     </select>
     <br>
     <br>
 
-    <label for="from" >Czytana od: </label>
-    <input id="from" type="date"  th:field="*{readFrom.}"/>
+
+    <label for="from">Czytana od: </label>
+    <input id="from" type="date" th:field="*{readFrom}"/>
     <br>
     <br>
 
-    <label for="to" >Czytana do: </label>
-    <input id="to" type="date"  th:field="*{readTo}"/>
+
+    <label for="to">Czytana do: </label>
+    <input id="to" type="date" th:field="*{readTo}"/>
     <br>
     <br>
 
-    <label for="info" >Moje notatki: </label>
-    <input id="info" type="text"  th:field="*{info}"/>
+
+    <label for="info">Moje notatki: </label>
+    <input id="info" type="text" th:field="*{info}"/>
     <br>
     <br>
 
     <div>
-
-    <label>Czy przeczytania: </label>
-    <label for="isReadYes" >Tak</label>
-    <input id="isReadYes" type="radio" required th:field="*{isRead}" th:value="true"/>
-    <label for="isReadNo" >Nie</label>
-    <input id="isReadNo" type="radio" required th:field="*{isRead}" th:value="false"/>
+        <label>Czy przeczytania: </label>
+        <label for="isReadYes">Tak</label>
+        <input id="isReadYes" type="radio" required th:field="*{isRead}" th:value="true"/>
+        <label for="isReadNo">Nie</label>
+        <input id="isReadNo" type="radio" checked required th:field="*{isRead}" th:value="false"/>
     </div>
     <br>
 
-    <input type="submit" value="Add"/>
-    <p>Wersja 1.0</p>
+    <input type="submit" value="Dodaj"/>
 </form>
+<br>
+<br>
 
-
-
-<!--<div>-->
-<!--    <label for="fname">URL do strony z książką:</label>-->
-<!--    <input type="text" id="fname" >-->
-<!--    <input id="find" type="button" value="Wypełnij formularz"/><br><br>-->
-
-
-
-<!--    <label for="fname2">Autor:</label>-->
-<!--    <input type="text" id="fname2" name="fname"><br><br>-->
-
-<!--    <label for="fname3">Categoria:</label>-->
-<!--    <input type="text" id="fname3" name="fname"><br><br>-->
-
-<!--    <label for="fname4">Tytuł:</label>-->
-<!--    <input type="text" id="fname4" name="fname"><br><br>-->
-
-<!--    <label for="fname5">Podtytuł:</label>-->
-<!--    <input type="text" id="fname5" name="fname"><br><br>-->
-
-<!--    <label for="fname1">Cykl:</label>-->
-<!--    <input type="text" id="fname1" name="fname"><br><br>-->
-
-<!--    <label for="fname6">Część cyklu:</label>-->
-<!--    <input type="text" id="fname6" name="fname"><br><br>-->
-
-<!--    <label for="fname7">Opis:</label>-->
-<!--    <input type="text" id="fname7" name="fname"><br><br>-->
-<!--    <input type="button" value="Dodaj"/>-->
-<!--</div>-->
-
-
+<table border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Book</th>
+        <th>User</th>
+        <th>Bookstore</th>
+        <th>Edition</th>
+        <th>ReadingStatus</th>
+        <th>OwnershipStatus</th>
+        <th>ReadFrom</th>
+        <th>ReadTo</th>
+        <th>Info</th>
+        <th>isRead</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="u: ${userBookListAll}">
+        <td th:text="${u.id}">1</td>
+        <td th:text="${u.idBook}">Fabulous</td>
+        <td th:text="${u.idUser}">4</td>
+        <td th:text="${u.bookstore}">4</td>
+        <td th:text="${u.editionType}">4</td>
+        <td th:text="${u.readingStatus}">4</td>
+        <td th:text="${u.ownershipStatus}">4</td>
+        <td th:text="${u.readFrom}">4</td>
+        <td th:text="${u.readTo}">4</td>
+        <td th:text="${u.info}">4</td>
+        <td th:text="${u.isRead}">4</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
 
-
-<!--
-    private Long idBook;
-        private Long idUser;
-private String bookstore;
-private EditionType editionType;
-private ReadingStatus readingStatus;
-private OwnershipStatus ownershipStatus;
-private LocalDate readFrom;
-private LocalDate readTo;
-private String info;
-private Boolean isRead;-->

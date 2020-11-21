@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.sda.library.domain.model.EditionType;
 import pl.sda.library.domain.model.OwnershipStatus;
 import pl.sda.library.domain.model.ReadingStatus;
-import pl.sda.library.domain.model.Role;
-import pl.sda.library.domain.model.User;
 import pl.sda.library.domain.model.UserBook;
 import pl.sda.library.domain.service.BookService;
 import pl.sda.library.domain.service.BookstoreService;
@@ -37,28 +35,20 @@ public class WebUserBookController {
         model.addAttribute(new UserBook());
         model.addAttribute("userList", userService.findAllUsers());
         model.addAttribute("bookList", bookService.findAllBooks());
-        model.addAttribute("booksoreList", bookstoreService.findAllBookstores());
+        model.addAttribute("bookstoreList", bookstoreService.findAllBookstores());
         model.addAttribute("editionTypes", editionTypes);
         model.addAttribute("readingStatus", readingStatus);
         model.addAttribute("ownershipStatus", ownershipStatus);
+        model.addAttribute("userBookListAll", userBookService.findAllUserBooks());
         return "userbooks";
 
     }
 
     @PostMapping
-    public String addUserBook(UserBook userBook)  {
+    public String addUserBook( UserBook userBook)  {
         int i=0;
         userBookService.addUserBook(userBook);
         return "redirect:/userbooks";
     }
 }
 
-/*
-private String bookstore;
-private EditionType editionType;
-private ReadingStatus readingStatus;
-private OwnershipStatus ownershipStatus;
-private LocalDate readFrom;
-private LocalDate readTo;
-private String info;
-private Boolean isRead;*/

@@ -20,10 +20,10 @@ public class UserBook {
         private EditionType editionType;
         private ReadingStatus readingStatus;
         private OwnershipStatus ownershipStatus;
-        @DateTimeFormat(pattern = "dd/MM/yyyy")
-        private Date readFrom;
-        @DateTimeFormat(pattern = "dd/MM/yyyy")
-        private Date readTo;
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        private LocalDate readFrom;
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        private LocalDate readTo;
         private String info;
         private Boolean isRead;
 }

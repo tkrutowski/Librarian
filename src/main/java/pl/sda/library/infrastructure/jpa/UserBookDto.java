@@ -63,11 +63,11 @@ public class UserBookDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "read_from")
-    private Date readFrom;
+    private LocalDate readFrom;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "read_to")
-    private Date readTo;
+    private LocalDate readTo;
 
     @Column(name = "is_read")
     private Boolean isRead;
