@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import pl.sda.library.domain.model.Book;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,13 +40,15 @@ class BookDto {
     @JoinColumn(name = "id_series")
     private SeriesDto series;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(name = "books_authors",
             joinColumns = {@JoinColumn(name = "id_book")},
             inverseJoinColumns = {@JoinColumn(name = "id_author")})
     private Set<AuthorDto> authors = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinTable(name = "books_categories",
             joinColumns = {@JoinColumn(name = "id_book")},
             inverseJoinColumns = {@JoinColumn(name = "id_category")})

@@ -31,7 +31,7 @@ public class BookRepositoryAdapter implements BookRepository {
 
     @Override
     public void delete(Long id) {
-        throw new NotYetImplementedException();
+        bookDtoRepository.deleteById(id);
     }
 
     @Override
