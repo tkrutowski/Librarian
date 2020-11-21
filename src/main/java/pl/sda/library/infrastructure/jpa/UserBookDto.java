@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.sda.library.domain.model.EditionType;
 import pl.sda.library.domain.model.OwnershipStatus;
 import pl.sda.library.domain.model.ReadingStatus;
@@ -21,6 +22,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -59,11 +61,13 @@ public class UserBookDto {
     @Enumerated(EnumType.STRING)
     private OwnershipStatus ownershipStatus;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "read_from")
-    private LocalDate readFrom;
+    private Date readFrom;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "read_to")
-    private LocalDate readTo;
+    private Date readTo;
 
     @Column(name = "is_read")
     private Boolean isRead;

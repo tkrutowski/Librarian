@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Controller
 @RequestMapping("/users")
-public class NewUserController {
+public class WebUserController {
     UserService userService;
 
     @GetMapping

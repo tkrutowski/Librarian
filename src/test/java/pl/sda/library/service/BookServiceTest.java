@@ -40,11 +40,11 @@ public class BookServiceTest {
     public void should_return_size_plus_1_when_1_book_added() {
         //when
         Book book = createBook1();
-        final long id = bookService.getAllBooks().size();
+        final long id = bookService.findAllBooks().size();
         bookService.addBook(book);
 
         //given
-        int result = bookService.getAllBooks().size();
+        int result = bookService.findAllBooks().size();
 
         //then
         assertEquals(id + 1, result);

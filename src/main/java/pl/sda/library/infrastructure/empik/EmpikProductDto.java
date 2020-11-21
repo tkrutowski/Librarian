@@ -21,7 +21,7 @@ public class EmpikProductDto {
 
     public Book toDomain() {
         return Book.builder()
-                .bookstore(this.bookstore)
+                //.bookstore(this.bookstore)
                 .authors(this.authors)
                 .title(this.title)
                 .build();

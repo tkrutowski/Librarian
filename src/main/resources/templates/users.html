@@ -13,12 +13,16 @@
 <!-- Hello <span >Stranger</span>!-->
 
  <form th:object="${user}" method="post">
+
+
+
+
      <label for="login">Login: </label>
      <input id="login" type="text" required th:field="*{login}"/>
      <br>
 
      <label for="password">Password: </label>
-     <input id="password" type="password"
+     <input id="password" type="password" required
             th:field="*{password}"/>
      <br>
 
