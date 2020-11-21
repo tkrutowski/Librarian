@@ -13,6 +13,7 @@
     <select id="user" required th:field="*{idUser}">
         <option th:each="u : ${userList}" th:value="${u.id}" th:text="${u.name}"></option>
     </select>
+    <a th:href="@{/users}" >Dodaj</a>
     <br>
     <br>
 
