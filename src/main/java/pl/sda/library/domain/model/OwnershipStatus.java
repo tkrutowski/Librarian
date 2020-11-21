@@ -7,7 +7,6 @@ public enum OwnershipStatus {
     private String description;
 
     OwnershipStatus(String description) {
-
         this.description = description;
     }
 

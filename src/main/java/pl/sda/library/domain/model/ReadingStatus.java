@@ -7,7 +7,6 @@ public enum ReadingStatus {
     private String description;
 
     ReadingStatus(String description) {
-
         this.description = description;
     }
 

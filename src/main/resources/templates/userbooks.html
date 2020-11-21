@@ -11,7 +11,7 @@
 
     <label for="user">Użytkownik: </label>
     <select id="user" required th:field="*{idUser}">
-        <option th:each="u : ${userList}" th:value="${u.getId()}" th:text="${u.getName()}"></option>
+        <option th:each="u : ${userList}" th:value="${u.id}" th:text="${u.name}"></option>
     </select>
     <br>
     <br>
@@ -22,7 +22,7 @@
         <option th:each="b : ${bookList}" th:value="${b.idBook}"
                 th:text="${b.title + ', ' + b.subtitle + ' Autor: ' + b.authors}"></option>
     </select>
-    <input id="findBook" type="button" value="Wyszukaj"/>
+    <a th:href="@{/books}" >Wyszukaj</a>
     <br>
     <br>
 
@@ -31,7 +31,7 @@
     <select id="bookstore" required th:field="*{bookstore}">
         <option th:each="bs : ${bookstoreList}" th:value="${bs.name}" th:text="${bs.name}"></option>
     </select>
-    <td><a th:href="@{/bookstores}" >Dodaj</a></td>
+    <a th:href="@{/bookstores}" >Dodaj</a>
     <br>
     <br>
 

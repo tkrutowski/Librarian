@@ -29,7 +29,7 @@
 
     <label for="role">Rola: </label>
     <select id="role" required th:field="*{role}">
-        <option th:each="role1 : ${roles}" th:value="${role1}" th:text="${role1}"></option>
+        <option th:each="r : ${roles}" th:value="${r}" th:text="${r}"></option>
     </select>
     <br>
     <br>
