@@ -22,13 +22,13 @@ public class UpolujebookaProductDto {
 
     public Book toDomain(){
         return Book.builder()
-                .bookstore(this.bookstore)
+                //.bookstore(this.bookstore)
                 .authors(this.authors)
                 .title(this.title)
                 .description(this.description)
                 .cover(this.cover)
-                .editionType(convertEditionType(this.editionType))
-                .isbn(this.isbn)
+                //.editionType(convertEditionType(this.editionType))
+               // .isbn(this.isbn)
                 .build();
     }
 
