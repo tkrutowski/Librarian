@@ -38,8 +38,7 @@ class BookDtoCreator {
             SeriesDto seriesDto = new SeriesDto();
             seriesDto.setTitle(series);
             seriesDto.setDescription(series);
-            seriesDto.setId(seriesDtoRepository.save(seriesDto).getId());
-            return seriesDto;
+            return seriesDtoRepository.save(seriesDto);
         }
     }
 
@@ -57,8 +56,7 @@ class BookDtoCreator {
                 AuthorDto newAuthorDto = new AuthorDto();
                 newAuthorDto.setFirstName(authorsSplit[0]);
                 newAuthorDto.setLastName(authorsSplit[1]);
-                newAuthorDto.setId(authorDtoRepository.save(newAuthorDto).getId());
-                authorDtos.add(newAuthorDto);
+                authorDtos.add(authorDtoRepository.save(newAuthorDto));
             }
         }
         return authorDtos;
@@ -74,8 +72,7 @@ class BookDtoCreator {
             else {
                 CategoryDto newCategoryDto = new CategoryDto();
                 newCategoryDto.setName(category);
-                newCategoryDto.setId(categoryDtoRepository.save(newCategoryDto).getId());
-                categoryDtos.add(newCategoryDto);
+                categoryDtos.add(categoryDtoRepository.save(newCategoryDto));
             }
         }
         return categoryDtos;

@@ -3,27 +3,27 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="table.css">
-    <title>Books list</title>
+    <title>Lista książek</title>
 </head>
 <style>
 
 </style>
 <body>
 
-<h2>Add book</h2>
+<h2>Dodaj książkę</h2>
 <form action="#" th:object="${book}" method="post">
     <input type="hidden" />
     <p>Id: <input type="text" th:field="*{idBook}" /></p>
-    <p>Series: <input type="text" th:field="*{series}" /></p>
-    <p>Authors: <input type="text" th:field="*{authors}" required/></p>
-    <p>Category: <input type="text" th:field="*{categories}" /></p>
-    <p>Title: <input type="text" th:field="*{title}" required /></p>
-    <p>Subtitle: <input type="text" th:field="*{subtitle}" /></p>
-    <p>Description: <input type="text" th:field="*{description}" /></p>
-    <p>Cover: <input type="text" th:field="*{cover}" /></p>
-    <p>Book number in series: <input type="text" th:field="*{bookInSeriesNo}" /></p>
-    <input type="submit" value="add book"/>
-    <input type="reset" value="clear form" />
+    <p>Seria: <input type="text" th:field="*{series}" /></p>
+    <p>Autor/-zy: <input type="text" th:field="*{authors}" required/></p>
+    <p>Kategoria: <input type="text" th:field="*{categories}" /></p>
+    <p>Tytuł: <input type="text" th:field="*{title}" required /></p>
+    <p>Podtytuł: <input type="text" th:field="*{subtitle}" /></p>
+    <p>Opis: <input type="text" th:field="*{description}" /></p>
+    <p>Link do zdjęcia okładki: <input type="text" th:field="*{cover}" /></p>
+    <p>Numer książki w serii: <input type="text" th:field="*{bookInSeriesNo}" /></p>
+    <input type="submit" value="Dodaj"/>
+    <input type="reset" value="Wyczyść" />
 </form>
 
 
@@ -32,15 +32,15 @@
     <thead>
     <tr>
         <th style="width: 30px;" align="left">Id</th>
-        <th style="width: 150px;" align="left">Series</th>
-        <th style="width: 200px;" align="left">Authors</th>
-        <th style="width: 200px;" align="left">Category</th>
-        <th style="width: 200px;" align="left">Title</th>
-        <th style="width: 200px;" align="left">Subtitle</th>
-        <th style="width: 200px;" align="left">Description</th>
-        <th style="width: 200px;" align="left">Cover</th>
-        <th style="width: 200px;" align="left">Book number in series</th>
-        <th style="width: 30px;" align="left">Action</th>
+        <th style="width: 150px;" align="left">Seria</th>
+        <th style="width: 200px;" align="left">Autor/-zy</th>
+        <th style="width: 200px;" align="left">Kategoria</th>
+        <th style="width: 200px;" align="left">Tytuł</th>
+        <th style="width: 200px;" align="left">Podtytuł</th>
+        <th style="width: 200px;" align="left">Opis</th>
+        <th style="width: 200px;" align="left">Link do zdjęcia okładki</th>
+        <th style="width: 200px;" align="left">Numer książki w serii</th>
+        <th style="width: 30px;" align="left">Akcja</th>
     </tr>
     </thead>
     <tbody>
@@ -54,7 +54,7 @@
         <td th:text="${book.description}"></td>
         <td th:text="${book.cover}"></td>
         <td th:text="${book.bookInSeriesNo}"></td>
-        <td><a th:href="@{/books/delete/{id}(id=${book.idBook})}" class="btn btn-danger">delete</a></td>
+        <td><a th:href="@{/books/delete/{id}(id=${book.idBook})}" class="btn btn-danger">usuń</a></td>
     </tr>
     </tbody>
 </table>

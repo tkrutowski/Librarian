@@ -3,29 +3,29 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="table.css">
-    <title>Authors list</title>
+    <title>Lista autorów</title>
 </head>
 <style>
 
 </style>
 <body>
 
-<h2>Add author</h2>
+<h2>Dodaj autora</h2>
 <form action="#" th:object="${author}" method="post">
     <input type="hidden" />
-    <p>First name: <input type="text" th:field="*{firstName}" required /></p>
-    <p>Last name: <input type="text" th:field="*{lastName}" required/></p>
-    <input type="submit" value="submit"/>
-    <input type="reset" value="reset" />
+    <p>Imię: <input type="text" th:field="*{firstName}" required /></p>
+    <p>Nazwisko: <input type="text" th:field="*{lastName}" required/></p>
+    <input type="submit" value="Dodaj"/>
+    <input type="reset" value="Wyczyść" />
 </form>
-<h1>Authors list</h1>
+<h1>Lista autorów</h1>
 <table class="content-table">
     <thead>
         <tr>
             <th style="width: 30px;" align="left">Id</th>
-            <th style="width: 150px;" align="left">First name</th>
-            <th style="width: 200px;" align="left">Last name</th>
-            <th style="width: 30;" align="left">Action</th>
+            <th style="width: 150px;" align="left">Imię</th>
+            <th style="width: 200px;" align="left">Nazwisko</th>
+            <th style="width: 30px;" align="left">Akcja</th>
         </tr>
     </thead>
     <tbody>
@@ -33,7 +33,7 @@
         <td th:text="${author.id}"></td>
         <td th:text="${author.firstName}"></td>
         <td th:text="${author.lastName}"></td>
-        <td><a th:href="@{/authors/delete/{id}(id=${author.id})}" class="btn btn-danger">delete</a></td>
+        <td><a th:href="@{/authors/delete/{id}(id=${author.id})}" class="btn btn-danger">usuń</a></td>
     </tr>
     </tbody>
 </table>
