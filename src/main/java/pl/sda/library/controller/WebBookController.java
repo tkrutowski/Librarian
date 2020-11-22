@@ -20,7 +20,7 @@ public class WebBookController {
     @GetMapping
     public String getAllBooks(Model model) {
         model.addAttribute(new Book());
-        model.addAttribute("bookList", bookService.getAllBooks());
+        model.addAttribute("bookList", bookService.findAllBooks());
         return "books";
     }
 
