@@ -35,15 +35,6 @@ public class EmpikAdapter {
         return  dtos;
     }
 
-    /*
-     * private String bookstore; //nazwa księgarni np. Empik
-     * private String authors; //autorzy: imie nazwisko            !!!!!!!!!!!
-     * private String title; //tytuł                                 !!!!!!!!!!
-     * private String description; //krótki opis książki           !!!!!!!!!!
-     * private String cover; //link do okładki                     !!!!!!!!!
-     * private EditionType editionType; //typ: EBOOK, AUDIOBOOK lub BOOK   !!!!!!!!!!!!
-     * private String isbn;  */
-
     private List<Book> toDomain(List<EmpikProductDto> dto) {
         return dto.stream()
                 .map(EmpikProductDto::toDomain)

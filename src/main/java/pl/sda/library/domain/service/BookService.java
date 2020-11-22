@@ -47,7 +47,7 @@ public class BookService {
         return bookById.get();
     }
 
-    public List<Book> getAllBooks() {
+    public List<Book> findAllBooks() {
         return bookRepository.findAll();
     }
 
@@ -59,8 +59,6 @@ public class BookService {
     bookRepository.delete(id);
     }
 
-    public List<Book> findAllBooks() {
-        return new ArrayList<>();
-    }
+
 }
 

@@ -12,15 +12,15 @@ class EmpikScrapperTest {
     @Test
     void ShouldFindFourElements(){
         //given
-        String phrase = "Dobry";
-//        String phrase = "omen";
-//        String phrase = "Dobry Omen";
-        //String phrase = "Neil Gaiman";
-
-        EmpikAdapter empikAdapter = new EmpikAdapter();
-        //when
-        List<Book> books = empikAdapter.findByPhrase(phrase);
-        //then
-        assertEquals(4, books.size());
+//        String phrase = "Dobry";
+////        String phrase = "omen";
+////        String phrase = "Dobry Omen";
+//        //String phrase = "Neil Gaiman";
+//
+//        EmpikAdapter empikAdapter = new EmpikAdapter();
+//        //when
+//        List<Book> books = empikAdapter.findByPhrase(phrase);
+//        //then
+//        assertEquals(4, books.size());
     }
 }
