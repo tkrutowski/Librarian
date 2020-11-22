@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="table.css">
+    <title>Lista serii</title>
+</head>
+<style>
+
+</style>
+<body>
+
+<h2>Dodaj serię</h2>
+<form action="#" th:object="${series}" method="post">
+    <input type="hidden" />
+    <p>Nazwa serii: <input type="text" th:field="*{title}" required/></p>
+    <p>Opis serii: <input type="text" th:field="*{description}" required/></p>
+    <input type="submit" value="Dodaj"/>
+    <input type="reset" value="Wyczyść" />
+</form>
+<h1>Lista kategorii</h1>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th style="width: 30px;" align="left">Id</th>
+            <th style="width: 200px;" align="left">Nazwa serii</th>
+            <th style="width: 200px;" align="left">Opis serii</th>
+            <th style="width: 30px;" align="left">Akcja</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="element: ${seriesList}">
+        <td th:text="${element.id}"></td>
+        <td th:text="${element.title}"></td>
+        <td th:text="${element.description}"></td>
+        <td><a th:href="@{/series/delete/{id}(id=${element.id})}" class="btn btn-danger">usuń</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

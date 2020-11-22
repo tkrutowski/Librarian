@@ -32,10 +32,16 @@ class BookDtoCreator {
 
     private SeriesDto getSeriesFromString(String series) {
         Optional<SeriesDto> seriesDtoByTitle = seriesDtoRepository.findSeriesDtoByTitle(series);
-        if (seriesDtoByTitle.isPresent())
-            return seriesDtoByTitle.get();
-        return null;
+        if (seriesDtoByTitle.isPresent()){
+            return seriesDtoByTitle.get();}
+        else {
+            SeriesDto seriesDto = new SeriesDto();
+            seriesDto.setTitle(series);
+            seriesDto.setDescription(series);
+            return seriesDtoRepository.save(seriesDto);
+        }
     }
+
 
     private Set<AuthorDto> getAuthorsFromString(String authors) {
         Set<AuthorDto> authorDtos = new HashSet<>();
@@ -43,8 +49,15 @@ class BookDtoCreator {
         for (String author : authorsList) {
             String[] authorsSplit = author.trim().split(" ");
             Optional<AuthorDto> authorDtoByFirstNameAndLastName = authorDtoRepository.findAuthorDtoByFirstNameAndLastName(authorsSplit[0], authorsSplit[1]);
-            if (authorDtoByFirstNameAndLastName.isPresent())
+            if (authorDtoByFirstNameAndLastName.isPresent()) {
                 authorDtos.add(authorDtoByFirstNameAndLastName.get());
+            }
+            else {
+                AuthorDto newAuthorDto = new AuthorDto();
+                newAuthorDto.setFirstName(authorsSplit[0]);
+                newAuthorDto.setLastName(authorsSplit[1]);
+                authorDtos.add(authorDtoRepository.save(newAuthorDto));
+            }
         }
         return authorDtos;
     }
@@ -54,8 +67,13 @@ class BookDtoCreator {
         String[] categoriesList = categories.trim().split(",");
         for (String category : categoriesList) {
             Optional<CategoryDto> categoryDtoByName = categoryDtoRepository.findCategoryDtoByName(category.trim());
-            if (categoryDtoByName.isPresent())
-                categoryDtos.add(categoryDtoByName.get());
+            if (categoryDtoByName.isPresent()) {
+                categoryDtos.add(categoryDtoByName.get());}
+            else {
+                CategoryDto newCategoryDto = new CategoryDto();
+                newCategoryDto.setName(category);
+                categoryDtos.add(categoryDtoRepository.save(newCategoryDto));
+            }
         }
         return categoryDtos;
     }

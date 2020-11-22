@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="table.css">
+    <title>Lista księgarni</title>
+</head>
+<style>
+
+</style>
+<body>
+
+<h2>Dodaj księgarnie</h2>
+<form action="#" th:object="${bookstore}" method="post">
+    <input type="hidden" />
+    <p>Nazwa: <input type="text" th:field="*{name}" required /></p>
+    <p>Adres URL: <input type="text" th:field="*{url}" required/></p>
+    <input type="submit" value="Dodaj"/>
+    <input type="reset" value="Wyczyść" />
+</form>
+<h1>Lista księgarni</h1>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th style="width: 30px;" align="left">Id</th>
+            <th style="width: 150px;" align="left">Nazwa księgarni</th>
+            <th style="width: 200px;" align="left">Adres URL</th>
+            <th style="width: 30px;" align="left">Akcja</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bookstore: ${bookstoreList}">
+        <td th:text="${bookstore.idBookstore}"></td>
+        <td th:text="${bookstore.name}"></td>
+        <td><a th:href="@{http://{url}(url=${bookstore.url})}" th:text="${bookstore.url}" target="_blank"></a></td>
+        <td><a th:href="@{/bookstores/delete/{id}(id=${bookstore.idBookstore})}" class="btn btn-danger">usuń</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

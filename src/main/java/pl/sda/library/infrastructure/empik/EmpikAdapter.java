@@ -1,16 +1,14 @@
 package pl.sda.library.infrastructure.empik;
 
 import pl.sda.library.domain.model.Book;
-//import pl.sda.library.model.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EmpikAdapter {//implements ProductRepository {
+public class EmpikAdapter {
 
-    //@Override
     public List<Book> findByPhrase(String phrase) {
         List<EmpikProductDto> dto = adaptItemsFromScrapper(phrase);
         return toDomain(dto);
@@ -36,15 +34,6 @@ public class EmpikAdapter {//implements ProductRepository {
         }
         return  dtos;
     }
-
-    /*
-     * private String bookstore; //nazwa księgarni np. Empik
-     * private String authors; //autorzy: imie nazwisko            !!!!!!!!!!!
-     * private String title; //tytuł                                 !!!!!!!!!!
-     * private String description; //krótki opis książki           !!!!!!!!!!
-     * private String cover; //link do okładki                     !!!!!!!!!
-     * private EditionType editionType; //typ: EBOOK, AUDIOBOOK lub BOOK   !!!!!!!!!!!!
-     * private String isbn;  */
 
     private List<Book> toDomain(List<EmpikProductDto> dto) {
         return dto.stream()

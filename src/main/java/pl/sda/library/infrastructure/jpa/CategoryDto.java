@@ -4,6 +4,8 @@ package pl.sda.library.infrastructure.jpa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import pl.sda.library.domain.model.Category;
 
 import javax.persistence.Column;
@@ -23,6 +25,7 @@ class CategoryDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Long id;
     private String name;
 
