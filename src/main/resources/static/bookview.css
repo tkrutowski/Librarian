@@ -1,0 +1,184 @@
+.btn-warning:active {
+    background-color: darkgoldenrod;
+    border-color: greenyellow;
+    color: greenyellow;
+}
+
+.container {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+}
+
+#navTop {
+    height: 100px;
+}
+
+#navLeft {
+    width: 250px;
+    float: left;
+    background-color: lightgray;
+    /*font-family: 'Poppins', sans-serif;*/
+}
+
+h1 {
+    height: 80px;
+    text-align: center;
+    padding-top: 18px;
+    margin-top: 60px;
+}
+
+.btn-warning {
+    /*color: white;*/
+    /*background-color: #666666;*/
+    /*border-color: darkgoldenrod;*/
+    /*border-radius: var(--border-radius);*/
+}
+
+.btn-primary:hover {
+    box-shadow: inset 0 0 0 20rem var(--darken-1);
+    background-color: #808080;
+}
+
+.btn-primary:active {
+    box-shadow: inset 0 0 0 20rem inset 10 13px 14px 10 var(--green),
+    0 0 10px var(--green);
+    background-color: darkgoldenrod;
+    border-color: greenyellow;
+    color: greenyellow;
+}
+
+.btn-primary:disabled,
+.btn-menu:active,
+.btn-primary.is-disabled {
+    opacity: .5;
+}
+
+.options {
+    height: 40px;
+    text-align: center;
+    padding-top: 5px;
+    background-color: #363636;
+    color: #ffbf00;
+    font-size: large;
+}
+
+.vertical-menu {
+    width: 200px; /* Set a width if you like */
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.vertical-menu a {
+    background-color: #eee; /* Grey background color */
+    color: black; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 15px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+    border: 1px solid #ffbf00;
+}
+
+.vertical-menu a:hover {
+    background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+    background-color: #ffbf00; /*#4CAF50;  Add a warninig color to the "active/current" link */
+    color: black;
+}
+
+.book_small {
+    width: 250px;
+    border: black 2px solid;
+    margin: 15px;
+
+    display: inline-block;
+
+}
+.book_large {
+    width: 500px;
+    height: 630px;
+    border: black 2px solid;
+    margin: 15px;
+    display: inline-block;
+
+}
+
+.book_medium {
+    width: 500px;
+    height: 440px;
+    border: black 2px solid;
+    margin: 15px;
+    display: inline-block;
+
+}
+
+.book__type {
+    margin: 10px 10px 0 10px;
+    background-color: deepskyblue;
+    padding: 1px 0;
+    text-align: center;
+}
+
+.book__picture {
+    /*width: 95%;*/
+    width: auto;
+    height: 310px;
+    margin: 10px;
+}
+
+.book__all {
+    height: 330px;
+    margin: 10px 0 0 20px;
+    width: 50%;
+    justify-content: left;
+    text-align: left;
+}
+
+.book__title {
+    margin: 10px 10px 1px 0;
+}
+
+.book__subtitle {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+.book__subtitle-sub {
+    margin: 5px 5px 5px 0;
+}
+
+.book__subtitle-bold {
+    margin: 5px 5px 5px 0;
+    font-weight: bold;
+}
+.book__title_small {
+    margin: 0 10px 1px 10px;
+    text-align: center;
+}
+
+.book__subtitle_small {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0;
+}
+.book__subtitle-sub_small{
+    margin: 5px;
+    text-align: center;
+}
+.book__discription {
+    margin-left: 10px;
+    float: left;
+    text-align: left;
+}
+
+.book__discription--text {
+    width: 475px;
+    height: 153px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    /*color: #2c3e50;*/
+    resize: none;
+}

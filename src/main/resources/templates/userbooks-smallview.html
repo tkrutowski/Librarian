@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head :: head">
-
 </head>
 
 <body>
@@ -9,12 +8,10 @@
 
 </div>
 <div th:replace="fragments/header :: header">
-
 </div>
 
 <div class="container">
-    <!--    <h2 class="bg-warning font-weight-bold info-reading-status">DO PRZECZYTANIA</h2>-->
-    <div id="main" th:replace="fragments/add-userbook :: ub-add"></div>
+    <div id="main" th:replace="fragments/smallview :: ub-smallview"></div>
 </div>
 
 </body>
