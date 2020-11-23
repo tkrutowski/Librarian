@@ -25,8 +25,14 @@
        INSERT INTO bookstores(name, url) VALUES('PWN','www.pwn.pl' );
 
 
-   INSERT INTO books(id_series,title,subtitle,description,cover,book_in_series_no)
-    VALUES(3,'Odyssey One', 'Ostatni bastion','Trzeci tom pasjonującego cyklu SF Evana Curie.','adresURL', 3);
+    INSERT INTO books(id_series,title,subtitle,description,cover,book_in_series_no)
+    VALUES(3,'Odyssey One', 'Ostatni bastion','Trzeci tom pasjonującego cyklu SF Evana Curie.','https://upolujebooka.pl/_data_cache/_data/offer/005/190_290_0_0_0_1_47751-odyssey_one_tom_3.jpg', 3);
     insert into books_authors values (1,7);
     insert into books_categories values (1,3);
     insert into books_categories values (1,4);
+
+--
+--       INSERT INTO books(id_series,title,subtitle,description,cover,book_in_series_no)
+--     VALUES(3,'Odyssey One', 'W ogniu wojny','Trzeci tom pasjonującego cyklu SF Evana Curie.','adresURL_inny', 4);
+--       INSERT INTO books(id_series,title,subtitle,description,cover,book_in_series_no)
+--     VALUES(3,'Odyssey One', 'Król Wojowników','Trzeci tom pasjonującego cyklu SF Evana Curie.','adresURL_jesczczeInny', 5);

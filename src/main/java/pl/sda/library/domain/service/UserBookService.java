@@ -2,13 +2,17 @@ package pl.sda.library.domain.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.sda.library.domain.model.ReadingStatus;
 import pl.sda.library.domain.model.UserBook;
 import pl.sda.library.domain.model.exception.UserBookAlreadyExistException;
 import pl.sda.library.domain.model.exception.UserBookDoesNotExistException;
 import pl.sda.library.domain.port.UserBookRepository;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -52,6 +56,12 @@ public class UserBookService {
             throw new UserBookDoesNotExistException(id);
         }
         return userBookById.get();
+    }
+
+    public List<UserBook> findAllUserBooksByReadingStatus(ReadingStatus status) {
+        return userBookRepository.findAll().stream()
+                .filter(userBook -> userBook.getReadingStatus() == status)
+                .collect(Collectors.toList());
     }
 
     public List<UserBook> findAllUserBooks() {
