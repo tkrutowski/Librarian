@@ -51,6 +51,7 @@ class BookDto {
 
     private String title;
     private String subtitle;
+    @Column(columnDefinition="TEXT")
     private String description;
     private String cover;
     private int bookInSeriesNo;
@@ -75,8 +76,7 @@ class BookDto {
             result += authorDto.getFirstName() + " " + authorDto.getLastName() + ", ";
         }
         int index = result.lastIndexOf(',');
-        String substring = result.substring(0, index);
-        return substring;
+        return index > 0 ? result.substring(0, index) :  result;
     }
 
     private String getCategoriesAsString() {
@@ -85,7 +85,6 @@ class BookDto {
             result += categoryDto.getName() + ", ";
         }
         int index = result.lastIndexOf(',');
-        String substring = result.substring(0, index);
-        return substring;
+        return index > 0 ? result.substring(0, index) :  result;
     }
 }
