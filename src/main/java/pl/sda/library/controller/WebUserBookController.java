@@ -53,10 +53,12 @@ public class WebUserBookController {
     @GetMapping("/status/{status}")
     public String findUsersBooksToRead(Model model, @PathVariable String status){
 
-            createModel(model);
             userBookList = userBookService.findAllUserBooksByReadingStatus(ReadingStatus.valueOf(status));
-        return getHtmlString();
+            createModel(model);
+       return getHtmlString();
     }
+
+
 
     @GetMapping
     public String findUsersBooksToRead(Model model){
@@ -80,7 +82,6 @@ public class WebUserBookController {
 
     @PostMapping
     public String addUserBook( UserBook userBook)  {
-        int i=0;
         userBookService.addUserBook(userBook);
         return "redirect:/userbooks";
     }
