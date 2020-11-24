@@ -22,7 +22,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +29,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "userbook")
-public class UserBookDto {
+class UserBookDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

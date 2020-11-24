@@ -2,6 +2,8 @@ package pl.sda.library.domain.port;
 
 import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.Book;
+import pl.sda.library.domain.model.Series;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +21,8 @@ public interface BookRepository {
     Optional<Book> findById(Long id);
 
     List<Book> findAllByTitle(String title);
+
+    List<Book> findAllBySeries(Series series);
 
     Optional<Book> findByTitle(String title);
 }

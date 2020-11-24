@@ -1,14 +1,15 @@
 package pl.sda.library.infrastructure.jpa;
 
 import lombok.AllArgsConstructor;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.Book;
+import pl.sda.library.domain.model.Series;
 import pl.sda.library.domain.port.BookRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -55,6 +56,20 @@ public class BookRepositoryAdapter implements BookRepository {
         bookDtoRepository.findAllByTitle(title)
                 .iterator()
                 .forEachRemaining(bookDto -> books.add(bookDto.toDomain()));
+        return books;
+    }
+
+    @Override
+    public List<Book> findAllBySeries(Series series) {
+        List<Book> books = new ArrayList<>();
+        List<BookDto> booksDto = new ArrayList<>();
+        bookDtoRepository.findAll()
+                .iterator()
+                .forEachRemaining(booksDto::add);
+
+         books = booksDto.stream()
+                 .filter(bookDto -> bookDto.getSeries().equals(SeriesDto.fromDomain(series)))
+                 .map(BookDto::toDomain).collect(Collectors.toList());
         return books;
     }
 

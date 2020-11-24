@@ -3,11 +3,11 @@ package pl.sda.library.domain.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.library.domain.model.Book;
+import pl.sda.library.domain.model.Series;
 import pl.sda.library.domain.model.exception.BookAlreadyExistException;
 import pl.sda.library.domain.model.exception.BookDoesNotExistException;
 import pl.sda.library.domain.port.BookRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +49,10 @@ public class BookService {
 
     public List<Book> findAllBooks() {
         return bookRepository.findAll();
+    }
+
+    public List<Book> findAllBooksBySeries(Series series) {
+        return bookRepository.findAllBySeries(series);
     }
 
     public Book editBook(Book book, Long id) {

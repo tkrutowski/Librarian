@@ -2,14 +2,13 @@ package pl.sda.library.domain.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.sda.library.domain.model.Book;
 import pl.sda.library.domain.model.ReadingStatus;
 import pl.sda.library.domain.model.UserBook;
 import pl.sda.library.domain.model.exception.UserBookAlreadyExistException;
 import pl.sda.library.domain.model.exception.UserBookDoesNotExistException;
 import pl.sda.library.domain.port.UserBookRepository;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
 public class UserBookService {
 
     private UserBookRepository userBookRepository;
+
 
     public UserBook addUserBook(UserBook userBook) {
         if (isUserBookExist(userBook))
@@ -75,5 +75,12 @@ public class UserBookService {
                 .count();
 
         return count > 0 ? true : false;
+    }
+
+    public List<UserBook> findAllUserBooksBySeries(List<Book> bookList) {
+        return userBookRepository.findAll().stream()
+                .filter(userBook -> bookList.stream()
+                        .anyMatch(book -> book.getIdBook() == userBook.getIdBook()))
+                .collect(Collectors.toList());
     }
 }
