@@ -52,12 +52,12 @@ public class WebUserBookController {
 
     @GetMapping("/status/{status}")
     public String findUsersBooksToRead(Model model, @PathVariable String status){
-
+        String infoBarText=getInfoReadingStatus(ReadingStatus.valueOf(status));
             userBookList = userBookService.findAllUserBooksByReadingStatus(ReadingStatus.valueOf(status));
             createModel(model);
+            model.addAttribute("infoBar",infoBarText);
        return getHtmlString();
     }
-
 
 
     @GetMapping
@@ -65,6 +65,12 @@ public class WebUserBookController {
 
         createModel(model);
         return "userbooks";
+    }
+
+    @PostMapping
+    public String addUserBook( UserBook userBook)  {
+        userBookService.addUserBook(userBook);
+        return "redirect:/userbooks";
     }
 
     private String getHtmlString() {
@@ -79,11 +85,18 @@ public class WebUserBookController {
                 return "userbooks-smallview";
         }
     }
-
-    @PostMapping
-    public String addUserBook( UserBook userBook)  {
-        userBookService.addUserBook(userBook);
-        return "redirect:/userbooks";
+    private String getInfoReadingStatus(ReadingStatus status) {
+        switch (status) {
+            case NOT_READ:
+                return "Książki które chce przeczytać";
+            case READ_NOW:
+                return "Książki które teraz czytam";
+            case READ:
+                return "Książki które przeczytałem";
+            default:
+                return "";
+        }
     }
+
 }
 
