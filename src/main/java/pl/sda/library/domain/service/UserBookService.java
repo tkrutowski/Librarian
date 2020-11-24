@@ -41,7 +41,6 @@ public class UserBookService {
         userBookById.get().setReadFrom(userBook.getReadFrom());
         userBookById.get().setReadTo(userBook.getReadTo());
         userBookById.get().setInfo(userBook.getInfo());
-        userBookById.get().setIsRead(userBook.getIsRead());
 
         return userBookRepository.edit(userBookById.get()).get();
     }

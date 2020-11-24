@@ -69,8 +69,6 @@ public class UserBookDto {
     @Column(name = "read_to")
     private LocalDate readTo;
 
-    @Column(name = "is_read")
-    private Boolean isRead;
 
     private String info;
 
@@ -86,7 +84,6 @@ public class UserBookDto {
         userBook.setReadFrom(getReadFrom());
         userBook.setReadTo(getReadTo());
         userBook.setInfo(getInfo());
-        userBook.setIsRead(getIsRead());
         return userBook;
     }
 }

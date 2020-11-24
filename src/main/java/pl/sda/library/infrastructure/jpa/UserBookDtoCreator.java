@@ -28,7 +28,6 @@ public class UserBookDtoCreator {
         userBookDto.setReadFrom(userBook.getReadFrom());
         userBookDto.setReadTo(userBook.getReadTo());
         userBookDto.setInfo(userBook.getInfo());
-        userBookDto.setIsRead(userBook.getIsRead());
         return userBookDto;
     }
 

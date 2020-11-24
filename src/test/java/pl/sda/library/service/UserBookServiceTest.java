@@ -86,7 +86,6 @@ public class UserBookServiceTest {
 //        userBook.setReadFrom();
 //        userBook.setReadTo();
         userBook.setInfo("Jakies info");
-        userBook.setIsRead(false);
         return userBook;
     }
 
@@ -101,7 +100,6 @@ public class UserBookServiceTest {
 //        userBook.setReadFrom();
 //        userBook.setReadTo();
         userBook.setInfo("Jakies info");
-        userBook.setIsRead(false);
         return userBook;
     }
 
@@ -116,7 +114,6 @@ public class UserBookServiceTest {
 //        userBook.setReadFrom();
 //        userBook.setReadTo();
         userBook.setInfo("Jakies info");
-        userBook.setIsRead(false);
         return userBook;
     }
 
@@ -131,7 +128,6 @@ public class UserBookServiceTest {
 //        userBook.setReadFrom();
 //        userBook.setReadTo();
         userBook.setInfo("Jakies info");
-        userBook.setIsRead(false);
         return userBook;
     }
 }

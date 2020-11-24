@@ -25,5 +25,4 @@ public class UserBook {
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         private LocalDate readTo;
         private String info;
-        private Boolean isRead;
 }
