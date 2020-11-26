@@ -22,7 +22,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +29,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "userbook")
-public class UserBookDto {
+class UserBookDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,8 +68,6 @@ public class UserBookDto {
     @Column(name = "read_to")
     private LocalDate readTo;
 
-    @Column(name = "is_read")
-    private Boolean isRead;
 
     private String info;
 
@@ -86,7 +83,6 @@ public class UserBookDto {
         userBook.setReadFrom(getReadFrom());
         userBook.setReadTo(getReadTo());
         userBook.setInfo(getInfo());
-        userBook.setIsRead(getIsRead());
         return userBook;
     }
 }

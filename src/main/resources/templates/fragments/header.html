@@ -55,7 +55,7 @@
                             </button>
                             <ul class="dropdown-menu" th:each="s:${seriesList}">
                                 <li th:each="s:${seriesList}">
-                                    <a class="dropdown-item" href="#" th:text="${s.title}"></a>
+                                    <a class="dropdown-item" th:href="@{/userbooks/series/{title}(title=${s.title})}"  th:text="${s.title}"></a>
                                 </li>
                             </ul>
                         </li>
@@ -67,7 +67,7 @@
                             <a class="btn btn-warning m-1" href="users">Użytkownicy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-warning m-1" href="autors">Autorzy</a>
+                            <a class="btn btn-warning m-1" href="authors">Autorzy</a>
                         </li>
                         <!-- Dropdown -->
                         <li class="nav-item dropdown ">

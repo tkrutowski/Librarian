@@ -47,6 +47,14 @@ public class SeriesService {
         return seriesOptional.get();
     }
 
+    public Series findSeriesByTitle(String title) {
+        Optional<Series> seriesOptional = seriesRepository.findByTitle(title);
+        if (!seriesOptional.isPresent()) {
+            throw new SeriesDoesNotExistException(0L);
+        }
+        return seriesOptional.get();
+    }
+
     public List<Series> findAllSeries() {
         return seriesRepository.findAll();
     }

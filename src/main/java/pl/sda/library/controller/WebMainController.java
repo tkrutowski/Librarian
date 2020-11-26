@@ -15,8 +15,9 @@ public class WebMainController {
     SeriesService seriesService;
     @GetMapping
     public String getStart(Model model){
-        int i=0;
+        String infoBarText = "Coś tutaj będzie!!!";
         model.addAttribute("seriesList", seriesService.findAllSeries());
+        model.addAttribute("infoBar", infoBarText);
         return "index";
     }
 }

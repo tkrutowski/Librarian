@@ -4,17 +4,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.sda.library.domain.model.UserBook;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Component
 @AllArgsConstructor
-public class UserBookDtoCreator {
+class UserBookDtoCreator {
 
     private BookstoreDtoRepository bookstoreDtoRepository;
     private BookDtoRepository bookDtoRepository;
     private UserDtoRepository userDtoRepository;
-
 
     UserBookDto fromDomain(UserBook userBook) {
         UserBookDto userBookDto = new UserBookDto();
@@ -28,7 +26,6 @@ public class UserBookDtoCreator {
         userBookDto.setReadFrom(userBook.getReadFrom());
         userBookDto.setReadTo(userBook.getReadTo());
         userBookDto.setInfo(userBook.getInfo());
-        userBookDto.setIsRead(userBook.getIsRead());
         return userBookDto;
     }
 
