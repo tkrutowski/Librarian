@@ -21,8 +21,9 @@ public class UserBookService {
 
 
     public UserBook addUserBook(UserBook userBook) {
-        if (isUserBookExist(userBook))
+        if (isUserBookExist(userBook)) {
             throw new UserBookAlreadyExistException(userBook);
+        }
 
         return userBookRepository.add(userBook).get();
     }
@@ -74,7 +75,7 @@ public class UserBookService {
                 .filter(userBook -> userBook.getEditionType().equals(userBookToCheck.getEditionType()))
                 .count();
 
-        return count > 0 ? true : false;
+        return count > 0;
     }
 
     public List<UserBook> findAllUserBooksBySeries(List<Book> bookList) {
