@@ -3,13 +3,12 @@ package pl.sda.library.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.sda.library.domain.model.Book;
 import pl.sda.library.domain.service.BookService;
+import pl.sda.library.infrastructure.upolujebooka.UpolujebookaScrapper;
+
+import java.net.MalformedURLException;
 
 @AllArgsConstructor
 @Controller
@@ -20,19 +19,27 @@ public class WebBookController {
     @GetMapping
     public String getAllBooks(Model model) {
         model.addAttribute(new Book());
+        System.out.println("Inside webBookController");
         model.addAttribute("bookList", bookService.findAllBooks());
         return "books";
     }
 
     @PostMapping
-    public String addBook(Book book) {
-        bookService.addBook(book);
-        return "redirect:/books";
+    public String addBook(String url, Book book, Model model) throws MalformedURLException {
+        model.addAttribute(new Book());
+        if ((book.getAuthors() != null )||(book.getTitle() != null) ){
+            bookService.addBook(book);
+        }
+        if (url != null){
+            model.addAttribute("bookFromUrl", UpolujebookaScrapper.findBookFromUrl(url));
+        }
+        model.addAttribute("bookList", bookService.findAllBooks());
+        return "books";
     }
 
     @RequestMapping(value="/delete/{bookId}",method = RequestMethod.GET)
     public String delBook(@PathVariable String bookId) {
         bookService.deleteBook(Long.parseLong(bookId));
-        return "redirect:/books";
+        return "books";
     }
 }
