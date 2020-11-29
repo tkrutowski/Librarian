@@ -9,31 +9,31 @@
     <div th:each="b : ${bookList}">
 
         <div th:if="${b.idBook == ub.idBook}">
-            <div class="book__type">
+            <div class="book__small-type">
                 <h2 th:text="${ub.editionType}"></h2>
             </div>
 
-                <img class="book__picture"
+                <img class="book__small-picture"
                      th:alt="${b.title + '   ' +b.subtitle}" th:src="${b.cover}"
                      align="center">
 
-            <div class="book__all_small">
-                <h2 class="book__title_small" th:text="${b.title}"></h2>
-                <div class="book__subtitle_small">
-                    <p class="book__subtitle-sub_small">Podtytuł: </p>
-                    <p class="book__subtitle-sub_small book__subtitle-bold" th:text="${b.subtitle}"></p>
+            <div class="book__small-all">
+                <h2 class="book__small-title" th:text="${b.title}"></h2>
+                <div class="book__small-subtitle">
+                    <p class="book__small-subtitle-sub">Podtytuł: </p>
+                    <p class="book__small-subtitle-sub book__small-subtitle-bold" th:text="${b.subtitle}"></p>
                 </div>
 
-                <p class="book__subtitle-sub_small">Kiedy czytana/słuchana:</p>
+                <p class="book__small-subtitle-sub">Kiedy czytana/słuchana:</p>
                 <div th:if="${ub.readFrom != null && ub.readTo == null}">
-                    <p class="book__subtitle-sub_small book__subtitle-bold" th:text="${ub.readFrom + ' - '}"></p>
+                    <p class="book__small-subtitle-sub book__small-subtitle-bold" th:text="${ub.readFrom + ' - '}"></p>
                 </div>
                 <div th:if="${ub.readFrom != null && ub.readTo != null}">
-                    <p class="book__subtitle-sub_small book__subtitle-bold"
+                    <p class="book__small-subtitle-sub book__small-subtitle-bold"
                        th:text="${ub.readFrom + '  do  ' + ub.readTo}"></p>
                 </div>
                 <div th:if="${ub.readFrom == null && ub.readTo == null}">
-                    <p class="book__subtitle-sub_small book__subtitle-bold">-</p>
+                    <p class="book__small-subtitle-sub book__small-subtitle-bold">-</p>
                 </div>
             </div>
         </div>
