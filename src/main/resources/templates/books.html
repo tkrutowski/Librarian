@@ -1,62 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="table.css">
-    <title>Lista książek</title>
+    <h2> URL </h2>
+    <form th:object="${url}" method="post">
+        <input type="hidden" />
+        <p>URL książki upolujebooka: <input type="text" th:name="url" /></p>
+        <input type="submit" value="Dodaj"/>
+    </form>
 </head>
-<style>
-
-</style>
 <body>
-
-<h2>Dodaj książkę</h2>
-<form action="#" th:object="${book}" method="post">
-    <input type="hidden" />
-    <p>Id: <input type="text" th:field="*{idBook}" /></p>
-    <p>Seria: <input type="text" th:field="*{series}" /></p>
-    <p>Autor/-zy: <input type="text" th:field="*{authors}" required/></p>
-    <p>Kategoria: <input type="text" th:field="*{categories}" /></p>
-    <p>Tytuł: <input type="text" th:field="*{title}" required /></p>
-    <p>Podtytuł: <input type="text" th:field="*{subtitle}" /></p>
-    <p>Opis: <input type="text" th:field="*{description}" /></p>
-    <p>Link do zdjęcia okładki: <input type="text" th:field="*{cover}" /></p>
-    <p>Numer książki w serii: <input type="text" th:field="*{bookInSeriesNo}" /></p>
-    <input type="submit" value="Dodaj"/>
-    <input type="reset" value="Wyczyść" />
-</form>
-
-
-<h1>Books list</h1>
-<table class="content-table">
-    <thead>
-    <tr>
-        <th style="width: 30px;" align="left">Id</th>
-        <th style="width: 150px;" align="left">Seria</th>
-        <th style="width: 200px;" align="left">Autor/-zy</th>
-        <th style="width: 200px;" align="left">Kategoria</th>
-        <th style="width: 200px;" align="left">Tytuł</th>
-        <th style="width: 200px;" align="left">Podtytuł</th>
-        <th style="width: 200px;" align="left">Opis</th>
-        <th style="width: 200px;" align="left">Link do zdjęcia okładki</th>
-        <th style="width: 200px;" align="left">Numer książki w serii</th>
-        <th style="width: 30px;" align="left">Akcja</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="book: ${bookList}">
-        <td th:text="${book.idBook}"></td>
-        <td th:text="${book.series}"></td>
-        <td th:text="${book.authors}"></td>
-        <td th:text="${book.categories}"></td>
-        <td th:text="${book.title}"></td>
-        <td th:text="${book.subtitle}"></td>
-        <td th:text="${book.description}"></td>
-        <td th:text="${book.cover}"></td>
-        <td th:text="${book.bookInSeriesNo}"></td>
-        <td><a th:href="@{/books/delete/{id}(id=${book.idBook})}" class="btn btn-danger">usuń</a></td>
-    </tr>
-    </tbody>
-</table>
+<div th:replace="fragments/books :: body">
 </body>
 </html>

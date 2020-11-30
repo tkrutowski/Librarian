@@ -2,28 +2,24 @@ package pl.sda.library.infrastructure.upolujebooka;
 
 import org.junit.jupiter.api.Test;
 import pl.sda.library.domain.model.Book;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.net.MalformedURLException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UpolujebookaScrapperTest {
 
     @Test
-    void ShouldFindOnlyOneBook(){
-//        //given
-//        //String phrase = "Dobry";
-//        //String phrase = "omen";
-//        String phrase = "Dobry Omen";
-//        //String phrase = "Neil Gaiman";
-//        UpolujebookaAdapter upolujebookaAdapter = new UpolujebookaAdapter();
-//        //List<String> productsList = new ArrayList<>();
-//        //List<Book> productList = new ArrayList<>();
-//        //when
-//        List<Book> books = upolujebookaAdapter.findByPhrase(phrase);
-//
-//        System.out.println(books.toString());
-//        //then
-//        assertEquals(1, books.size());
+    void ShouldFindOnlyTwoAuthors() throws MalformedURLException {
+
+        //given
+        String bookUrl = "https://upolujebooka.pl/oferta,6519,dobry_omen.html";
+        //String phrase = "Neil Gaiman";
+        Book book= new Book();
+        //when
+        book = UpolujebookaScrapper.findBookFromUrl(bookUrl);
+        String atuhors[] = book.getAuthors().split(",");
+        //then
+        assertEquals(2,atuhors.length);
     }
 
 }

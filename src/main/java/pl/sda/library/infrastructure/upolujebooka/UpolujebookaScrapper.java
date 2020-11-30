@@ -5,20 +5,62 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
+import pl.sda.library.domain.model.Book;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
-class UpolujebookaScrapper {
-    private final static String URL = "https://upolujebooka.pl";
+public class UpolujebookaScrapper {
+    private final static String pageURL = "https://upolujebooka.pl";
+
+    public static Book findBookFromUrl(String url){
+        Book book = new Book();
+        try{
+            if (!url.isEmpty()) {
+                StringBuilder pageContent = new ReadPageContent(url).invoke();
+                Document documentURL = Jsoup.parse(pageContent.toString());
+                book.setAuthors((documentURL.select("div.authors > h2 >a").textNodes().stream()
+                        .map(Object::toString)
+                        .collect(Collectors.joining(","))));
+                book.setCategories(documentURL.select("div.container > ol > li > span > a").eachText().stream()
+                        .map(Object::toString)
+                        .collect(Collectors.joining(",")));
+                book.setTitle(documentURL.select("div.col-lg-6.col-md-8.col-sm-8 > h1").first().childNode(0).toString().trim());
+                book.setDescription(documentURL.select("div.description > p").text());
+                book.setCover(pageURL + "/" + documentURL.select(" Div.DetailImage > img ").first().attr("src"));
+            }
+        }catch (Exception exception) {
+            exception.printStackTrace();
+            book = new Book();
+        }
+        return book;
+
+    }
+
+    private static List<String> getUniqueElements(Elements element) {
+        List<String> foundElements = new ArrayList<>();
+        HashSet<String> elementHashSet = new HashSet<>();
+        //System.out.println("Autors list " + element.size());
+        for (int i = 0; i< element.size(); i++){
+            if (elementHashSet.add(element.get(i).text())) foundElements.add(element.get(i).text());
+        }
+
+        //System.out.println("Autors unique list " + foundElements.size());
+        return foundElements;
+    }
 
     public static List<String> finder(String phrase) {
         List<String> productsList = new ArrayList<>();
         //https://upolujebooka.pl/szukaj,dobry+omen.html#filtr
-        String url = URL + "/szukaj," + phrase.replace(" ","+") + ".html?count=60";
+        String url = pageURL + "/szukaj," + phrase.replace(" ","+") + ".html?count=60";
         if (phrase.isEmpty()){
             throw new RuntimeException("Pole wyszukiwanie nie może zostać puste!");
         }
@@ -51,37 +93,17 @@ class UpolujebookaScrapper {
             else  {
                 typeOfItem = "BOOK";
             }
-            foundElements.add(URL
+            foundElements.add(pageURL
                     + "::"+authors.get(i).text()
                     + "::"+title.get(i).text()
                     + "::"+description.get(i).attr("title").substring(description.get(i).attr("title").lastIndexOf("<br/>")+5).trim()
-                    + "::"+URL+"/"+image.get(i).attr("src")
+                    + "::"+ pageURL +"/"+image.get(i).attr("src")
                     + "::"+typeOfItem
                     + "::"+isbn.get(i).attr("content"));
         }
         return foundElements;
     }
-    /*
-    * private String bookstore; //nazwa księgarni np. Empik
-    * private String authors; //autorzy: imie nazwisko            !!!!!!!!!!!
-    * private String title; //tytuł                                 !!!!!!!!!!
-    * private String description; //krótki opis książki           !!!!!!!!!!
-    * private String cover; //link do okładki                     !!!!!!!!!
-    * private EditionType editionType; //typ: EBOOK, AUDIOBOOK lub BOOK   !!!!!!!!!!!!
-    * private String isbn;  //
-    private ReadingStatus readingStatus;
-    private Long idBook;
-    private String userLogin;
-    private String series; //cykl książek np 'Jack Reacher'   !!!!!!!!!!
-    private String categories; //kategorie np. Thriller, kryminał  !!!!!!!!!
-    private String subtitle;//podtytuł jeżęli jest              !!!!!!!!!!
-    private OwnershipStatus ownershipStatus;
-    private LocalDate readFrom; //zaczęto czytać
-    private LocalDate readTo; //skończono czytać
-    private String info; //jakieś swoje zapiski
-    private boolean isRead;//czy przeczytana
 
-     */
 
     private static Elements pagesTraverse (Document doc, String cssQuery) throws IOException {
         Elements siteElements = new Elements();
@@ -126,4 +148,33 @@ class UpolujebookaScrapper {
     }
 
 
+    private static class ReadPageContent {
+        private String url;
+
+        public ReadPageContent(String url) {
+            this.url = url;
+        }
+
+        public StringBuilder invoke() throws IOException {
+            InputStream inputStream = null;
+            BufferedReader bufferedReader;
+            StringBuilder pageContent = new StringBuilder();
+            String line;
+            URL inputUrl = new URL(url);
+
+            try {
+                inputStream = inputUrl.openStream();
+
+            }catch (Exception exception) {
+                throw new IOException();
+            }
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+
+            while ((line=bufferedReader.readLine()) !=null){
+                pageContent.append(line);
+            }
+            return pageContent;
+        }
+    }
 }
