@@ -1,0 +1,49 @@
+.book_small {
+    width: 250px;
+    border: black 2px solid;
+    margin: 15px;
+    height: 530px;
+    display: inline-block;
+}
+
+.book__small-all {
+    height: 120px;
+}
+
+.book__small-type {
+    margin: 10px 10px 0 10px;
+    background-color: #343a40;
+    padding: 10px 0px 1px 0px;
+    text-align: center;
+}
+.book__small-picture {
+    /*width: 95%;*/
+    width: -webkit-fill-available;
+    height: 310px;
+    margin: 10px;
+}
+.book__small-title {
+    margin: 0 10px 1px 10px;
+    text-align: center;
+}
+
+.book__small-subtitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0;
+}
+
+.book__small-subtitle-sub{
+    margin: 5px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.book__small-subtitle-bold {
+    margin: 5px 5px 5px 0;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+

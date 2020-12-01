@@ -9,79 +9,75 @@
 
 
     <form th:object="${userBook}" method="post">
+        <div class="container" style="width: 700px">
 
-        <br>
-
-        <label for="user">Użytkownik: </label>
-        <select id="user" required th:field="*{idUser}">
-            <option th:each="u : ${userList}" th:value="${u.id}" th:text="${u.name}"></option>
-        </select>
-        <a th:href="@{/users}">Dodaj</a>
-        <br>
-        <br>
-
-
-        <label for="book">Książka: </label>
-        <select id="book" required th:field="*{idBook}">
-            <option th:each="b : ${bookList}" th:value="${b.idBook}"
-                    th:text="${b.title + ', ' + b.subtitle + ' Autor: ' + b.authors}"></option>
-        </select>
-        <a th:href="@{/books}">Wyszukaj</a>
-        <br>
-        <br>
+            <label class="form-label" for="user">Użytkownik: </label>
+            <div class="form-div">
+                <select class="form-select" id="user" required th:field="*{idUser}">
+                    <option th:each="u : ${userList}" th:value="${u.id}" th:text="${u.name}"></option>
+                </select>
+                <a class="btn btn-warning form-button" th:href="@{/users}">Dodaj</a>
+            </div>
 
 
-        <label for="bookstore">Księgarnia: </label>
-        <select id="bookstore" required th:field="*{bookstore}">
-            <option th:each="bs : ${bookstoreList}" th:value="${bs.name}" th:text="${bs.name}"></option>
-        </select>
-        <a th:href="@{/bookstores}">Dodaj</a>
-        <br>
-        <br>
+            <label class="form-label"  for="book">Książka: </label>
+            <div class="form-div">
+                <select class="form-select" id="book" required th:field="*{idBook}">
+                    <option th:each="b : ${bookList}" th:value="${b.idBook}"
+                            th:text="${b.title + ', ' + b.subtitle + ' Autor: ' + b.authors}"></option>
+                </select>
+                <a  class="btn btn-warning form-button" th:href="@{/books}">Wyszukaj</a>
+            </div>
 
+            <label class="form-label"  for="bookstore">Księgarnia: </label>
+            <div class="form-div">
+                <select class="form-select"  id="bookstore" required th:field="*{bookstore}">
+                    <option th:each="bs : ${bookstoreList}" th:value="${bs.name}" th:text="${bs.name}"></option>
+                </select>
+                <a class="btn btn-warning form-button" th:href="@{/bookstores}">Dodaj</a>
+            </div>
 
-        <label for="owner">Własność: </label>
-        <select id="owner" required th:field="*{ownershipStatus}">
-            <option th:each="o : ${ownershipStatus}" th:value="${o}" th:text="${o.getDescription()}"></option>
-        </select>
-        <br>
-        <br>
+            <label class="form-label"  for="owner">Własność: </label>
+            <div class="form-div">
+                <select class="form-select" id="owner" required th:field="*{ownershipStatus}">
+                    <option th:each="o : ${ownershipStatus}" th:value="${o}" th:text="${o.getDescription()}"></option>
+                </select>
+            </div>
 
+            <label class="form-label"  for="edition">Edycja: </label>
+            <div class="form-div">
+                <select class="form-select" id="edition" required th:field="*{editionType}">
+                    <option th:each="e : ${editionType}" th:value="${e}" th:text="${e}"></option>
+                </select>
+            </div>
 
-        <label for="edition">Edycja: </label>
-        <select id="edition" required th:field="*{editionType}">
-            <option th:each="e : ${editionType}" th:value="${e}" th:text="${e}"></option>
-        </select>
-        <br>
-        <br>
+            <label class="form-label"  for="status">Stan czytania: </label>
+            <div class="form-div">
+                <select class="form-select" id="status" required th:field="*{readingStatus}">
+                    <option th:each="s : ${readingStatus}" th:value="${s}" th:text="${s.getDescription()}"></option>
+                </select>
+            </div>
 
+            <label class="form-label"  for="from">Czytana od: </label>
+            <div class="form-div">
+                <input id="from" type="date" th:field="*{readFrom}"/>
+            </div>
 
-        <label for="status">Stan czytania: </label>
-        <select id="status" required th:field="*{readingStatus}">
-            <option th:each="s : ${readingStatus}" th:value="${s}" th:text="${s.getDescription()}"></option>
-        </select>
-        <br>
-        <br>
+            <label class="form-label"  for="to">Czytana do: </label>
+            <div class="form-div">
+                <input id="to" type="date" th:field="*{readTo}"/>
+            </div>
 
+            <label class="form-label"  for="info">Moje notatki: </label>
+            <div class="form-div">
+                <textarea class="form-area" id="info" rows="3" > </textarea>
+            </div>
 
-        <label for="from">Czytana od: </label>
-        <input id="from" type="date" th:field="*{readFrom}"/>
-        <br>
-        <br>
+            <div class="form-div-save">
+                <input class="btn btn-warning form-button-save"  type="submit" value="Zapisz książkę"/>
+            </div>
 
-
-        <label for="to">Czytana do: </label>
-        <input id="to" type="date" th:field="*{readTo}"/>
-        <br>
-        <br>
-
-
-        <label for="info">Moje notatki: </label>
-        <input id="info" type="text" th:field="*{info}"/>
-        <br>
-        <br>
-
-        <input type="submit" value="Dodaj"/>
+        </div>
     </form>
 </div>
 </body>

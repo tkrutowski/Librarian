@@ -8,62 +8,62 @@
     <div  th:each="b : ${bookList}">
 
         <div th:if="${b.idBook == ub.idBook}">
-            <div class="book__type">
+            <div class="book__medium-type">
                 <h2 th:text="${ub.editionType}"></h2>
             </div>
             <div style="float:left;">
 
-                <img class="book__picture"
+                <img class="book__medium-picture"
                      th:alt="${b.title + '   ' +b.subtitle}" th:src="${b.cover}"
                      align="center">
             </div>
 
-            <div class="book__all" style="float: left">
-                <h2 class="book__title" th:text="${b.title}"></h2>
-                <div class="book__subtitle">
-                    <p class="book__subtitle-sub">Podtytuł: </p>
-                    <p class="book__subtitle-sub book__subtitle-bold" th:text="${b.subtitle}"></p>
+            <div class="book__medium-all" style="float: left">
+                <h2 class="book__medium-title" th:text="${b.title}"></h2>
+                <div class="book__medium-subtitle">
+                    <p class="book__medium-subtitle-sub">Podtytuł: </p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${b.subtitle}"></p>
                 </div>
-                <div class="book__subtitle">
-                    <p class="book__subtitle-sub">Autor: </p>
-                    <p class="book__subtitle-sub book__subtitle-bold" th:text="${b.authors}"></p>
+                <div class="book__medium-subtitle">
+                    <p class="book__medium-subtitle-sub">Autor: </p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${b.authors}"></p>
                 </div>
-                <div class="book__subtitle">
-                    <p class="book__subtitle-sub">Kategoria: </p>
-                    <p class="book__subtitle-sub book__subtitle-bold" th:text="${b.categories}"></p>
+                <div class="book__medium-subtitle">
+                    <p class="book__medium-subtitle-sub">Kategoria: </p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${b.categories}"></p>
                 </div>
-                <div class="book__subtitle">
-                    <p class="book__subtitle-sub">Cykl: </p>
-                    <p class="book__subtitle-sub book__subtitle-bold" th:text="${b.series}"></p>
+                <div class="book__medium-subtitle">
+                    <p class="book__medium-subtitle-sub">Cykl: </p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${b.series}"></p>
                 </div>
-                <div class="book__subtitle" th:if="${b.bookInSeriesNo != 0}">
-                    <p class="book__subtitle-sub">Czesc cyklu: </p>
-                    <p class="book__subtitle-sub book__subtitle-bold" th:text="${b.bookInSeriesNo}"></p>
+                <div class="book__medium-subtitle" th:if="${b.bookInSeriesNo != 0}">
+                    <p class="book__medium-subtitle-sub">Czesc cyklu: </p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${b.bookInSeriesNo}"></p>
                 </div>
-                <div class="book__subtitle" th:unless="${b.bookInSeriesNo != 0}">
-                    <p class="book__subtitle-sub">Czesc cyklu: </p>
-                    <p class="book__subtitle-sub book__subtitle-bold" ></p>
+                <div class="book__medium-subtitle" th:unless="${b.bookInSeriesNo != 0}">
+                    <p class="book__medium-subtitle-sub">Czesc cyklu: </p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" ></p>
                 </div>
-                <div class="book__subtitle">
-                    <p class="book__subtitle-sub">Ksiegarnia: </p>
-                    <p class="book__subtitle-sub book__subtitle-bold" th:text="${ub.bookstore}"></p>
+                <div class="book__medium-subtitle">
+                    <p class="book__medium-subtitle-sub">Ksiegarnia: </p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${ub.bookstore}"></p>
                 </div>
-                <div class="book__subtitle">
-                    <p class="book__subtitle-sub">Stan posiadania: </p>
-                    <p class="book__subtitle-sub book__subtitle-bold"
+                <div class="book__medium-subtitle">
+                    <p class="book__medium-subtitle-sub">Stan posiadania: </p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold"
                        th:text="${ub.ownershipStatus.getDescription()}"></p>
                 </div>
-                <div class="book__subtitle">
-                    <p class="book__subtitle-sub">Stan przeczytania: </p>
-                    <p class="book__subtitle-sub book__subtitle-bold" th:text="${ub.readingStatus.getDescription()}"></p>
+                <div class="book__medium-subtitle">
+                    <p class="book__medium-subtitle-sub">Stan przeczytania: </p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${ub.readingStatus.getDescription()}"></p>
                 </div>
 
-                <p class="book__subtitle-sub">Kiedy czytana/słuchana:</p>
+                <p class="book__medium-subtitle-sub">Kiedy czytana/słuchana:</p>
                 <div th:if="${ub.readFrom != null && ub.readTo == null}">
-                <p class="book__subtitle-sub book__subtitle-bold" th:text="${ub.readFrom}"></p>
+                <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${ub.readFrom}"></p>
                 </div>
                 <div th:if="${ub.readFrom != null && ub.readTo != null}">
-                <p class="book__subtitle-sub book__subtitle-bold" th:text="${ub.readFrom + '  do  ' + ub.readTo}"></p>
+                <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${ub.readFrom + '  do  ' + ub.readTo}"></p>
                 </div>
             </div>
         </div>
