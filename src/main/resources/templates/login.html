@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+
+</head>
+
+<body>
+<div th:replace="fragments/head :: js-script" th:remove="tag">
+
+</div>
+<div th:replace="fragments/header :: header">
+
+</div>
+
+<div class="container">
+    <h4 class="bg-warning font-weight-bold info-reading-status" th:text="${infoBar}"></h4>
+
+
+    <form th:object="${user}" th:action="@{/login}"  method="post">
+
+        <label for="login">Login: </label>
+        <input id="login" type="text" name="login" required th:field="*{login}"/>
+        <br>
+        <br>
+
+        <label for="password">Password: </label>
+        <input id="password" type="password" required name="password"
+               th:field="*{password}"/>
+        <br>
+        <br>
+
+
+        <label for="name">Nazwa: </label>
+        <input id="name" type="text" required th:field="*{name}"/>
+        <br>
+        <br>
+
+<!--        <label for="role">Rola: </label>-->
+<!--        <select id="role" required th:field="*{role}">-->
+<!--            <option th:each="r : ${roles}" th:value="${r}" th:text="${r}"></option>-->
+<!--        </select>-->
+        <br>
+        <br>
+
+        <input type="submit" value="Dodaj"/>
+    </form>
+</div>
+
+</body>
+</html>

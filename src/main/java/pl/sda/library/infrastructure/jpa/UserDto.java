@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 import pl.sda.library.domain.model.Role;
 import pl.sda.library.domain.model.User;
 
@@ -15,7 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+@Validated
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
