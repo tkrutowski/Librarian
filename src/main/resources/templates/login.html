@@ -8,46 +8,36 @@
 <div th:replace="fragments/head :: js-script" th:remove="tag">
 
 </div>
-<!--<div th:replace="fragments/header :: header">-->
 
 </div>
 
-<div class="container">
 
-        <h1 class="bg-warning text-center font-weight-bold">BIBLIOTEKA</h1>
+<h1 class="bg-warning text-center font-weight-bold">BIBLIOTEKA</h1>
+<br>
+<h4 class="bg-warning font-weight-bold info-reading-status" th:text="${infoBar}"></h4>
+<br>
+<div style="margin-top: 200px;">
 
-    <h4 class="bg-warning font-weight-bold info-reading-status" th:text="${infoBar}"></h4>
+    <form th:object="${user}" th:action="@{/login}" method="post">
+        <div class="container" style="width: 400px;">
+            <h4 th:if="${loginError}" class="bg-danger font-weight-bold info-reading-status">Nieprawidłowe dane
+                logowania.</h4>
+            <label class="form-label" for="login">Login: </label>
+            <div class="form-div-login">
+                <input class="form-input-login" id="login" type="text" name="login" required th:field="*{username}"/>
+            </div>
 
+            <label class="form-label" for="password">Password: </label>
+            <div class="form-div-login">
+                <input class="form-input-login" id="password" type="password" required name="password"
+                       th:field="*{password}"/>
+            </div>
 
-        <p th:if="${loginError}" class="error">Wrong user or password</p>
-    <form th:object="${user}" th:action="@{/login}"  method="post">
-        <label for="login">Login: </label>
-        <input id="login" type="text" name="login" required th:field="*{username}"/>
-        <br>
-        <br>
-
-        <label for="password">Password: </label>
-        <input id="password" type="password" required name="password"
-               th:field="*{password}"/>
-        <br>
-        <br>
-
-
-<!--        <label for="name">Nazwa: </label>-->
-<!--        <input id="name" type="text" required th:field="*{name}"/>-->
-<!--        <br>-->
-<!--        <br>-->
-
-<!--        <label for="role">Rola: </label>-->
-<!--        <select id="role" required th:field="*{role}">-->
-<!--            <option th:each="r : ${roles}" th:value="${r}" th:text="${r}"></option>-->
-<!--        </select>-->
-        <br>
-        <br>
-
-        <input type="submit" value="Zaloguj"/>
+            <div class="form-div-logbtn">
+                <input class="btn btn-warning form-button-save" type="submit" value="Zaloguj"/>
+            </div>
+        </div>
     </form>
 </div>
-
 </body>
 </html>
