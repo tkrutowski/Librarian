@@ -80,6 +80,13 @@
                                 <a class="dropdown-item" href="/userbooks/reloaded/LARGE">Duży</a>
                             </div>
                         </li>
+                        <!--Login / logout-->
+                        <li th:if="${logged}" class="nav-item">
+                            <form  th:action="@{/logout}"  method="post">
+                                <!--                <label for="login">Login: </label>-->
+                                <input class="btn btn-warning m-1" type="submit" value="Wyloguj"/>
+                            </form>
+                        </li>
 
                     </ul>
                 </div>

@@ -4,15 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.sda.library.domain.service.SeriesService;
 
 @AllArgsConstructor
 @Controller
-//@RequestMapping("/")
 public class WebMainController {
 
     SeriesService seriesService;
@@ -20,12 +17,19 @@ public class WebMainController {
     @GetMapping("/home")
     public ModelAndView getHomePage() {
         ModelAndView modelAndView = new ModelAndView();
-        String infoBarText = "Coś tutaj będzie!!!";
+        String infoBarText = "Witaj ";
+        boolean isLogged = false;
         modelAndView.addObject("seriesList", seriesService.findAllSeries());
-        modelAndView.addObject("infoBar", infoBarText);
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-      //  String name = authentication.getName();
-       // modelAndView.addObject("name", name);
+
+        if (authentication != null || !authentication.getPrincipal().equals("anonymousUser")) {
+            infoBarText += authentication.getName();
+            isLogged = true;
+        }
+
+        modelAndView.addObject("infoBar", infoBarText);
+        modelAndView.addObject("logged", isLogged);
         modelAndView.setViewName("home");
         return modelAndView;
     }

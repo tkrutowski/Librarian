@@ -12,14 +12,8 @@
 </div>
 
 <div class="container">
-    <h4 class="bg-warning font-weight-bold info-reading-status" th:text="${infoBar}">Logowanie ???</h4>
+    <h4 class="bg-warning font-weight-bold info-reading-status" th:text="${infoBar}"></h4>
 
-    <p>jestes zalogowany jako:  [[${#httpServletRequest.remoteUser}]]</p>
-
-    <form  th:action="@{/logout}"  method="post">
-        <!--                <label for="login">Login: </label>-->
-        <input type="submit" value="Wyloguj"/>
-    </form>
 </div>
 
 </body>
