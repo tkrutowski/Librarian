@@ -28,7 +28,7 @@ class UserDto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    private String login;
+    private String username;
     private String password;
     private String name;
     @Enumerated(EnumType.STRING)
@@ -37,7 +37,7 @@ class UserDto {
     User toDomain() {
         User user = new User();
         user.setId(getId());
-        user.setLogin(getLogin());
+        user.setUsername(getUsername());
         user.setPassword(getPassword());
         user.setName(getName());
         user.setRole(getRole());
@@ -48,7 +48,7 @@ class UserDto {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setName(user.getName());
-        userDto.setLogin(user.getLogin());
+        userDto.setUsername(user.getUsername());
         userDto.setPassword(user.getPassword());
         userDto.setRole(user.getRole());
         return userDto;

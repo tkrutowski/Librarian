@@ -1,5 +1,5 @@
-   INSERT INTO users(login,password,name, role) VALUES('admin','1234','administrator', 'ADMIN');
-    INSERT INTO users(login,password,name, role) VALUES('test@gmail.com','12345','tom kru','USER');
+   INSERT INTO users(username,password,name, role) VALUES('admin',/*1234*/'{bcrypt}$2y$06$SWEQM5PNMs1psVa2FnRytuZvfeHO0Xnt2m0qXgGSPYPQnVBi5Z6Xy','administrator', 'ADMIN');
+    INSERT INTO users(username,password,name, role) VALUES('test',/*'12345'*/'{bcrypt}$2y$06$ACSryLuz9ojOffj/.ADPquYUHGTgoPq6mjXF24iAWG6YOvV5LYA2W','tom kru','USER');
 
       INSERT INTO categories(name) VALUES('Thriller');
         INSERT INTO categories(name) VALUES('Sensacja');

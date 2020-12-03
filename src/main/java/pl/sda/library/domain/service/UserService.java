@@ -17,7 +17,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public Long addUser(User user){
-        Optional<User> optionalUser = userRepository.findByLogin(user.getLogin());
+        Optional<User> optionalUser = userRepository.findByLogin(user.getUsername());
         if (optionalUser.isPresent()) {
             throw new UserAlreadyExistException(user);
         }

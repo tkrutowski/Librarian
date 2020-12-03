@@ -8,18 +8,21 @@
 <div th:replace="fragments/head :: js-script" th:remove="tag">
 
 </div>
-<div th:replace="fragments/header :: header">
+<!--<div th:replace="fragments/header :: header">-->
 
 </div>
 
 <div class="container">
+
+        <h1 class="bg-warning text-center font-weight-bold">BIBLIOTEKA</h1>
+
     <h4 class="bg-warning font-weight-bold info-reading-status" th:text="${infoBar}"></h4>
 
 
+        <p th:if="${loginError}" class="error">Wrong user or password</p>
     <form th:object="${user}" th:action="@{/login}"  method="post">
-
         <label for="login">Login: </label>
-        <input id="login" type="text" name="login" required th:field="*{login}"/>
+        <input id="login" type="text" name="login" required th:field="*{username}"/>
         <br>
         <br>
 
@@ -30,10 +33,10 @@
         <br>
 
 
-        <label for="name">Nazwa: </label>
-        <input id="name" type="text" required th:field="*{name}"/>
-        <br>
-        <br>
+<!--        <label for="name">Nazwa: </label>-->
+<!--        <input id="name" type="text" required th:field="*{name}"/>-->
+<!--        <br>-->
+<!--        <br>-->
 
 <!--        <label for="role">Rola: </label>-->
 <!--        <select id="role" required th:field="*{role}">-->
@@ -42,7 +45,7 @@
         <br>
         <br>
 
-        <input type="submit" value="Dodaj"/>
+        <input type="submit" value="Zaloguj"/>
     </form>
 </div>
 

@@ -44,7 +44,7 @@
 
     <div>
         <label for="login">Login: </label>
-        <input id="login" type="text" required th:field="*{login}"/>
+        <input id="login" type="text" required th:field="*{getUsername}"/>
         <p th:each="error : ${#fields.errors('email')}"
            th:text="${error}">Validation error</p>
     </div>
