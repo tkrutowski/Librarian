@@ -58,8 +58,9 @@ public class UserBookService {
         return userBookById.get();
     }
 
-    public List<UserBook> findAllUserBooksByReadingStatus(ReadingStatus status) {
+    public List<UserBook> findAllUserBooksByReadingStatus(ReadingStatus status, Long userId) {
         return userBookRepository.findAll().stream()
+                .filter(userBook -> userBook.getIdUser() == userId)
                 .filter(userBook -> userBook.getReadingStatus() == status)
                 .collect(Collectors.toList());
     }

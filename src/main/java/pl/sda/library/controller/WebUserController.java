@@ -31,7 +31,6 @@ public class WebUserController {
         model.addAttribute("roles", roles);
         model.addAttribute("usersList",userService.findAllUsers());
         return "users";
-
     }
 
     @PostMapping
@@ -39,8 +38,6 @@ public class WebUserController {
         userService.addUser(user);
         return "redirect:/users";
     }
-
-
 
     @GetMapping("/registration")
     public String showRegistrationForm(WebRequest request, Model model) {
@@ -53,7 +50,6 @@ public class WebUserController {
     @PostMapping("/registration")
     public ModelAndView registerUserAccount (@ModelAttribute("user")  User user, HttpServletRequest request, Errors errors) {
             ModelAndView mav = new ModelAndView();
-
         try {
             Long registered = userService.addUser(user);
         } catch (UserAlreadyExistException uaeEx) {

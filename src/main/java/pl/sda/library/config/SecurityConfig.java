@@ -24,30 +24,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .rolePrefix("ROLE_")
-//                .usersByUsernameQuery("SELECT username, password, 'true' FROM users where username = ?")
-//                .authoritiesByUsernameQuery("SELECT username, role FROM users where username = ?");
+        int i=0;
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder())
+                .rolePrefix("ROLE_")
+                .usersByUsernameQuery("SELECT username, password, 'true' FROM users where username = ?")
+                .authoritiesByUsernameQuery("SELECT username, role FROM users where username = ?");
 
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password(passwordEncoder().encode("user"))
-                .roles("USER")
-                .and()
-                .withUser("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .and()
-                .withUser("test")
-                .password(passwordEncoder().encode("test"))
-                .roles("USER");
+//        auth.inMemoryAuthentication()
+//                .withUser("user")
+//                .password(passwordEncoder().encode("user"))
+//                .roles("USER")
+//                .and()
+//                .withUser("admin")
+//                .password(passwordEncoder().encode("admin"))
+//                .roles("ADMIN")
+//                .and()
+//                .withUser("test")
+//                .password(passwordEncoder().encode("test"))
+//                .roles("USER");
     }
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 
-        http//.csrf().disable()
+        http.csrf().disable()
 //                .requestMatchers()
 //                .and()
                 .authorizeRequests()
@@ -60,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/bookstores/**").hasAuthority("USER")
                 .antMatchers("/userbooks","/userbooks/**").hasRole("USER")
                 .antMatchers("/**","/login*").permitAll()
+                .antMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

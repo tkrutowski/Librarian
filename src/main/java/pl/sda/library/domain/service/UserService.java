@@ -49,6 +49,14 @@ public class UserService {
             return userById.get();
     }
 
+    public User findUserByUserName(String username) {
+        Optional<User> userByUserName = userRepository.findByLogin(username);
+        if (!userByUserName.isPresent()) {
+            throw new UserDoesNotExistException(username);
+        }
+        return userByUserName.get();
+    }
+
     public List<User> findAllUsers(){
         return userRepository.findAll();
     }

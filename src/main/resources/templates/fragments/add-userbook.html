@@ -8,17 +8,8 @@
 <div th:fragment="ub-add">
 
 
-    <form th:object="${userBook}" method="post">
+    <form th:object="${userBook}" th:action="@{/userbooks}" method="post">
         <div class="container" style="width: 700px">
-
-            <label class="form-label" for="user">Użytkownik: </label>
-            <div class="form-div">
-                <select class="form-select" id="user" required th:field="*{idUser}">
-                    <option th:each="u : ${userList}" th:value="${u.id}" th:text="${u.name}"></option>
-                </select>
-                <a class="btn btn-warning form-button" th:href="@{/users}">Dodaj</a>
-            </div>
-
 
             <label class="form-label"  for="book">Książka: </label>
             <div class="form-div">
