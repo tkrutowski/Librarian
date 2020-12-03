@@ -16,7 +16,8 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    DataSource dataSource;
+    private DataSource dataSource;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -50,24 +51,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
 
         http.csrf().disable()
-//                .requestMatchers()
-//                .and()
                 .authorizeRequests()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/login*").permitAll()
-//                .antMatchers("/logout**").permitAll()
-                .antMatchers("/error**").hasAnyRole("ADMIN","USER")
+//                .antMatchers("/api/**").hasRole("ADMIN")
                 .antMatchers("/home").hasAnyRole("ADMIN","USER")
                 .antMatchers("/users","/users/**").hasRole("ADMIN")
-                .antMatchers("/bookstores/**").hasAuthority("USER")
+                .antMatchers("/bookstores/**").hasRole("USER")
                 .antMatchers("/userbooks","/userbooks/**").hasRole("USER")
                 .antMatchers("/**","/login*").permitAll()
-                .antMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .permitAll()
-                .loginPage("/login").permitAll()
+                .loginPage("/login")
                 .failureUrl("/login-error")
                 .defaultSuccessUrl("/home", true)
                 .and()
@@ -76,81 +70,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .and()
-                .exceptionHandling().accessDeniedPage("/error403")
-//        .and()
-//        .anonymous().disable()
-        ;
-
-
-
-        // http builder configurations for authorize requests and form login (see below)
- /*       http//.csrf().disable()
-                .requestMatchers()
-                .antMatchers("/","/login*")
-                .and()
-                .authorizeRequests()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/login*").permitAll()
-//                .antMatchers("/logout**").permitAll()
-                .antMatchers("/error**").hasAnyRole("ADMIN","USER")
-                .antMatchers("/home").hasAnyAuthority("ADMIN","USER")
-                .antMatchers("/users/**").hasRole("ADMIN")
-                .antMatchers("/bookstores/**").hasAuthority("USER")
-                .antMatchers("/userbooks/**").hasRole("USER")
-                .antMatchers("/userbooks").hasRole("USER")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                    .permitAll()
-                    .loginPage("/login").permitAll()
-                    .failureUrl("/login-error")
-                    .defaultSuccessUrl("/home", true)
-                .and()
-                .logout()
-                .deleteCookies("JSESSIONID").clearAuthentication(true)
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-        .and()
-        .exceptionHandling().accessDeniedPage("/error403")
-//        .and()
-//        .anonymous().disable()
-        ;*/
-         /*       .csrf().disable()
-                .authorizeRequests()
-//                .antMatchers("/users/**").permitAll()
-                .antMatchers("/users/**").hasRole("ADMIN")
-                .antMatchers("/userbooks/**").hasRole("USER")
-                .antMatchers("/bookstores/**").hasRole("USER")
-                .antMatchers("/login*").permitAll()
-                .antMatchers("/h2console/**").permitAll()
-//                .antMatchers("/anonymous*").anonymous()
-
-                .and()
-        .httpBasic()
-        .and()
-        .authorizeRequests()
-        ;*/
-
-
-//                .anyRequest().authenticated()
-//                .and()
-//                .httpBasic()
-//                .and()
-//                .formLogin()
-////                .loginPage()
-////                .loginPage("/login")
-////                .loginProcessingUrl("/perform_login")
-//                .defaultSuccessUrl("/", true)
-////                .usernameParameter("login")
-////                .passwordParameter("password")
-////                .failureUrl("/login.html?error=true")
-////                .failureHandler(authenticationFailureHandler())
-//                .and()
-//                .logout()
-//                .logoutUrl("/perform_logout")
-//                .deleteCookies("JSESSIONID")
-////                .logoutSuccessHandler(logoutSuccessHandler());
-//                .and().csrf().disable()
-        ;
+                .exceptionHandling().accessDeniedPage("/error403");
     }
 }

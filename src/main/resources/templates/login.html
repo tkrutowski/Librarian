@@ -27,7 +27,7 @@
                 <input class="form-input-login" id="login" type="text" name="login" required th:field="*{username}"/>
             </div>
 
-            <label class="form-label" for="password">Password: </label>
+            <label class="form-label" for="password">Hasło: </label>
             <div class="form-div-login">
                 <input class="form-input-login" id="password" type="password" required name="password"
                        th:field="*{password}"/>
@@ -36,8 +36,14 @@
             <div class="form-div-logbtn">
                 <input class="btn btn-warning form-button-save" type="submit" value="Zaloguj"/>
             </div>
+            <div class="form-div-login" style="margin-top: 7px">
+                <p style="float: right">Nie masz konta?
+                    <a class="btn-warning " th:href="@{/register}" href="/register">Zarejestruj się!</a>
+                </p>
+            </div>
         </div>
     </form>
+
 </div>
 </body>
 </html>

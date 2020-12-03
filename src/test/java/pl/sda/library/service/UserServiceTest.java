@@ -26,7 +26,7 @@ public class UserServiceTest {
     @Test
     public void should_return_id_bigger_then_when_user_added() {
         //when
-        User user = new User(null, "admin10", "password", "name10", Role.ADMIN);
+        User user = new User(null, "admin10", "password", "name10", Role.ADMIN,"");
 
         //given
         Long id = userService.addUser(user);
@@ -38,7 +38,7 @@ public class UserServiceTest {
     @Test
     public void should_throw_ObjectAlreadyExistException_when_author_already_exist() {
         //when
-        User user = new User(null, "user", "password1", "name1", Role.USER);
+        User user = new User(null, "user", "password1", "name1", Role.USER,"");
         userService.addUser(user);
 
         //then
@@ -48,7 +48,7 @@ public class UserServiceTest {
     @Test
     public void should_return_changed_password_while_edit() {
         //when
-        User user = new User(null, "login2", "password2", "name2", Role.USER);
+        User user = new User(null, "login2", "password2", "name2", Role.USER,"");
         Long id = userService.addUser(user);
         User toEdit = userService.findUser(id);
         toEdit.setPassword("password2_new");
@@ -63,7 +63,7 @@ public class UserServiceTest {
     @Test
     public void should_return_changed_name_while_edit() {
         //when
-        User user = new User(null, "login3", "password3", "name3", Role.USER);
+        User user = new User(null, "login3", "password3", "name3", Role.USER,"");
         Long id = userService.addUser(user);
         User toEdit = userService.findUser(id);
         toEdit.setName("name3_new");
@@ -78,7 +78,7 @@ public class UserServiceTest {
     @Test
     public void should_throw_UserDoesNotExistException() {
         //when
-        User user = new User(null, "login4", "password4", "name4", Role.USER);
+        User user = new User(null, "login4", "password4", "name4", Role.USER,"");
         Long id = userService.addUser(user);
         User toEdit = userService.findUser(id);
         toEdit.setId(0L);
@@ -92,8 +92,8 @@ public class UserServiceTest {
     public void should_return_size__plus_2_when_2_users_added() {
         //when
         final int SIZE = userService.findAllUsers().size() + 2;
-        userService.addUser(new User(null, "login5", "password5", "name5", Role.ADMIN));
-        userService.addUser(new User(null, "login6", "password6", "name6", Role.USER));
+        userService.addUser(new User(null, "login5", "password5", "name5", Role.ADMIN,""));
+        userService.addUser(new User(null, "login6", "password6", "name6", Role.USER,""));
 
         //given
         int result = userService.findAllUsers().size();

@@ -3,6 +3,7 @@ package pl.sda.library.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +15,7 @@ import pl.sda.library.domain.model.Role;
 import pl.sda.library.domain.model.User;
 import pl.sda.library.domain.model.exception.UserAlreadyExistException;
 import pl.sda.library.domain.service.UserService;
+import pl.sda.library.domain.service.UserValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -59,4 +61,6 @@ public class WebUserController {
 
         return new ModelAndView("successRegister", "user", user);
     }
+
+
 }
