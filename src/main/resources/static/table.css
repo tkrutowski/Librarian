@@ -1,20 +1,22 @@
-* {
-  font-family: sans-serif; /* Change your font family */
-}
+/** {*/
+/*  font-family: sans-serif; !* Change your font family *!*/
+/*}*/
 
 .content-table {
   border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 0.9em;
+  margin: auto;
+  font-size: 16px;
   min-width: 400px;
   border-radius: 5px 5px 0 0;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  width: 550px;
+  color: #212529;
 }
 
 .content-table thead tr {
-  background-color: #5DADE2;
-  color: #ffffff;
+  background-color: #ffc107;
+  color: #212529;
   text-align: left;
   font-weight: bold;
 }
@@ -28,15 +30,26 @@
   border-bottom: 1px solid #dddddd;
 }
 
+/*yellow*/
 .content-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
+  background-color: #ebecb0;
+}
+
+/*greey*/
+.content-table tbody tr {
+  background-color: #f2ede6;
 }
 
 .content-table tbody tr:last-of-type {
-  border-bottom: 2px solid #5DADE2;
+  border-bottom: 2px solid  #ffc107;
 }
 
 .content-table tbody tr.active-row {
   font-weight: bold;
-  color: #009879;
+  color: deeppink;
+}
+
+.table-button{
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
