@@ -1,6 +1,8 @@
 package pl.sda.library.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import pl.sda.library.domain.model.EditionType;
 import pl.sda.library.domain.model.OwnershipStatus;
 import pl.sda.library.domain.model.ReadingStatus;
 import pl.sda.library.domain.model.Series;
+import pl.sda.library.domain.model.User;
 import pl.sda.library.domain.model.UserBook;
 import pl.sda.library.domain.service.BookService;
 import pl.sda.library.domain.service.BookstoreService;
@@ -35,17 +38,6 @@ public class WebUserBookController {
     List<UserBook> userBookList;
     List<Book> bookList;
 
-    private void createModel(Model model) {
-        model.addAttribute("userList", userService.findAllUsers());
-        model.addAttribute("bookList", bookList);
-        model.addAttribute("bookstoreList", bookstoreService.findAllBookstores());
-        model.addAttribute("userBookList", userBookList);
-        model.addAttribute("seriesList", seriesService.findAllSeries());
-        model.addAttribute("ownershipStatus", Arrays.asList(OwnershipStatus.values()));
-        model.addAttribute("editionType", Arrays.asList(EditionType.values()));
-        model.addAttribute("readingStatus", Arrays.asList(ReadingStatus.values()));
-        model.addAttribute(new UserBook());
-    }
 
     @GetMapping("/reloaded/{view}")
     public String findUsersBooksReloaded(Model model, @PathVariable String view) {
@@ -59,7 +51,7 @@ public class WebUserBookController {
     @GetMapping("/status/{status}")
     public String findUsersBooksToRead(Model model, @PathVariable String status) {
         String infoBarText = getInfoReadingStatus(ReadingStatus.valueOf(status));
-        userBookList = userBookService.findAllUserBooksByReadingStatus(ReadingStatus.valueOf(status));
+        userBookList = userBookService.findAllUserBooksByReadingStatus(ReadingStatus.valueOf(status),getUser().getId());
         bookList =  bookService.findAllBooks();
         createModel(model);
         model.addAttribute("infoBar", infoBarText);
@@ -86,8 +78,18 @@ public class WebUserBookController {
 
     @PostMapping
     public String addUserBook(UserBook userBook) {
+        userBook.setIdUser(getUser().getId());
         userBookService.addUserBook(userBook);
-        return "redirect:/userbooks";
+        return "redirect:/home";
+    }
+
+    private User getUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null || !authentication.getPrincipal().equals("anonymousUser")) {
+           return userService.findUserByUserName(authentication.getName());
+        }
+        return new User();
     }
 
     private String getHtmlBookView() {
@@ -116,5 +118,16 @@ public class WebUserBookController {
         }
     }
 
+    private void createModel(Model model) {
+        model.addAttribute("bookList", bookList);
+        model.addAttribute("bookstoreList", bookstoreService.findAllBookstores());
+        model.addAttribute("userBookList", userBookList);
+        model.addAttribute("seriesList", seriesService.findAllSeries());
+        model.addAttribute("ownershipStatus", Arrays.asList(OwnershipStatus.values()));
+        model.addAttribute("editionType", Arrays.asList(EditionType.values()));
+        model.addAttribute("readingStatus", Arrays.asList(ReadingStatus.values()));
+        model.addAttribute("logged", getUser().getId() > 0? true : false);
+        model.addAttribute(new UserBook());
+    }
 }
 

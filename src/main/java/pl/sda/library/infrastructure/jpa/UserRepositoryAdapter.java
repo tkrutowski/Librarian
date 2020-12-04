@@ -48,7 +48,7 @@ public class UserRepositoryAdapter implements UserRepository {
 
     @Override
     public Optional<User> findByLogin(String login) {
-        return userDtoRepository.findUserDtoByLogin(login)
+        return userDtoRepository.findUserDtoByUsername(login)
                 .map(userDto -> userDto.toDomain());
     }
 }

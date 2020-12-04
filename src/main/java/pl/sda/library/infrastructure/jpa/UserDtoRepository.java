@@ -6,6 +6,6 @@ import java.util.Optional;
 
 interface UserDtoRepository extends CrudRepository<UserDto, Long> {
 
-     Optional<UserDto> findUserDtoByLogin(String login);
+     Optional<UserDto> findUserDtoByUsername(String login);
 
 }
