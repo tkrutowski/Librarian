@@ -11,6 +11,16 @@
     height: 34px;
 }
 
+.form-input {
+    margin: 0px;
+    width: max-content;
+    padding: 5px 35px 5px 5px;
+    font-size: 16px;
+    border: 1px solid #CCC;
+    height: 34px;
+}
+
+
 .form-div{
     width: 630px;
 }
@@ -37,6 +47,7 @@
 
 .form-area{
     width: 500px;
+    resize: both;
 }
 
 /*LOGIN , LOGOUT*/

@@ -12,7 +12,8 @@ class UpolujebookaScrapperTest {
     void ShouldFindOnlyTwoAuthors() throws MalformedURLException {
 
         //given
-        String bookUrl = "https://upolujebooka.pl/oferta,6519,dobry_omen.html";
+//        String bookUrl = "https://upolujebooka.pl/oferta,6519,dobry_omen.html";
+        String bookUrl = "https://upolujebooka.pl/oferta,42943,w_samo_sedno.html";
         //String phrase = "Neil Gaiman";
         Book book= new Book();
         //when
