@@ -12,16 +12,15 @@ import java.net.MalformedURLException;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping("/books")
+@RequestMapping("/book")
 public class WebBookController {
     BookService bookService;
 
     @GetMapping
     public String getAllBooks(Model model) {
         model.addAttribute(new Book());
-        System.out.println("Inside webBookController");
         model.addAttribute("bookList", bookService.findAllBooks());
-        return "books";
+        return "book";
     }
 
     @PostMapping
@@ -29,17 +28,18 @@ public class WebBookController {
         model.addAttribute(new Book());
         if ((book.getAuthors() != null )||(book.getTitle() != null) ){
             bookService.addBook(book);
+            return "redirect:/userbooks";
         }
         if (url != null){
             model.addAttribute("bookFromUrl", UpolujebookaScrapper.findBookFromUrl(url));
         }
         model.addAttribute("bookList", bookService.findAllBooks());
-        return "books";
+        return "book";
     }
 
     @RequestMapping(value="/delete/{bookId}",method = RequestMethod.GET)
     public String delBook(@PathVariable String bookId) {
         bookService.deleteBook(Long.parseLong(bookId));
-        return "books";
+        return "book";
     }
 }

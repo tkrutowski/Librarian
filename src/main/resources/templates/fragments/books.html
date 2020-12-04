@@ -2,8 +2,7 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="table.css">
-    <title>Lista książek</title>
+    <title>Dodaj książkę</title>
 </head>
 <style>
 
@@ -21,8 +20,7 @@
     <p>Opis: <input type="text" name="description" th:value="${bookFromUrl?.description}" /></p>
     <p>Link do zdjęcia okładki: <input type="text" name="cover" th:value="${bookFromUrl?.cover}" /></p>
     <p>Numer książki w serii: <input type="text" name="bookInSeriesNo" th:value="${bookFromUrl?.bookInSeriesNo}" /></p>
-    <input type="submit" value="Dodaj"/>
-    <input type="reset" value="Wyczyść" />
+    <input  class="btn btn-warning form-button-save" type="submit" value="Dodaj"/>
 </form>
 
 

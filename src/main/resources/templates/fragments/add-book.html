@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj książkę</title>
+</head>
+<body>
+<div th:fragment="book-add">
+    <div class="container">
+        <h4 class="bg-warning font-weight-bold info-reading-status">Opis:</h4>
+    </div>
+    <div class="container">
+        <form th:object="${book}" method="post">
+            <div class="container">
+                <div class="container-child">
+                    <label class="form-label" for="authors">Autor/-zy:</label>
+                    <div class="form-div">
+                        <input class="form-select" id="authors" type="text" name="authors"  th:value="${bookFromUrl?.authors}" required/>
+                    </div>
+
+                    <label class="form-label" for="title">Tytuł:</label>
+                    <div class="form-div">
+                        <input class="form-select" id="title" type="text" name="title" th:value="${bookFromUrl?.title}" required />
+                    </div>
+
+                    <label class="form-label" for="subtitle">Podtytuł:</label>
+                    <div class="form-div">
+                        <input class="form-select" id="subtitle" type="text" name="subtitle" th:value="${bookFromUrl?.subtitle}" />
+                    </div>
+
+                    <label class="form-label" for="series">Seria:</label>
+                    <div class="form-div">
+                        <input class="form-select" id="series" type="text" name="series" th:value="${bookFromUrl?.series}" />
+                    </div>
+
+                    <label class="form-label" for="categories">Kategoria:</label>
+                    <div class="form-div">
+                        <input class="form-select" id="categories" type="text" name="categories" th:value="${bookFromUrl?.categories}" />
+                    </div>
+
+                    <label class="form-label" for="description">Opis:</label>
+                    <div class="form-div">
+                        <input class="form-select" id="description" type="text" name="description" th:value="${bookFromUrl?.description}">
+                    </div>
+
+                    <label class="form-label" for="bookInSeriesNo">Numer książki w serii:</label>
+                    <div class="form-div">
+                        <input class="form-select" id="bookInSeriesNo" type="text" name="bookInSeriesNo" th:value="${bookFromUrl?.bookInSeriesNo}" />
+                    </div>
+
+                    <input type="hidden" name="cover" th:value="${bookFromUrl?.cover}">
+                    <div class="form-div-save">
+                        <input class="btn btn-warning form-button-save" type="submit" value="Dodaj"/>
+                    </div>
+                </div>
+                <div class="container-child">
+                    <img class="book_picture" th:src="${bookFromUrl?.cover}">
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+
