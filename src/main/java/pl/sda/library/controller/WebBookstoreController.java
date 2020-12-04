@@ -1,6 +1,8 @@
 package pl.sda.library.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +17,7 @@ import pl.sda.library.domain.model.Role;
 import pl.sda.library.domain.model.User;
 import pl.sda.library.domain.service.BookstoreService;
 import pl.sda.library.domain.service.BookstoreValidator;
+import pl.sda.library.domain.service.UserService;
 
 @AllArgsConstructor
 @Controller
@@ -23,10 +26,12 @@ public class WebBookstoreController {
 
     private BookstoreService bookstoreService;
     private BookstoreValidator bookstoreValidator;
+    UserService userService;
 
     @GetMapping
     public String getAllBookstores(Model model) {
         model.addAttribute(new Bookstore());
+        model.addAttribute("logged", getUser().getId() > 0? true : false);
         model.addAttribute("bookstoreList", bookstoreService.findAllBookstores());
         return "bookstores";
     }
@@ -47,5 +52,14 @@ public class WebBookstoreController {
     public String delBookstore(@PathVariable String bookstoreId) {
         bookstoreService.deleteBookstore(Long.parseLong(bookstoreId));
         return "redirect:/bookstores";
+    }
+
+    private User getUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null || !authentication.getPrincipal().equals("anonymousUser")) {
+            return userService.findUserByUserName(authentication.getName());
+        }
+        return new User();
     }
 }
