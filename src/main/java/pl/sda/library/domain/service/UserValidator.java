@@ -23,18 +23,28 @@ public class UserValidator implements Validator {
     public void validate(Object o, Errors errors) {
         User user = (User) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty", "Pole nie może być puste");
 
-        try {
-            userService.findUserByUserName(user.getUsername());
-            errors.rejectValue("username", "Duplicate.userForm.username");
-        } catch (UserDoesNotExistException ignored){}
+        if (!errors.hasErrors()) {
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty", "Pole nie może być puste");
+        }
 
-        int i=0;
-        if (!user.getPasswordConfirm().equals(user.getPassword())) {
-            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
+        if (!errors.hasErrors()) {
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty", "Pole nie może być puste");
+        }
+
+        if (!errors.hasErrors()) {
+            try {
+                userService.findUserByUserName(user.getUsername());
+                errors.rejectValue("username", "Duplicate.userForm.username", "Użytkownik istnieje już w bazie danych.");
+            } catch (UserDoesNotExistException ignored) {
+            }
+        }
+
+        if (!errors.hasErrors()) {
+            if (!user.getPasswordConfirm().equals(user.getPassword())) {
+                errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm", "Hasła muszą być identyczne.");
+            }
         }
     }
 }

@@ -19,14 +19,17 @@
     <form action="#" th:object="${bookstore}" method="post">
         <div class="container" style="width: 400px;">
 
+            <!--            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('name')}" >Pole nie może być puste.</h4>-->
             <label class="form-label" for="name">Nazwa: </label>
             <div class="form-div-login">
                 <input class="form-input-login" id="name" type="text" name="name" required th:field="*{name}"/>
             </div>
+            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors()}"
+                th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
 
             <label class="form-label" for="url">URL: </label>
             <div class="form-div-login">
-                <input class="form-input-login" id="URL" type="text" required name="url" th:field="*{url}"/>
+                <input class="form-input-login" id="URL" type="text"  name="url" th:field="*{url}"/>
             </div>
 
             <div class="form-div-logbtn">
@@ -49,7 +52,8 @@
             <td th:text="${bookstore.idBookstore}"></td>
             <td th:text="${bookstore.name}"></td>
             <td><a th:href="@{http://{url}(url=${bookstore.url})}" th:text="${bookstore.url}" target="_blank"></a></td>
-            <td><a th:href="@{/bookstores/delete/{id}(id=${bookstore.idBookstore})}" class="btn btn-danger table-button">usuń</a>
+            <td><a th:href="@{/bookstores/delete/{id}(id=${bookstore.idBookstore})}"
+                   class="btn btn-danger table-button">usuń</a>
             </td>
         </tr>
         </tbody>
