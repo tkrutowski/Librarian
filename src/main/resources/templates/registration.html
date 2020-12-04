@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+
+</head>
+
+<body>
+<div th:replace="fragments/head :: js-script" th:remove="tag">
+
+</div>
+
+</div>
+
+
+<h1 class="bg-warning text-center font-weight-bold">BIBLIOTEKA</h1>
+<br>
+<h4 class="bg-warning font-weight-bold info-reading-status" th:text="${infoBar}"></h4>
+<br>
+<div style="margin-top: 200px;">
+
+    <form th:object="${user}" th:action="@{/register}" method="post">
+        <div class="container" style="width: 400px;">
+
+            <label class="form-label" for="name">Twoje imię: </label>
+            <div class="form-div-login">
+                <input class="form-input-login" id="name" type="text" name="name" required th:field="*{name}"/>
+            </div>
+            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('name')}" th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
+
+
+            <label class="form-label" for="username">Login: </label>
+            <div class="form-div-login">
+                <input class="form-input-login" id="username" type="text" name="username" required th:field="*{username}"/>
+            </div>
+            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('username')}" th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
+
+
+            <label class="form-label" for="password">Hasło: </label>
+            <div class="form-div-login">
+                <input class="form-input-login" id="password" type="password" required name="password"
+                       th:field="*{password}"/>
+            </div>
+            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('password')}" th:text="${#fields.detailedErrors().get(0).getMessage()}" ></h4>
+
+
+            <label class="form-label" for="passwordConfirm">Potwierdz hasło: </label>
+            <div class="form-div-login">
+                <input class="form-input-login" id="passwordConfirm" type="password" required name="passwordConfirm"
+                       th:field="*{passwordConfirm}"/>
+            </div>
+            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('passwordConfirm')}" th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
+
+            <div class="form-div-logbtn">
+                <input class="btn btn-warning form-button-save" type="submit" value="Zarejestruj"/>
+            </div>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 import pl.sda.library.domain.model.Role;
 import pl.sda.library.domain.model.User;
 
@@ -15,7 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+@Validated
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -27,7 +28,7 @@ class UserDto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    private String login;
+    private String username;
     private String password;
     private String name;
     @Enumerated(EnumType.STRING)
@@ -36,7 +37,7 @@ class UserDto {
     User toDomain() {
         User user = new User();
         user.setId(getId());
-        user.setLogin(getLogin());
+        user.setUsername(getUsername());
         user.setPassword(getPassword());
         user.setName(getName());
         user.setRole(getRole());
@@ -47,7 +48,7 @@ class UserDto {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setName(user.getName());
-        userDto.setLogin(user.getLogin());
+        userDto.setUsername(user.getUsername());
         userDto.setPassword(user.getPassword());
         userDto.setRole(user.getRole());
         return userDto;

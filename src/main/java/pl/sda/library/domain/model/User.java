@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class User {
     private Long id;
-    private String login;
+    private String username;
     private String password;
     private String name;
     private Role role;
+    private String passwordConfirm;
 }

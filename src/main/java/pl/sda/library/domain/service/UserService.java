@@ -17,7 +17,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public Long addUser(User user){
-        Optional<User> optionalUser = userRepository.findByLogin(user.getLogin());
+        Optional<User> optionalUser = userRepository.findByLogin(user.getUsername());
         if (optionalUser.isPresent()) {
             throw new UserAlreadyExistException(user);
         }
@@ -47,6 +47,14 @@ public class UserService {
             throw new UserDoesNotExistException(id);
         }
             return userById.get();
+    }
+
+    public User findUserByUserName(String username) {
+        Optional<User> userByUserName = userRepository.findByLogin(username);
+        if (!userByUserName.isPresent()) {
+            throw new UserDoesNotExistException(username);
+        }
+        return userByUserName.get();
     }
 
     public List<User> findAllUsers(){
