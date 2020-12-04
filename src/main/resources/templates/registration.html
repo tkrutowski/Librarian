@@ -25,14 +25,14 @@
             <div class="form-div-login">
                 <input class="form-input-login" id="name" type="text" name="name" required th:field="*{name}"/>
             </div>
-            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('name')}" >Pole nie może być puste.</h4>
+            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('name')}" th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
 
 
             <label class="form-label" for="username">Login: </label>
             <div class="form-div-login">
                 <input class="form-input-login" id="username" type="text" name="username" required th:field="*{username}"/>
             </div>
-            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('username')}" >Pole nie może być puste.</h4>
+            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('username')}" th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
 
 
             <label class="form-label" for="password">Hasło: </label>
@@ -40,7 +40,7 @@
                 <input class="form-input-login" id="password" type="password" required name="password"
                        th:field="*{password}"/>
             </div>
-            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('password')}" >Pole nie może być puste.</h4>
+            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('password')}" th:text="${#fields.detailedErrors().get(0).getMessage()}" ></h4>
 
 
             <label class="form-label" for="passwordConfirm">Potwierdz hasło: </label>
@@ -48,7 +48,7 @@
                 <input class="form-input-login" id="passwordConfirm" type="password" required name="passwordConfirm"
                        th:field="*{passwordConfirm}"/>
             </div>
-            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('passwordConfirm')}" >Hasła są różne.</h4>
+            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('passwordConfirm')}" th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
 
             <div class="form-div-logbtn">
                 <input class="btn btn-warning form-button-save" type="submit" value="Zarejestruj"/>

@@ -48,6 +48,13 @@ public class BookstoreService {
         return bookstoreById.get();
     }
 
+    public Bookstore findBookstoreByName(String name) {
+        Optional<Bookstore> bookstoreByName = bookstoreRepository.findByName(name);
+        if (!bookstoreByName.isPresent()) {
+            throw new BookstoreDoesNotExistException(name);
+        }
+        return bookstoreByName.get();
+    }
     public List<Bookstore> findAllBookstores() {
         return bookstoreRepository.findAll();
     }
