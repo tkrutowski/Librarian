@@ -70,3 +70,9 @@
     /*border: 1px solid #CCC;*/
     height: 34px;
 }
+
+/*book*/
+.book_picture{
+    border-style: none;
+    margin-top: 60px;
+}

@@ -17,7 +17,7 @@
                     <option th:each="b : ${bookList}" th:value="${b.idBook}"
                             th:text="${b.title + ', ' + b.subtitle + ' Autor: ' + b.authors}"></option>
                 </select>
-                <a  class="btn btn-warning form-button" th:href="@{/book}">Wyszukaj</a>
+                <a  class="btn btn-warning form-button" th:href="@{/books}">Wyszukaj</a>
             </div>
 
             <label class="form-label"  for="bookstore">Księgarnia: </label>
@@ -65,7 +65,7 @@
             </div>
 
             <div class="form-div-save">
-                <input class="btn btn-warning form-button-save"  type="submit" value="Zapisz książkę"/>
+                <input class="btn btn-warning form-button-save"  type="submit" value="Dodaj książkę"/>
             </div>
 
         </div>

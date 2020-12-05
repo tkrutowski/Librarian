@@ -8,7 +8,7 @@
 <div th:replace="fragments/head :: js-script" th:remove="tag"></div>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
-    <h4 class="bg-warning font-weight-bold info-reading-status">Dodaj nową książkę</h4>
+    <h4 class="bg-warning font-weight-bold info-reading-status">Wyszukaj nową książkę</h4>
 </div>
 <div class="container">
     <form th:object="${url}" method="post">
@@ -16,7 +16,7 @@
            <label class="form-label" for="url">Url książki upolujebooka:</label>
             <div class="form-div ">
                 <input class="form-select" id ="url" type="text" th:name="url" required />
-                <input class="btn btn-warning form-button" type="submit" value="Dodaj"/>
+                <input class="btn btn-warning form-button" type="submit" value="Wyszukaj"/>
             </div>
             <br>
         </div>

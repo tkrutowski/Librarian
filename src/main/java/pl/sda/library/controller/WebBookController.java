@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping("/book")
+@RequestMapping("/books")
 public class WebBookController {
     BookService bookService;
 
@@ -28,7 +28,8 @@ public class WebBookController {
         model.addAttribute(new Book());
         if ((book.getAuthors() != null )||(book.getTitle() != null) ){
             bookService.addBook(book);
-            return "redirect:/userbooks";
+         //   return "redirect:/userbooks";//
+            return "book";//
         }
         if (url != null){
             model.addAttribute("bookFromUrl", UpolujebookaScrapper.findBookFromUrl(url));

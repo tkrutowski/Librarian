@@ -7,13 +7,13 @@
 <body>
 <div th:fragment="book-add">
     <div class="container">
-        <h4 class="bg-warning font-weight-bold info-reading-status">Opis:</h4>
+        <h4 class="bg-warning font-weight-bold info-reading-status" style="margin-top: 30px">Opis:</h4>
     </div>
     <div class="container">
         <form th:object="${book}" method="post">
             <div class="container">
                 <div class="container-child">
-                    <label class="form-label" for="authors">Autor/-zy:</label>
+                    <label class="form-label" for="authors">Autorzy:</label>
                     <div class="form-div">
                         <input class="form-select" id="authors" type="text" name="authors"  th:value="${bookFromUrl?.authors}" required/>
                     </div>
@@ -33,6 +33,12 @@
                         <input class="form-select" id="series" type="text" name="series" th:value="${bookFromUrl?.series}" />
                     </div>
 
+                    <label class="form-label" for="bookInSeriesNo">Numer książki w serii:</label>
+                    <div class="form-div">
+                        <input class="form-select" id="bookInSeriesNo" type="text" name="bookInSeriesNo" th:value="${bookFromUrl?.bookInSeriesNo}" />
+
+                    </div>
+
                     <label class="form-label" for="categories">Kategoria:</label>
                     <div class="form-div">
                         <input class="form-select" id="categories" type="text" name="categories" th:value="${bookFromUrl?.categories}" />
@@ -41,23 +47,24 @@
                     <label class="form-label" for="description">Opis:</label>
                     <div class="form-div">
                         <input class="form-select" id="description" type="text" name="description" th:value="${bookFromUrl?.description}">
+<!--                        <textarea  id="description"  rows="5"  style="width: 500px"-->
+<!--                                   th:text="${bookFromUrl?.description}"  th:field="*{description}">-->
+<!--            </textarea>-->
                     </div>
 
-                    <label class="form-label" for="bookInSeriesNo">Numer książki w serii:</label>
-                    <div class="form-div">
-                        <input class="form-select" id="bookInSeriesNo" type="text" name="bookInSeriesNo" th:value="${bookFromUrl?.bookInSeriesNo}" />
-                    </div>
+
 
                     <input type="hidden" name="cover" th:value="${bookFromUrl?.cover}">
-                    <div class="form-div-save">
-                        <input class="btn btn-warning form-button-save" type="submit" value="Dodaj"/>
-                    </div>
+
                 </div>
                 <div class="container-child">
                     <img class="book_picture" th:src="${bookFromUrl?.cover}">
                 </div>
-
+                <div class="form-div-save" style="width: 80%">
+                    <input class="btn btn-warning form-button-save" type="submit" value="Zapisz"/>
+                </div>
             </div>
+
         </form>
     </div>
 </div>

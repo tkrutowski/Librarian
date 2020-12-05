@@ -58,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/bookstores/delete/**","/authors/delete/**").hasRole("ADMIN")
                 .antMatchers("/bookstores","/authors").hasAnyRole("ADMIN","USER")
                 .antMatchers("/userbooks","/userbooks/**").hasRole("USER")
+                .antMatchers("/users","/books/**").hasRole("USER")
                 .antMatchers("/**","/login*").permitAll()
                 .anyRequest().authenticated()
                 .and()
