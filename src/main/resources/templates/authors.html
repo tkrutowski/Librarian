@@ -1,41 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="table.css">
-    <title>Lista autorów</title>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+
 </head>
-<style>
 
-</style>
 <body>
+<div th:replace="fragments/head :: js-script" th:remove="tag">
 
-<h2>Dodaj autora</h2>
-<form action="#" th:object="${author}" method="post">
-    <input type="hidden" />
-    <p>Imię: <input type="text" th:field="*{firstName}" required /></p>
-    <p>Nazwisko: <input type="text" th:field="*{lastName}" required/></p>
-    <input type="submit" value="Dodaj"/>
-    <input type="reset" value="Wyczyść" />
-</form>
-<h1>Lista autorów</h1>
-<table class="content-table">
-    <thead>
+</div>
+<div th:replace="fragments/header :: header">
+
+</div>
+
+
+<h4 class="bg-warning font-weight-bold info-reading-status">Autorzy</h4>
+<div class="container">
+
+
+    <form action="#" th:object="${author}" method="post">
+        <div class="container" style="width: 400px;">
+
+            <label class="form-label" for="firstname">Imię: </label>
+            <div class="form-div-login">
+                <input class="form-input-login" id="firstname" name="firstname" type="text" th:field="*{firstName}"
+                       required/>
+            </div>
+            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('firstName')}"
+                th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
+
+            <label class="form-label" for="lastname">Imię: </label>
+            <div class="form-div-login">
+                <input class="form-input-login" id="lastname" name="lastname" type="text" th:field="*{lastName}"
+                       required/>
+            </div>
+            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('lastName')}"
+                th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
+
+            <div class="form-div-logbtn">
+                <input class="btn btn-warning form-button-save" type="submit" value="Zapisz"/>
+            </div>
+
+        </div>
+        <!--    <input type="hidden" />-->
+        <!--    <p>Imię: <input type="text" th:field="*{firstName}" required /></p>-->
+        <!--    <p>Nazwisko: <input type="text" th:field="*{lastName}" required/></p>-->
+        <!--    <input type="submit" value="Dodaj"/>-->
+        <!--    <input type="reset" value="Wyczyść" />-->
+    </form>
+    <h1>Lista autorów</h1>
+    <table class="content-table">
+        <thead>
         <tr>
             <th style="width: 30px;" align="left">Id</th>
             <th style="width: 150px;" align="left">Imię</th>
             <th style="width: 200px;" align="left">Nazwisko</th>
             <th style="width: 30px;" align="left">Akcja</th>
         </tr>
-    </thead>
-    <tbody>
-    <tr th:each="author: ${authorList}">
-        <td th:text="${author.id}"></td>
-        <td th:text="${author.firstName}"></td>
-        <td th:text="${author.lastName}"></td>
-        <td><a th:href="@{/authors/delete/{id}(id=${author.id})}" class="btn btn-danger">usuń</a></td>
-    </tr>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <tr th:each="author: ${authorList}">
+            <td th:text="${author.id}"></td>
+            <td th:text="${author.firstName}"></td>
+            <td th:text="${author.lastName}"></td>
+            <td><a th:href="@{/authors/delete/{id}(id=${author.id})}" class="btn btn-danger table-button">usuń</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

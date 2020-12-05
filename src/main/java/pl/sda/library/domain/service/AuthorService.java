@@ -52,4 +52,12 @@ public class AuthorService {
         }
         return authorById.get();
     }
+
+    public Author findAuthor(String firstName, String lastName) {
+        Optional<Author> authorById = authorRepository.findByFirstNameAndLastName(firstName, lastName);
+        if (!authorById.isPresent()) {
+            throw new AuthorDoesNotExistException(firstName + ' ' + lastName);
+        }
+        return authorById.get();
+    }
 }

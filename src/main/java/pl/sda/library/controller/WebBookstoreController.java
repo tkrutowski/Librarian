@@ -26,7 +26,7 @@ public class WebBookstoreController {
 
     private BookstoreService bookstoreService;
     private BookstoreValidator bookstoreValidator;
-    UserService userService;
+    private UserService userService;
 
     @GetMapping
     public String getAllBookstores(Model model) {
@@ -37,7 +37,7 @@ public class WebBookstoreController {
     }
 
     @PostMapping
-    public String registration(@ModelAttribute("bookstore") Bookstore bookstoreForm, BindingResult bindingResult) {
+    public String addBookstore(@ModelAttribute("bookstore") Bookstore bookstoreForm, BindingResult bindingResult) {
         bookstoreValidator.validate(bookstoreForm, bindingResult);
 
         if (bindingResult.hasErrors()) {

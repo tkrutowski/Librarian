@@ -24,6 +24,7 @@ public class BookstoreValidator implements Validator {
         Bookstore bookstore = (Bookstore) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty","Pole nie może być puste.");
 
+
         if (!errors.hasErrors()) {
             try {
                 bookstoreService.findBookstoreByName(bookstore.getName());

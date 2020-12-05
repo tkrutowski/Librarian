@@ -19,7 +19,6 @@
     <form action="#" th:object="${bookstore}" method="post">
         <div class="container" style="width: 400px;">
 
-            <!--            <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('name')}" >Pole nie może być puste.</h4>-->
             <label class="form-label" for="name">Nazwa: </label>
             <div class="form-div-login">
                 <input class="form-input-login" id="name" type="text" name="name" required th:field="*{name}"/>
