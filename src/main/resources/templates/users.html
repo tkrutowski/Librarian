@@ -1,45 +1,25 @@
 <!DOCTYPE html>
-<html lang="pl" >
-<head>
-    <meta charset="UTF-8">
-    <title>Dodawanie użytkownika</title>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
 </head>
+
 <body>
-<h2>Dodawanie użytkownika</h2>
-<br>
+<div th:replace="fragments/head :: js-script" th:remove="tag">
 
-<!--<form th:object="${user}" method="post">-->
+</div>
+<div th:replace="fragments/header :: header">
 
-<!--    <label for="login">Login: </label>-->
-<!--    <input id="login" type="text" required th:field="*{login}"/>-->
-<!--    <br>-->
-<!--    <br>-->
+</div>
 
-<!--    <label for="password">Password: </label>-->
-<!--    <input id="password" type="password" required-->
-<!--           th:field="*{password}"/>-->
-<!--    <br>-->
-<!--    <br>-->
+<div class="container">
+    <h4 class="bg-warning font-weight-bold info-reading-status">Zarządzanie użytkownikami</h4>
 
 
-<!--    <label for="name">Nazwa: </label>-->
-<!--    <input id="name" type="text" required th:field="*{name}"/>-->
-<!--    <br>-->
-<!--    <br>-->
+    <!--    <h4 class="bg-warning font-weight-bold info-reading-status" >UNDER CONSTRUCTION</h4>-->
+    <h1>UNDER CONSTRUCTION</h1>
+    <img src="library-uc.jpg" style="width: inherit; padding: 0 150px 150px 150px">
 
-<!--    <label for="role">Rola: </label>-->
-<!--    <select id="role" required th:field="*{role}">-->
-<!--        <option th:each="r : ${roles}" th:value="${r}" th:text="${r}"></option>-->
-<!--    </select>-->
-<!--    <br>-->
-<!--    <br>-->
-
-<!--    <input type="submit" value="Dodaj"/>-->
-<!--</form>-->
-<br>
-<br>
-<br>
-
+</div>
 
 </body>
 </html>

@@ -17,7 +17,7 @@
 <div class="container">
 
 
-    <form action="#" th:object="${author}" method="post">
+    <form  th:object="${author}" method="post">
         <div class="container" style="width: 400px;">
 
             <label class="form-label" for="firstname">Imię: </label>
@@ -28,7 +28,7 @@
             <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('firstName')}"
                 th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
 
-            <label class="form-label" for="lastname">Imię: </label>
+            <label class="form-label" for="lastname">Nazwisko: </label>
             <div class="form-div-login">
                 <input class="form-input-login" id="lastname" name="lastname" type="text" th:field="*{lastName}"
                        required/>

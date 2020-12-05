@@ -46,10 +46,11 @@
 
                     <label class="form-label" for="description">Opis:</label>
                     <div class="form-div">
-                        <input class="form-select" id="description" type="text" name="description" th:value="${bookFromUrl?.description}">
-<!--                        <textarea  id="description"  rows="5"  style="width: 500px"-->
-<!--                                   th:text="${bookFromUrl?.description}"  th:field="*{description}">-->
-<!--            </textarea>-->
+                        <input class="form-select" id="description" type="text" name="description" th:value="${bookFromUrl?.description}" hidden>
+                        <textarea  id="description"  rows="5"  style="width: 500px"
+                                   th:text="${bookFromUrl?.description}">
+<!--                                   th:inline="${bookFromUrl?.description}">-->
+            </textarea>
                     </div>
 
 
