@@ -17,7 +17,7 @@ public class BookstoreRepositoryAdapter implements BookstoreRepository {
 
     @Override
     public Long add(Bookstore bookstore) {
-        return bookstoreDtoRepository.save(BookstoreDto.fromDomain(bookstore)).getIdBookstore();
+        return bookstoreDtoRepository.save(BookstoreDto.fromDomain(bookstore)).getId();
     }
 
     @Override

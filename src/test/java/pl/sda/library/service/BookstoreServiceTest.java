@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.library.LibraryApplication;
 import pl.sda.library.domain.model.Bookstore;
 import pl.sda.library.domain.model.exception.BookstoreAlreadyExistException;
@@ -22,6 +23,7 @@ public class BookstoreServiceTest {
     BookstoreService bookstoreService;
 
     @Test
+    @Transactional
     public void should_return_true_when_bookstore_added() {
         //when
         Bookstore bookstore = new Bookstore(null, "Helion", "www.helion.pl");
@@ -34,6 +36,7 @@ public class BookstoreServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_size__plus_3_when_3_authors_added() {
         //when
         final int SIZE = bookstoreService.findAllBookstores().size() + 3;
@@ -49,10 +52,12 @@ public class BookstoreServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_size__minus_1_when_one_author_deleted() {
         //when
-        final int SIZE = bookstoreService.findAllBookstores().size() - 1;
-        bookstoreService.deleteBookstore(3L);
+        final int SIZE = bookstoreService.findAllBookstores().size();
+        Long id = bookstoreService.addBookstore(new Bookstore(null, "Gandalf32333", "www.gandalf.com"));
+        bookstoreService.deleteBookstore(id);
 
         //given
         int result = bookstoreService.findAllBookstores().size();
@@ -62,6 +67,7 @@ public class BookstoreServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_throw_BookstoreAlreadyExistException_when_bookstore_already_exist() {
         //when
         Bookstore bookstore = new Bookstore(10L, "Gandalf33", "www.gandalf.com");
@@ -72,6 +78,7 @@ public class BookstoreServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_changed_name_while_edit() {
         //when
         Bookstore bookstore = new Bookstore(null, "Arsenał2", "www.arsenal.com");
@@ -87,13 +94,14 @@ public class BookstoreServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_throw_BookstoreDoesNotExistException_when_bookstore_doesnt_exist() {
         //when
         Bookstore bookstore = new Bookstore(null, "Arsenał", "www.arsenal.com");
         Long id = bookstoreService.addBookstore(bookstore);
         Bookstore toEdit = bookstoreService.findBookstore(id);
         Long notExistID = 0L;
-        toEdit.setIdBookstore(0L);
+        toEdit.setId(0L);
         toEdit.setName("Arsenał22");
 
         //then
@@ -101,6 +109,7 @@ public class BookstoreServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_changed_www_while_edit() {
         //when
         Bookstore bookstore = new Bookstore(10L, "Gandalf", "www.gandalf.com");

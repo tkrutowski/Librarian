@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.library.LibraryApplication;
 import pl.sda.library.domain.model.Role;
 import pl.sda.library.domain.model.User;
@@ -24,6 +25,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
+    @Transactional
     public void should_return_id_bigger_then_when_user_added() {
         //when
         User user = new User(null, "admin10", "password", "name10", Role.ADMIN,"");
@@ -36,6 +38,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_throw_ObjectAlreadyExistException_when_author_already_exist() {
         //when
         User user = new User(null, "user", "password1", "name1", Role.USER,"");
@@ -46,6 +49,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_changed_password_while_edit() {
         //when
         User user = new User(null, "login2", "password2", "name2", Role.USER,"");
@@ -61,6 +65,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_changed_name_while_edit() {
         //when
         User user = new User(null, "login3", "password3", "name3", Role.USER,"");
@@ -76,6 +81,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_throw_UserDoesNotExistException() {
         //when
         User user = new User(null, "login4", "password4", "name4", Role.USER,"");
@@ -89,6 +95,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_size__plus_2_when_2_users_added() {
         //when
         final int SIZE = userService.findAllUsers().size() + 2;
@@ -103,6 +110,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_size__minus_1_when_one_user_deleted() {
         //when
         final int SIZE = userService.findAllUsers().size() - 1;

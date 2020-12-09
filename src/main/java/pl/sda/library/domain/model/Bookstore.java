@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Bookstore {
-    private Long idBookstore;
+    private Long id;
     private String name;
     private String url;
 }

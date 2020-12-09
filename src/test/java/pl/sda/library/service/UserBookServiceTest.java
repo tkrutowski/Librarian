@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.library.LibraryApplication;
 import pl.sda.library.domain.model.EditionType;
 import pl.sda.library.domain.model.OwnershipStatus;
@@ -26,6 +27,7 @@ public class UserBookServiceTest {
     UserBookService userBookService;
 
     @Test
+    @Transactional
     public void should_return_true_when_equal() {
         //when
         UserBook userBook = createUserBook();
@@ -39,9 +41,10 @@ public class UserBookServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_size_plus_1_when_1_book_added() {
         //when
-        UserBook userBook = createUserBook1();
+        UserBook userBook = createUserBook();
         final long id = userBookService.findAllUserBooks().size();
         userBookService.addUserBook(userBook);
 
@@ -53,9 +56,10 @@ public class UserBookServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_add_book_to_db() {
         //when
-        UserBook userBook = createUserBook2();
+        UserBook userBook = createUserBook();
 
         //then
         Long resultId = userBookService.addUserBook(userBook).getId();
@@ -64,9 +68,10 @@ public class UserBookServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_throw_UserBookAlreadyExistException_when_added_userBook_already_exist() {
         //when
-        UserBook userBook = createUserBook3();
+        UserBook userBook = createUserBook();
         userBookService.addUserBook(userBook);
         ;
 
@@ -77,7 +82,7 @@ public class UserBookServiceTest {
 
     private UserBook createUserBook() {
         UserBook userBook = new UserBook();
-        userBook.setIdBook(1L);
+        userBook.setIdBook(17L);
         userBook.setIdUser(1L);
         userBook.setBookstore("Empik");
         userBook.setEditionType(EditionType.AUDIOBOOK);
@@ -88,46 +93,5 @@ public class UserBookServiceTest {
         userBook.setInfo("Jakies info");
         return userBook;
     }
-
-    private UserBook createUserBook1() {
-        UserBook userBook = new UserBook();
-        userBook.setIdBook(1L);
-        userBook.setIdUser(1L);
-        userBook.setBookstore("Empik");
-        userBook.setEditionType(EditionType.EBOOK);
-        userBook.setReadingStatus(ReadingStatus.NOT_READ);
-        userBook.setOwnershipStatus(OwnershipStatus.READ_ONLY);
-//        userBook.setReadFrom();
-//        userBook.setReadTo();
-        userBook.setInfo("Jakies info");
-        return userBook;
-    }
-
-    private UserBook createUserBook2() {
-        UserBook userBook = new UserBook();
-        userBook.setIdBook(2L);
-        userBook.setIdUser(1L);
-        userBook.setBookstore("Empik");
-        userBook.setEditionType(EditionType.EBOOK);
-        userBook.setReadingStatus(ReadingStatus.NOT_READ);
-        userBook.setOwnershipStatus(OwnershipStatus.READ_ONLY);
-//        userBook.setReadFrom();
-//        userBook.setReadTo();
-        userBook.setInfo("Jakies info");
-        return userBook;
-    }
-
-    private UserBook createUserBook3() {
-        UserBook userBook = new UserBook();
-        userBook.setIdBook(2L);
-        userBook.setIdUser(1L);
-        userBook.setBookstore("Empik");
-        userBook.setEditionType(EditionType.BOOK);
-        userBook.setReadingStatus(ReadingStatus.NOT_READ);
-        userBook.setOwnershipStatus(OwnershipStatus.READ_ONLY);
-//        userBook.setReadFrom();
-//        userBook.setReadTo();
-        userBook.setInfo("Jakies info");
-        return userBook;
-    }
+//
 }

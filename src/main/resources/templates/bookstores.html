@@ -48,10 +48,10 @@
         </thead>
         <tbody>
         <tr th:each="bookstore: ${bookstoreList}">
-            <td th:text="${bookstore.idBookstore}"></td>
+            <td th:text="${bookstore.getId}"></td>
             <td th:text="${bookstore.name}"></td>
             <td><a th:href="@{http://{url}(url=${bookstore.url})}" th:text="${bookstore.url}" target="_blank"></a></td>
-            <td><a th:href="@{/bookstores/delete/{id}(id=${bookstore.idBookstore})}"
+            <td><a th:href="@{/bookstores/delete/{id}(id=${bookstore.getId})}"
                    class="btn btn-danger table-button">usuń</a>
             </td>
         </tr>

@@ -18,7 +18,7 @@ class BookDtoCreator {
 
     BookDto fromDomain(Book book) {
         BookDto bookDto = new BookDto();
-        bookDto.setId(book.getIdBook());
+        bookDto.setId(book.getId());
         bookDto.setSeries(getSeriesFromString(book.getSeries()));
         bookDto.setAuthors(getAuthorsFromString(book.getAuthors()));
         bookDto.setCategories(getCategoriesFromString(book.getCategories()));
@@ -76,5 +76,12 @@ class BookDtoCreator {
             }
         }
         return categoryDtos;
+    }
+
+    private AuthorDto validAuthor(String author){
+        AuthorDto authorDto = new AuthorDto();
+
+
+        return authorDto;
     }
 }

@@ -82,7 +82,7 @@ public class UserBookService {
     public List<UserBook> findAllUserBooksBySeries(List<Book> bookList) {
         return userBookRepository.findAll().stream()
                 .filter(userBook -> bookList.stream()
-                        .anyMatch(book -> book.getIdBook() == userBook.getIdBook()))
+                        .anyMatch(book -> book.getId() == userBook.getIdBook()))
                 .collect(Collectors.toList());
     }
 }

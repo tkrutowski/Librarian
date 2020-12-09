@@ -28,7 +28,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "userbook")
+@Table(name = "userbooks")
 class UserBookDto {
 
     @Id
@@ -74,7 +74,7 @@ class UserBookDto {
     UserBook toDomain() {
         UserBook userBook = new UserBook();
         userBook.setId(getId());
-        userBook.setIdBook(book.getId());
+        userBook.setIdBook(getBook().getId());
         userBook.setIdUser(getUser().getId());
         userBook.setBookstore(getBookstore().getName());
         userBook.setEditionType(getEditionType());

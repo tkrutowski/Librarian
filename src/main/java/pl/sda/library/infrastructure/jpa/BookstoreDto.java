@@ -20,14 +20,14 @@ import javax.persistence.Table;
 class BookstoreDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_bookstore")
-    private Long idBookstore;
+    @Column(name = "id")
+    private Long id;
     private String name;
     private String url;
 
     Bookstore toDomain() {
         Bookstore bookstore = new Bookstore();
-        bookstore.setIdBookstore(getIdBookstore());
+        bookstore.setId(getId());
         bookstore.setName(getName());
         bookstore.setUrl(getUrl());
         return bookstore;
@@ -35,7 +35,7 @@ class BookstoreDto {
 
     static BookstoreDto fromDomain(Bookstore bookstore) {
         BookstoreDto bookstoreDto = new BookstoreDto();
-        bookstoreDto.setIdBookstore(bookstore.getIdBookstore());
+        bookstoreDto.setId(bookstore.getId());
         bookstoreDto.setName(bookstore.getName());
         bookstoreDto.setUrl(bookstore.getUrl());
         return bookstoreDto;

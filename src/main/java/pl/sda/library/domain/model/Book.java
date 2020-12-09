@@ -16,7 +16,7 @@ import java.util.Objects;
 @Setter
 @ToString
 public class Book {
-    private Long idBook;
+    private Long id;
     private String series;
     private String authors;
     private String categories;

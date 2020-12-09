@@ -1,16 +1,20 @@
 package pl.sda.library.service;
 
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.library.LibraryApplication;
 import pl.sda.library.domain.model.exception.AuthorDoesNotExistException;
 import pl.sda.library.domain.service.AuthorService;
 import pl.sda.library.domain.model.exception.ObjectAlreadyExistException;
 import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
 import pl.sda.library.domain.model.Author;
+
 
 import static org.junit.Assert.*;
 
@@ -22,6 +26,7 @@ public class AuthorServiceTest {
     private AuthorService authorService;
 
     @Test
+    @Transactional
     public void should_return_id_bigger_than_zero_when_author_added() {
         //when
         Author author = new Author(null, "Johnny", "Doo");
@@ -34,6 +39,7 @@ public class AuthorServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_throw_ObjectAlreadyExistException_when_author_already_exist() {
         //when
         Author author = new Author(null, "John", "Doo");
@@ -44,6 +50,7 @@ public class AuthorServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_changed_firstName_while_edit() {
         //when
         Author author = new Author(null, "John2", "Doo2");
@@ -59,6 +66,7 @@ public class AuthorServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_throw_ObjectDoesNotExistException() {
         //when
         Author author = new Author(null, "John2", "Doo2");
@@ -72,6 +80,7 @@ public class AuthorServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_changed_lastName_while_edit() {
         //when
         Author author = new Author(null, "John3", "Doo3");
@@ -87,6 +96,7 @@ public class AuthorServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_falsa_when_author_does_not_exist() {
         //when
         Author author = new Author(null, "John3", "Doo3");
@@ -101,6 +111,7 @@ public class AuthorServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_throw_AuthorDoesNotExistException_while_delete_no_exist_author() {
         //when
         Long id = 0L;
@@ -110,6 +121,7 @@ public class AuthorServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_size__plus_3_when_3_authors_added() {
         //when
         final int SIZE = authorService.findAllAuthors().size() + 3;
@@ -125,10 +137,13 @@ public class AuthorServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_size__minus_1_when_one_author_deleted() {
         //when
-        final int SIZE = authorService.findAllAuthors().size() - 1;
-        authorService.deleteAuthor(3L);
+        final int SIZE = authorService.findAllAuthors().size() ;
+        Long id = authorService.addAuthor(new Author(null, "Jim", "Carey"));
+
+        authorService.deleteAuthor(id);
 
         //given
         int result = authorService.findAllAuthors().size();
@@ -136,4 +151,6 @@ public class AuthorServiceTest {
         //then
         assertEquals(SIZE, result);
     }
+
+
 }

@@ -63,7 +63,7 @@ class BookDto {
 
     Book toDomain() {
         Book book = new Book();
-        book.setIdBook(getId());
+        book.setId(getId());
         book.setSeries(series == null ? "" : getSeries().getTitle());
         book.setAuthors(getAuthorsAsString());
         book.setCategories(getCategoriesAsString());

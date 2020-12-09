@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.library.LibraryApplication;
 import pl.sda.library.domain.model.Series;
 import pl.sda.library.domain.model.exception.SeriesAlreadyExistException;
@@ -22,6 +23,7 @@ public class SeriesServiceTest {
     private SeriesService seriesService;
 
     @Test
+    @Transactional
     public void should_return_id_bigger_than_zero_when_series_added() {
         //when
         Series series = new Series(null, "Rambo", "Doo jakiś opis");
@@ -34,6 +36,7 @@ public class SeriesServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_throw_SeriesAlreadyExistException_when_series_already_exist() {
         //when
         Series series = new Series(null, "Commando", "Doo jakiś opis");
@@ -44,6 +47,7 @@ public class SeriesServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_changed_title_while_edit() {
         //when
         Series series = new Series(null, "Jack", "Doo jakiś opis");
@@ -59,6 +63,7 @@ public class SeriesServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_throw_SeriesDoesNotExistException_when_series_doesnt_exist() {
         //when
         Series series = new Series(null, "Piraci", "Doo jakiś opis");
@@ -73,6 +78,7 @@ public class SeriesServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_size__plus_2_when_2_serieses_added() {
         //when
         final int SIZE = seriesService.findAllSeries().size() + 2;
@@ -87,10 +93,12 @@ public class SeriesServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_size__minus_1_when_one_series_deleted() {
         //when
-        final int SIZE = seriesService.findAllSeries().size() - 1;
-        seriesService.deleteSeries(2L);
+        final int SIZE = seriesService.findAllSeries().size();
+        Long id = seriesService.addSeries(new Series(null, "test", "fsdfds"));
+        seriesService.deleteSeries(id);
 
         //given
         int result = seriesService.findAllSeries().size();

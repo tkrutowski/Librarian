@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.library.LibraryApplication;
 import pl.sda.library.domain.model.Category;
 import pl.sda.library.domain.service.CategoryService;
@@ -21,6 +22,7 @@ public class CategoryServiceTest {
     private CategoryService categoryService;
 
     @Test
+    @Transactional
     public void should_return_id_bigger_than_zero_when_category_added() {
         //when
         Category category = new Category(null,"Komedia");
@@ -32,6 +34,7 @@ public class CategoryServiceTest {
         assertNotEquals(java.util.Optional.of(0),result);
     }
     @Test
+    @Transactional
     public void should_throw_ObjectAlreadyExistException_when_category_already_exist()   {
         //when
         Category category = new Category(null,"Dramat");
@@ -41,6 +44,7 @@ public class CategoryServiceTest {
         assertThrows(ObjectAlreadyExistException.class, () -> categoryService.addCategory(category));
     }
     @Test
+    @Transactional
     public void should_return_changed_Name_while_edit()  {
         //when
         Category category = new Category(null,"Fantasy");
@@ -56,6 +60,7 @@ public class CategoryServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_throw_ObjectDoesNotExistException() {
         //when
         Category category = new Category(null, "SF");
@@ -69,6 +74,7 @@ public class CategoryServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_size__plus_2_when_2_categories_added() {
         //when
         final int SIZE = categoryService.findAllCategories().size() + 2;
@@ -83,10 +89,12 @@ public class CategoryServiceTest {
     }
 
     @Test
+    @Transactional
     public void should_return_size__minus_1_when_one_category_deleted() {
         //when
-        final int SIZE = categoryService.findAllCategories().size() - 1;
-        categoryService.deleteCategory(3L);
+        final int SIZE = categoryService.findAllCategories().size();
+        Long id = categoryService.addCategory(new Category(null, "Testowa"));
+        categoryService.deleteCategory(id);
 
         //given
         int result = categoryService.findAllCategories().size();
