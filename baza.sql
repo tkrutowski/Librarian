@@ -1,5 +1,5 @@
 
-CREATE DATABASE  IF NOT EXISTS `library` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_polish_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `library_test` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_polish_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 use library;
 
 
@@ -9,30 +9,30 @@ CREATE TABLE `users` (
   `password` VARCHAR(100) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `role` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id_user`));
+  PRIMARY KEY (`id`));
   
   CREATE TABLE `authors` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_author`));
+  PRIMARY KEY (`id`));
   
   CREATE TABLE `bookstores`  (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL UNIQUE,
-  `www` VARCHAR(100) NULL,
-  PRIMARY KEY (`id_bookstore`));
+  `url` VARCHAR(100) NULL,
+  PRIMARY KEY (`id`));
   
     CREATE TABLE `series` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL UNIQUE,
   `description` TEXT NULL,
-  PRIMARY KEY (`id_series`));
+  PRIMARY KEY (`id`));
   
     CREATE TABLE `categories` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL UNIQUE,
-   PRIMARY KEY (`id_category`));
+   PRIMARY KEY (`id`));
   
    CREATE TABLE `books` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
@@ -42,7 +42,7 @@ CREATE TABLE `users` (
   `description` TEXT NULL,
   `cover` VARCHAR(45) NULL,
   `book_in_series_no` TINYINT NULL DEFAULT 0,
-  PRIMARY KEY (`id_book`),
+  PRIMARY KEY (`id`),
    FOREIGN KEY (id_series) REFERENCES series(id)
   );
   
@@ -67,18 +67,20 @@ CREATE TABLE `users` (
   `id_book` BIGINT NOT NULL,
   `id_user` BIGINT NOT NULL,
   `id_bookstore` BIGINT NOT NULL,
-  `edition_type` VARCHAR(20) NULL,
-  `reading_status` VARCHAR(20) NULL,
-  `ownership_status` VARCHAR(20) NULL,
+  `edition_type` VARCHAR(20) NOT NULL,
+  `reading_status` VARCHAR(20) NOT NULL,
+  `ownership_status` VARCHAR(20) NOT NULL,
   `read_from` DATE NULL,
   `read_to` DATE NULL,
   `info` VARCHAR(200) NULL,
   PRIMARY KEY (`id`),
+  FOREIGN KEY (id_book) REFERENCES books(id),
   FOREIGN KEY (id_user) REFERENCES users(id),
   FOREIGN KEY (id_bookstore) REFERENCES bookstores(id)
   );
   
 SELECT * from authors;
+SELECT * from users;
 SELECT * from books;
 delete from authors where id_author>0;
 
@@ -91,8 +93,30 @@ delete from authors where id_author>0;
     INSERT INTO authors(first_name, last_name) VALUES('Evan', 'Currie' );
     
     select * from series;
-    
+    select * from categories;
+    delete from books where id=16;
       INSERT INTO users(username,password,name, role) VALUES('admin',/*1234*/'$2y$06$SWEQM5PNMs1psVa2FnRytuZvfeHO0Xnt2m0qXgGSPYPQnVBi5Z6Xy','administrator', 'ADMIN');
     INSERT INTO users(username,password,name, role) VALUES('test',/*'12345'*/'$2y$06$ACSryLuz9ojOffj/.ADPquYUHGTgoPq6mjXF24iAWG6YOvV5LYA2W','tom kru','USER');
     INSERT INTO users(username,password,name, role) VALUES('Tomek',/*'12345'*/'$2y$06$ACSryLuz9ojOffj/.ADPquYUHGTgoPq6mjXF24iAWG6YOvV5LYA2W','tom kru','USER');
     INSERT INTO users(username,password,name, role) VALUES('Paweł',/*'12345'*/'$2y$06$ACSryLuz9ojOffj/.ADPquYUHGTgoPq6mjXF24iAWG6YOvV5LYA2W','tom kru','USER');
+ 
+ INSERT INTO series(title, description) VALUES('Jack Reacher','dsfsdfs dfsfds ds sd s' );
+       INSERT INTO series(title, description) VALUES('The Frontires Saga','d55435 grtet sfsdfs dfsfds ds sd s' );
+       INSERT INTO series(title, description) VALUES('Odyssey One','d55435 grtet sfsdfs dfsfds ds sd s' );
+       
+        INSERT INTO bookstores(name, url) VALUES('Empik','www.empik.com' );
+       INSERT INTO bookstores(name, url) VALUES('PWN','www.pwn.pl' );
+       
+             INSERT INTO categories(name) VALUES('Thriller');
+        INSERT INTO categories(name) VALUES('Sensacja');
+        INSERT INTO categories(name) VALUES('Fantastyka');
+        INSERT INTO categories(name) VALUES('Science fiction');
+        INSERT INTO categories(name) VALUES('Kryminał');
+        
+        
+        INSERT INTO books(id_series,title,subtitle,description,cover,book_in_series_no)
+    VALUES(33,'Odyssey One', 'Ostatni bastion','Trzeci tom pasjonującego cyklu SF Evana Curie.','https://upolujebooka.pl/_data_cache/_data/offer/005/190_290_0_0_0_1_47751-odyssey_one_tom_3.jpg', 3);
+    insert into books_authors values (17,7);
+    insert into books_categories values (48,17);
+    insert into books_categories values (49,17);
+       

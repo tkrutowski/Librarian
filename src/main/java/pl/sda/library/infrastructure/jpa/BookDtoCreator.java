@@ -32,9 +32,9 @@ class BookDtoCreator {
 
     private SeriesDto getSeriesFromString(String series) {
         Optional<SeriesDto> seriesDtoByTitle = seriesDtoRepository.findSeriesDtoByTitle(series);
-        if (seriesDtoByTitle.isPresent()){
-            return seriesDtoByTitle.get();}
-        else {
+        if (seriesDtoByTitle.isPresent()) {
+            return seriesDtoByTitle.get();
+        } else {
             SeriesDto seriesDto = new SeriesDto();
             seriesDto.setTitle(series);
             seriesDto.setDescription(series);
@@ -47,16 +47,16 @@ class BookDtoCreator {
         Set<AuthorDto> authorDtos = new HashSet<>();
         String[] authorsList = authors.trim().split(",");
         for (String author : authorsList) {
-            String[] authorsSplit = author.trim().split(" ");
-            Optional<AuthorDto> authorDtoByFirstNameAndLastName = authorDtoRepository.findAuthorDtoByFirstNameAndLastName(authorsSplit[0], authorsSplit[1]);
+            AuthorDto validAuthor = validAuthor(author);
+//            String[] authorsSplit = author.trim().split(" ");
+            Optional<AuthorDto> authorDtoByFirstNameAndLastName = authorDtoRepository.findAuthorDtoByFirstNameAndLastName(validAuthor.getFirstName(), validAuthor.getLastName());
             if (authorDtoByFirstNameAndLastName.isPresent()) {
                 authorDtos.add(authorDtoByFirstNameAndLastName.get());
-            }
-            else {
-                AuthorDto newAuthorDto = new AuthorDto();
-                newAuthorDto.setFirstName(authorsSplit[0]);
-                newAuthorDto.setLastName(authorsSplit[1]);
-                authorDtos.add(authorDtoRepository.save(newAuthorDto));
+            } else {
+//                AuthorDto newAuthorDto = new AuthorDto();
+//                newAuthorDto.setFirstName(authorsSplit[0]);
+//                newAuthorDto.setLastName(authorsSplit[1]);
+                authorDtos.add(authorDtoRepository.save(validAuthor));
             }
         }
         return authorDtos;
@@ -68,8 +68,8 @@ class BookDtoCreator {
         for (String category : categoriesList) {
             Optional<CategoryDto> categoryDtoByName = categoryDtoRepository.findCategoryDtoByName(category.trim());
             if (categoryDtoByName.isPresent()) {
-                categoryDtos.add(categoryDtoByName.get());}
-            else {
+                categoryDtos.add(categoryDtoByName.get());
+            } else {
                 CategoryDto newCategoryDto = new CategoryDto();
                 newCategoryDto.setName(category);
                 categoryDtos.add(categoryDtoRepository.save(newCategoryDto));
@@ -78,10 +78,36 @@ class BookDtoCreator {
         return categoryDtos;
     }
 
-    private AuthorDto validAuthor(String author){
+    private AuthorDto validAuthor(String author) {
         AuthorDto authorDto = new AuthorDto();
+        String[] authorsSplit = author.trim().split(" ");
 
+        if (authorsSplit.length == 1) {
+            authorDto.setFirstName("");
+            authorDto.setLastName(authorsSplit[0]);
+        }
 
+        if (authorsSplit.length > 1) {
+            authorDto = author.lastIndexOf("-") > 0 ? getAuthorWithSeveralLastNames(author) : getAuthorWithSeveralFirstNames(author);
+        }
+
+        return authorDto;
+    }
+
+    private AuthorDto getAuthorWithSeveralFirstNames(String author) {
+        AuthorDto authorDto = new AuthorDto();
+        int i = author.lastIndexOf(" ");
+        authorDto.setFirstName(author.substring(0, i).trim());
+        authorDto.setLastName(author.substring(i).trim());
+        return authorDto;
+    }
+
+    private AuthorDto getAuthorWithSeveralLastNames(String author) {
+        AuthorDto authorDto = new AuthorDto();
+        int i = author.lastIndexOf("-");
+        authorDto = (getAuthorWithSeveralFirstNames(author.substring(0, i).trim()));
+
+        authorDto.setLastName(authorDto.getLastName()  + "-" + author.substring(i + 1).trim());
         return authorDto;
     }
 }
