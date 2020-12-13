@@ -3,6 +3,7 @@ package pl.sda.library.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.library.domain.model.Book;
 import pl.sda.library.domain.service.BookService;
@@ -24,17 +25,18 @@ public class WebBookController {
     }
 
     @PostMapping
-    public String addBook(String url, Book book, Model model) throws MalformedURLException {
-        model.addAttribute(new Book());
-        if ((book.getAuthors() != null )||(book.getTitle() != null) ){
-            bookService.addBook(book);
-         //   return "redirect:/userbooks";//
+    public String addBook(String url, @ModelAttribute("book") Book bookForm, Model model, BindingResult bindingResult) throws MalformedURLException {
+        model.addAttribute(UpolujebookaScrapper.findBookFromUrl(url));
+
+        if (bindingResult.hasErrors()) {
+            return "book";
+        }
+
+        if ((bookForm.getAuthors() != null )||(bookForm.getTitle() != null) ){
+            bookService.addBook(bookForm);
             return "book";//
         }
-        if (url != null){
-            model.addAttribute("bookFromUrl", UpolujebookaScrapper.findBookFromUrl(url));
-        }
-        model.addAttribute("bookList", bookService.findAllBooks());
+
         return "book";
     }
 

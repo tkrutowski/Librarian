@@ -15,51 +15,46 @@
                 <div class="container-child">
                     <label class="form-label" for="authors">Autorzy:</label>
                     <div class="form-div">
-                        <input class="form-select" id="authors" type="text" name="authors"  th:value="${bookFromUrl?.authors}" required/>
+                        <input class="form-select" id="authors" type="text" name="authors" th:value="${book?.authors}"
+                               required/>
                     </div>
 
                     <label class="form-label" for="title">Tytuł:</label>
                     <div class="form-div">
-                        <input class="form-select" id="title" type="text" name="title" th:value="${bookFromUrl?.title}" required />
-                    </div>
-
-                    <label class="form-label" for="subtitle">Podtytuł:</label>
-                    <div class="form-div">
-                        <input class="form-select" id="subtitle" type="text" name="subtitle" th:value="${bookFromUrl?.subtitle}" />
+                        <input class="form-select" id="title" type="text" name="title" th:value="${book?.title}"
+                               required/>
                     </div>
 
                     <label class="form-label" for="series">Seria:</label>
                     <div class="form-div">
-                        <input class="form-select" id="series" type="text" name="series" th:value="${bookFromUrl?.series}" />
+                        <input class="form-select" id="series" type="text" name="series" th:value="${book?.series}"/>
                     </div>
 
                     <label class="form-label" for="bookInSeriesNo">Numer książki w serii:</label>
                     <div class="form-div">
-                        <input class="form-select" id="bookInSeriesNo" type="text" name="bookInSeriesNo" th:value="${bookFromUrl?.bookInSeriesNo}" />
+                        <input class="form-select" id="bookInSeriesNo" type="number" name="bookInSeriesNo"
+                            min="0" max="99"  th:value="${book?.bookInSeriesNo}"/>
 
                     </div>
 
                     <label class="form-label" for="categories">Kategoria:</label>
                     <div class="form-div">
-                        <input class="form-select" id="categories" type="text" name="categories" th:value="${bookFromUrl?.categories}" />
+                        <input class="form-select" id="categories" type="text" name="categories"
+                               th:value="${book?.categories}"/>
                     </div>
 
                     <label class="form-label" for="description">Opis:</label>
                     <div class="form-div">
-                        <input class="form-select" id="description" type="text" name="description" th:value="${bookFromUrl?.description}" hidden>
-                        <textarea  id="description"  rows="5"  style="width: 500px"
-                                   th:text="${bookFromUrl?.description}">
-<!--                                   th:inline="${bookFromUrl?.description}">-->
+                        <textarea id="description" rows="5" style="width: 500px"
+                                  th:field="*{description}">
             </textarea>
                     </div>
-
-
 
                     <input type="hidden" name="cover" th:value="${bookFromUrl?.cover}">
 
                 </div>
                 <div class="container-child">
-                    <img class="book_picture" th:src="${bookFromUrl?.cover}">
+                    <img class="book_picture" src="/pictures/default-image.jpg" th:src="${book?.cover}">
                 </div>
                 <div class="form-div-save" style="width: 80%">
                     <input class="btn btn-warning form-button-save" type="submit" value="Zapisz"/>
