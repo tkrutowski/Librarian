@@ -51,15 +51,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
 
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/h2-console/**").permitAll();
+//        http.authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/h2-console/**").permitAll();
+//
+//        http.csrf().disable();
+//        http.headers().frameOptions().disable();
 
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
 
-
-      /*  http.csrf().disable()
+        http.csrf().disable()
                 .authorizeRequests()
 //                .antMatchers("/api/**").hasRole("ADMIN")
                 .antMatchers("/home").hasAnyRole("ADMIN","USER")
@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .and()
-                .exceptionHandling().accessDeniedPage("/error403");*/
+                .exceptionHandling().accessDeniedPage("/error403");
     }
 
     @Override

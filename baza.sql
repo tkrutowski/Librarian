@@ -78,8 +78,9 @@ CREATE TABLE `users` (
   FOREIGN KEY (id_user) REFERENCES users(id),
   FOREIGN KEY (id_bookstore) REFERENCES bookstores(id)
   );
-  
+  INSERT INTO users(username,password,name, role) VALUES('admin',/*1234*/'$2y$06$SWEQM5PNMs1psVa2FnRytuZvfeHO0Xnt2m0qXgGSPYPQnVBi5Z6Xy','administrator', 'ADMIN');
 SELECT * from authors;
+SELECT * from authors where first_name='rYK';
 SELECT * from users;
 SELECT * from books;
 delete from authors where id_author>0;
@@ -112,7 +113,7 @@ delete from authors where id_author>0;
         INSERT INTO categories(name) VALUES('Fantastyka');
         INSERT INTO categories(name) VALUES('Science fiction');
         INSERT INTO categories(name) VALUES('Kryminał');
-        
+        https://upolujebooka.pl/_data_cache/_data/offer/013/190_290_0_0_0_1_128754-legion_niesmiertelnych_3_swiat_postepu.jpg
         
         INSERT INTO books(id_series,title,subtitle,description,cover,book_in_series_no)
     VALUES(33,'Odyssey One', 'Ostatni bastion','Trzeci tom pasjonującego cyklu SF Evana Curie.','https://upolujebooka.pl/_data_cache/_data/offer/005/190_290_0_0_0_1_47751-odyssey_one_tom_3.jpg', 3);

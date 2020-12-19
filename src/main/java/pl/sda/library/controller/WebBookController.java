@@ -33,19 +33,19 @@ public class WebBookController {
         if (bookFromUrl.getTitle() == null || bookFromUrl.getTitle().isEmpty()) {
             modelAndView.addObject("bookError", true);
             modelAndView.setViewName("find-book");
+        } else {
+            modelAndView.addObject("book", bookFromUrl);
+            modelAndView.addObject("manual", false);
+            modelAndView.setViewName("book");
         }
-
-        modelAndView.addObject("book", bookFromUrl);
-        modelAndView.addObject("manual",false);
-        modelAndView.setViewName("book");
-        return modelAndView;
+            return modelAndView;
     }
 
     @GetMapping("/addManual")
     public ModelAndView addBooksManual() {
-        ModelAndView modelAndView=new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject(new Book());
-        modelAndView.addObject("manual",true);
+        modelAndView.addObject("manual", true);
         modelAndView.setViewName("book");
         return modelAndView;
     }
