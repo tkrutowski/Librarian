@@ -8,60 +8,75 @@
 <div th:fragment="book-add">
     <div class="container">
         <h4 class="bg-warning font-weight-bold info-reading-status" style="margin-top: 30px">Opis:</h4>
+
     </div>
     <div class="container">
-        <form th:object="${book}" method="post">
-            <div class="container">
-                <div class="container-child">
-                    <label class="form-label" for="authors">Autorzy:</label>
-                    <div class="form-div">
-                        <input class="form-select" id="authors" type="text" name="authors" th:value="${book?.authors}"
-                               required/>
-                    </div>
+        <form th:object="${book}" th:action="@{/books/add}" method="post">
+            <div class="container-child">
 
-                    <label class="form-label" for="title">Tytuł:</label>
-                    <div class="form-div">
-                        <input class="form-select" id="title" type="text" name="title" th:value="${book?.title}"
-                               required/>
-                    </div>
-
-                    <label class="form-label" for="series">Seria:</label>
-                    <div class="form-div">
-                        <input class="form-select" id="series" type="text" name="series" th:value="${book?.series}"/>
-                    </div>
-
-                    <label class="form-label" for="bookInSeriesNo">Numer książki w serii:</label>
-                    <div class="form-div">
-                        <input class="form-select" id="bookInSeriesNo" type="number" name="bookInSeriesNo"
-                            min="0" max="99"  th:value="${book?.bookInSeriesNo}"/>
-
-                    </div>
-
-                    <label class="form-label" for="categories">Kategoria:</label>
-                    <div class="form-div">
-                        <input class="form-select" id="categories" type="text" name="categories"
-                               th:value="${book?.categories}"/>
-                    </div>
-
-                    <label class="form-label" for="description">Opis:</label>
-                    <div class="form-div">
-                        <textarea id="description" rows="5" style="width: 500px"
-                                  th:field="*{description}">
-            </textarea>
-                    </div>
-
-                    <input type="hidden" name="cover" th:value="${bookFromUrl?.cover}">
-
+                <label class="form-label" for="title">Tytuł:</label>
+                <div class="form-div">
+                    <input class="form-select" id="title" style="width: inherit" type="text" name="title"
+                           th:value="${book?.title}"
+                           required/>
                 </div>
-                <div class="container-child">
-                    <img class="book_picture" src="/pictures/default-image.jpg" th:src="${book?.cover}">
+                <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('title')}"
+                    th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
+                <!--                <div class="container">-->
+
+                <label class="form-label" for="authors">Autorzy:</label>
+                <div class="form-div">
+                    <input class="form-select" id="authors" style="width: inherit" type="text" name="authors"
+                           th:value="${book?.authors}"
+                           required/>
                 </div>
+                <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('authors')}"
+                    th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
+
+                <label class="form-label" for="series">Seria:</label>
+                <div class="form-div">
+                    <input class="form-select" id="series" style="width: inherit" type="text" name="series"
+                           th:value="${book?.series}"/>
+                </div>
+
+                <label class="form-label" for="bookInSeriesNo">Numer książki w serii:</label>
+                <div class="form-div">
+                    <input class="form-select" id="bookInSeriesNo" style="width: inherit" type="number"
+                           name="bookInSeriesNo"
+                           min="0" max="99" th:value="${book?.bookInSeriesNo}"/>
+                </div>
+
+                <label class="form-label" for="categories">Kategoria:</label>
+                <div class="form-div">
+                    <input class="form-select" id="categories" style="width: inherit" type="text" name="categories"
+                           th:value="${book?.categories}" required/>
+                </div>
+                <h4 class="bg-danger font-weight-bold error" th:if="${#fields.hasErrors('categories')}"
+                    th:text="${#fields.detailedErrors().get(0).getMessage()}"></h4>
+
+                <label class="form-label" for="description">Opis:</label>
+                <div class="form-div">
+                        <textarea id="description" rows="5" style="width: inherit"
+                                  th:field="*{description}"> </textarea>
+                </div>
+
+                <label th:if="${manual}" class="form-label" for="cover">URL okładki:</label>
+                <div class="form-div" th:if="${manual}">
+                    <input class="form-select" style="width: inherit" name="cover" type="url" id="cover"
+                           th:value="${book?.cover}">
+                </div>
+                <input th:unless="${manual}" type="hidden" name="cover" th:value="${book?.cover}">
+
+
                 <div class="form-div-save" style="width: 80%">
                     <input class="btn btn-warning form-button-save" type="submit" value="Zapisz"/>
                 </div>
             </div>
 
         </form>
+        <div class="container-child">
+            <img class="book_picture" src="/pictures/default-image.jpg" th:src="${book?.cover}">
+        </div>
     </div>
 </div>
 </body>

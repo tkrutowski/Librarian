@@ -1,5 +1,5 @@
 
-CREATE DATABASE  IF NOT EXISTS `library_test` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_polish_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `library` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_polish_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 use library;
 
 
@@ -37,10 +37,10 @@ CREATE TABLE `users` (
    CREATE TABLE `books` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `id_series` BIGINT NULL,
-  `title` VARCHAR(45) NULL,
-  `subtitle` VARCHAR(45) NULL,
+  `title` VARCHAR(100) NULL,
+  `subtitle` VARCHAR(100) NULL,
   `description` TEXT NULL,
-  `cover` VARCHAR(45) NULL,
+  `cover` TEXT NULL,
   `book_in_series_no` TINYINT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
    FOREIGN KEY (id_series) REFERENCES series(id)

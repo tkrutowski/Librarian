@@ -35,7 +35,7 @@
 .form-div-save{
     width: 630px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 .form-button-save{
@@ -75,4 +75,5 @@
 .book_picture{
     border-style: none;
     margin-top: 60px;
+    height: 500px;
 }

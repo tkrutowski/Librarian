@@ -25,7 +25,7 @@ public class BookService {
         return bookRepository.add(book).get();
     }
 
-    private boolean isBookExist(Book book) {
+    boolean isBookExist(Book book) {
         boolean isExist = false;
         List<Book> allByTitle = bookRepository.findAllByTitle(book.getTitle());
         if(allByTitle.size() > 0) {
@@ -38,6 +38,8 @@ public class BookService {
         }
         return isExist;
     }
+
+
 
     public Book findBook(Long id) {
         Optional<Book> bookById = bookRepository.findById(id);

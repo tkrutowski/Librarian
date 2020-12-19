@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+
+</head>
+
+<body>
+<div th:replace="fragments/head :: js-script" th:remove="tag"></div>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <h4 class="bg-warning font-weight-bold info-reading-status">Wyszukaj nową książkę</h4>
+</div>
+<div class="container">
+    <h4 th:if="${bookError}" class="bg-danger font-weight-bold info-reading-status">Nie znaleziono książki.</h4>
+    <form th:object="${url}" action="/books/findBook" method="post">
+        <div class="container" style="width: 700px">
+            <label class="form-label" for="url">Url książki upolujebooka.pl:</label>
+            <div class="form-div ">
+                <input class="form-select" id="url" type="text" th:name="url" required/>
+                <input class="btn btn-warning form-button" type="submit" value="Wyszukaj"/>
+            </div>
+            <br>
+        </div>
+    </form>
+    <div style="display: flex; flex-direction: column; align-items: center">
+        <p>-- LUB --</p>
+        <a class="btn btn-warning form-button" style="width: auto" th:href="@{/books/addManual}">Wprowadź książkę ręcznie</a>
+    </div>
+</div>
+
+</body>
+</html>

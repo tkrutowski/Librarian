@@ -34,13 +34,12 @@ public class Book {
         return getBookInSeriesNo() == book.getBookInSeriesNo() &&
                 Objects.equals(getSeries(), book.getSeries()) &&
                 getAuthors().equals(book.getAuthors()) &&
-                getTitle().equals(book.getTitle()) &&
-                Objects.equals(getSubtitle(), book.getSubtitle());
+                getTitle().equals(book.getTitle());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSeries(), getAuthors(), getTitle(), getSubtitle(), getBookInSeriesNo());
+        return Objects.hash(getSeries(), getAuthors(), getTitle(), getBookInSeriesNo());
     }
 }
 
