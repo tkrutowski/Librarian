@@ -2,6 +2,8 @@ package pl.sda.library.service;
 
 import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ import pl.sda.library.domain.model.exception.ObjectAlreadyExistException;
 import pl.sda.library.domain.model.exception.ObjectDoesNotExistException;
 import pl.sda.library.domain.model.Author;
 
+
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
@@ -140,7 +145,7 @@ public class AuthorServiceTest {
     @Transactional
     public void should_return_size__minus_1_when_one_author_deleted() {
         //when
-        final int SIZE = authorService.findAllAuthors().size() ;
+        final int SIZE = authorService.findAllAuthors().size();
         Long id = authorService.addAuthor(new Author(null, "Jim", "Carey"));
 
         authorService.deleteAuthor(id);
@@ -152,5 +157,27 @@ public class AuthorServiceTest {
         assertEquals(SIZE, result);
     }
 
+    @ParameterizedTest
+    @MethodSource("generateData")
+    @Transactional
+    public void should_find_author_by_firstname_and_lastname(String firstname, String lastname) {
+        //when
+
+        Long id = authorService.addAuthor(new Author(null, "Brandon", "Sardenson"));
+
+        //given
+        Author author = authorService.findAuthor(firstname, lastname);
+
+        //then
+        assertEquals(id, author.getId());
+    }
+
+    static Stream<Arguments> generateData() {
+        return Stream.of(
+                Arguments.of("Brandon", "Sardenson"),
+                Arguments.of("brandon", "sardenson"),
+                Arguments.of("BRANDON", "SARDENSON")
+        );
+    }
 
 }

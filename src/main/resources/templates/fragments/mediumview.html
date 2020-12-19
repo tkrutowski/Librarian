@@ -7,7 +7,7 @@
 <div class="book_medium" th:each="ub : ${userBookList}" th:fragment="ub-largeview">
     <div  th:each="b : ${bookList}">
 
-        <div th:if="${b.idBook == ub.idBook}">
+        <div th:if="${b.id == ub.idBook}">
             <div class="book__medium-type">
                 <h2 th:text="${ub.editionType}"></h2>
             </div>
