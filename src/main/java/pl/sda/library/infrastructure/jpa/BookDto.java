@@ -58,7 +58,6 @@ class BookDto {
     private Set<CategoryDto> categories = new HashSet<>();
 
     private String title;
-    private String subtitle;
     @Column(columnDefinition = "TEXT")
     private String description;
     private String cover;
@@ -71,7 +70,6 @@ class BookDto {
         book.setAuthors(getAuthorsAsString());
         book.setCategories(getCategoriesAsString());
         book.setTitle(getTitle());
-        book.setSubtitle(getSubtitle());
         book.setDescription(getDescription());
         book.setCover(getCover());
         book.setBookInSeriesNo(getBookInSeriesNo());

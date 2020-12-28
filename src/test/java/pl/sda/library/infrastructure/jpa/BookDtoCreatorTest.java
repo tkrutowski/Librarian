@@ -101,7 +101,6 @@ public class BookDtoCreatorTest {
         book.setAuthors("Evan Currie");
         book.setCategories("Fantastyka, Science fiction");
         book.setTitle("Odyssey One");
-        book.setSubtitle("Rozgrywka w ciemno");
         book.setDescription("Korzystając z najnowszej technologii, umożliwiającej podróże międzygwiezdne, okręt badawczy „Odyseja” wyrusza w dziewiczy rejs.");
         book.setCover("www.costam2.pl");
         book.setBookInSeriesNo(1);

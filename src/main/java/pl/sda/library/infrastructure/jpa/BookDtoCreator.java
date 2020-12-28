@@ -23,7 +23,6 @@ class BookDtoCreator {
         bookDto.setAuthors(getAuthorsFromString(book.getAuthors()));
         bookDto.setCategories(getCategoriesFromString(book.getCategories()));
         bookDto.setTitle(book.getTitle());
-        bookDto.setSubtitle(book.getSubtitle());
         bookDto.setDescription(book.getDescription());
         bookDto.setCover(book.getCover());
         bookDto.setBookInSeriesNo(book.getBookInSeriesNo());

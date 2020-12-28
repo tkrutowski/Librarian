@@ -83,7 +83,6 @@ public class BookServiceTest {
         book.setAuthors("Ryk Brown, Jo Nesbo");
         book.setCategories("Fantastyka, Science fiction");
         book.setTitle("Aurora CV-01");
-        book.setSubtitle("brak");
         book.setDescription("Wyniszczony zarazą świat, który powstaje z kolan.");
         book.setCover("www.costam.pl");
         book.setBookInSeriesNo(0);

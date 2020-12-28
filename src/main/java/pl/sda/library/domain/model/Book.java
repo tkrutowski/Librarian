@@ -21,7 +21,6 @@ public class Book {
     private String authors;
     private String categories;
     private String title;
-    private String subtitle;
     private String description;
     private String cover;
     private int bookInSeriesNo;
