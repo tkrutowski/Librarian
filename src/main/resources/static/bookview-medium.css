@@ -21,11 +21,12 @@
 }
 
 .book__medium-all {
-    height: 330px;
+    height: 340px;
     margin: 5px 0 0 20px;
     width: 50%;
     justify-content: left;
     text-align: left;
+    overflow: auto;
 }
 
 
