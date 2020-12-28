@@ -14,17 +14,18 @@
             </div>
             <div style="float:left;">
 
-                <img class="book__large-picture"
-                     th:alt="${b.title + '   ' +b.subtitle}" th:src="${b.cover}"
+                <img th:if="${b.cover != null && b.cover != ''}" class="book__large-picture"
+                     th:alt="${b.title}" th:src="${b.cover}"
+                     align="center">
+
+                <img th:unless="${b.cover != null &&  b.cover != ''}" class="book__large-picture"
+                     th:alt="${b.title}" th:src="@{/images/no-cover.jpg}"
                      align="center">
             </div>
 
             <div class="book__large-all" style="float: left">
                 <h2 class="book__large-title" th:text="${b.title}"></h2>
-                <div class="book__large-subtitle">
-                    <p class="book__large-subtitle-sub">Podtytuł: </p>
-                    <p class="book__large-subtitle-sub book__large-subtitle-bold" th:text="${b.subtitle}"></p>
-                </div>
+
                 <div class="book__large-subtitle">
                     <p class="book__large-subtitle-sub">Autor: </p>
                     <p class="book__large-subtitle-sub book__large-subtitle-bold" th:text="${b.authors}"></p>
