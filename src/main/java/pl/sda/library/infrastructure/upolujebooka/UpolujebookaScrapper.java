@@ -45,7 +45,7 @@ public class UpolujebookaScrapper {
                 }
                 book.setAuthors((documentURL.select("div.authors > h2 >a").textNodes().stream()
                         .map(Object::toString)
-                        .collect(Collectors.joining(","))));
+                        .collect(Collectors.joining(", "))));
                 book.setCategories(documentURL.select("div.container > ol > li > span > a").eachText().stream()
                         .map(Object::toString)
                         .collect(Collectors.joining(",")));

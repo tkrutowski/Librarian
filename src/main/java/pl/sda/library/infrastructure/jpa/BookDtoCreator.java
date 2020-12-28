@@ -71,7 +71,7 @@ class BookDtoCreator {
                 categoryDtos.add(categoryDtoByName.get());
             } else {
                 CategoryDto newCategoryDto = new CategoryDto();
-                newCategoryDto.setName(category);
+                newCategoryDto.setName(category.trim());
                 categoryDtos.add(categoryDtoRepository.save(newCategoryDto));
             }
         }

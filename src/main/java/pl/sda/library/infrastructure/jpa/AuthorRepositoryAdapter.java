@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Component
 @AllArgsConstructor
-public class AuthorRepositoryAdapter implements AuthorRepository {
+public class    AuthorRepositoryAdapter implements AuthorRepository {
 
     private AuthorDtoRepository authorDtoRepository;
 
@@ -28,7 +28,7 @@ public class AuthorRepositoryAdapter implements AuthorRepository {
     @Override
     public List<Author> findAll() {
         List<Author> authorList = new ArrayList<>();
-        authorDtoRepository.findAll().iterator().forEachRemaining(authorDto -> authorList.add(authorDto.toDomain()));
+        authorDtoRepository.findByOrderByLastNameAsc().iterator().forEachRemaining(authorDto -> authorList.add(authorDto.toDomain()));
         return authorList;
     }
 
