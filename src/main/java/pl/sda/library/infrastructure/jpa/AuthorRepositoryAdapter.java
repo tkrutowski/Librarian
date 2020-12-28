@@ -28,7 +28,7 @@ public class    AuthorRepositoryAdapter implements AuthorRepository {
     @Override
     public List<Author> findAll() {
         List<Author> authorList = new ArrayList<>();
-        authorDtoRepository.findByOrderByLastNameAsc().iterator().forEachRemaining(authorDto -> authorList.add(authorDto.toDomain()));
+        authorDtoRepository.findAllByOrderByLastNameAsc().iterator().forEachRemaining(authorDto -> authorList.add(authorDto.toDomain()));
         return authorList;
     }
 

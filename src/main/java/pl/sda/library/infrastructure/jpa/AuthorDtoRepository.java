@@ -8,6 +8,6 @@ import java.util.Optional;
 interface AuthorDtoRepository extends JpaRepository<AuthorDto, Long> {
     Optional<AuthorDto> findAuthorDtoByFirstNameAndLastName(String firstName, String lastName);
 
-    List<AuthorDto> findByOrderByLastNameAsc();
+    List<AuthorDto> findAllByOrderByLastNameAsc();
 
 }
