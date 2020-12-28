@@ -20,8 +20,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -55,8 +58,7 @@ class BookDto {
     private Set<CategoryDto> categories = new HashSet<>();
 
     private String title;
-    private String subtitle;
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String description;
     private String cover;
     private int bookInSeriesNo;
@@ -68,7 +70,6 @@ class BookDto {
         book.setAuthors(getAuthorsAsString());
         book.setCategories(getCategoriesAsString());
         book.setTitle(getTitle());
-        book.setSubtitle(getSubtitle());
         book.setDescription(getDescription());
         book.setCover(getCover());
         book.setBookInSeriesNo(getBookInSeriesNo());
@@ -77,11 +78,15 @@ class BookDto {
 
     private String getAuthorsAsString() {
         String result = "";
-        for (AuthorDto authorDto : authors) {
+        List<AuthorDto> sortedList = authors
+                .stream()
+                .sorted(Comparator.comparing(AuthorDto::getLastName))
+                .collect(Collectors.toList());
+        for (AuthorDto authorDto : sortedList) {
             result += authorDto.getFirstName() + " " + authorDto.getLastName() + ", ";
         }
         int index = result.lastIndexOf(',');
-        return index > 0 ? result.substring(0, index) :  result;
+        return index > 0 ? result.substring(0, index) : result;
     }
 
     private String getCategoriesAsString() {
@@ -90,6 +95,6 @@ class BookDto {
             result += categoryDto.getName() + ", ";
         }
         int index = result.lastIndexOf(',');
-        return index > 0 ? result.substring(0, index) :  result;
+        return index > 0 ? result.substring(0, index) : result;
     }
 }

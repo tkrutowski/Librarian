@@ -1,8 +1,13 @@
 package pl.sda.library.infrastructure.jpa;
 
-import org.springframework.data.repository.CrudRepository;
+import ch.qos.logback.classic.spi.EventArgUtil;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-interface BookDtoRepository extends CrudRepository<BookDto, Long> {
+import java.util.List;
+
+interface BookDtoRepository extends JpaRepository<BookDto, Long> {
 
     Iterable<BookDto> findAllByTitle(String title);
+
+    List<BookDto> findAllByOrderByTitleAsc();
 }

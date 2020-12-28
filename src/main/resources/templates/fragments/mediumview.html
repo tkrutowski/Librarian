@@ -13,17 +13,18 @@
             </div>
             <div style="float:left;">
 
-                <img class="book__medium-picture"
-                     th:alt="${b.title + '   ' +b.subtitle}" th:src="${b.cover}"
+                <img th:if="${b.cover != null && b.cover != ''}" class="book__medium-picture"
+                     th:alt="${b.title}" th:src="${b.cover}"
+                     align="center">
+
+                <img th:unless="${b.cover != null &&  b.cover != ''}" class="book__medium-picture"
+                     th:alt="${b.title}" th:src="@{/images/no-cover.jpg}"
                      align="center">
             </div>
 
             <div class="book__medium-all" style="float: left">
-                <h2 class="book__medium-title" th:text="${b.title}"></h2>
-                <div class="book__medium-subtitle">
-                    <p class="book__medium-subtitle-sub">Podtytuł: </p>
-                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${b.subtitle}"></p>
-                </div>
+                <h3 class="book__medium-title" th:text="${b.title}"></h3>
+
                 <div class="book__medium-subtitle">
                     <p class="book__medium-subtitle-sub">Autor: </p>
                     <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${b.authors}"></p>

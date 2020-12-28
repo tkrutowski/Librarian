@@ -15,7 +15,7 @@
             <div class="form-div">
                 <select class="form-select" id="book" required th:field="*{idBook}">
                     <option th:each="b : ${bookList}" th:value="${b.id}"
-                            th:text="${b.title + ', ' + b.subtitle + ' Autor: ' + b.authors}"></option>
+                            th:text="${b.title + ',  Autor: ' + b.authors}"></option>
                 </select>
                 <a  class="btn btn-warning form-button" th:href="@{/books/findBook}">Wyszukaj</a>
             </div>

@@ -8,6 +8,7 @@
 
 .book__small-all {
     height: 120px;
+    overflow: auto;
 }
 
 .book__small-type {

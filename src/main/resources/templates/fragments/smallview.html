@@ -13,16 +13,16 @@
                 <h2 th:text="${ub.editionType}"></h2>
             </div>
 
-                <img class="book__small-picture"
-                     th:alt="${b.title + '   ' +b.subtitle}" th:src="${b.cover}"
-                     align="center">
+            <img th:if="${b.cover != null && b.cover != ''}" class="book__small-picture"
+                 th:alt="${b.title}" th:src="${b.cover}"
+                 align="center">
+
+            <img th:unless="${b.cover != null &&  b.cover != ''}" class="book__small-picture"
+                 th:alt="${b.title}" th:src="@{/images/no-cover.jpg}"
+                 align="center">
 
             <div class="book__small-all">
-                <h2 class="book__small-title" th:text="${b.title}"></h2>
-                <div class="book__small-subtitle">
-                    <p class="book__small-subtitle-sub">Podtytuł: </p>
-                    <p class="book__small-subtitle-sub book__small-subtitle-bold" th:text="${b.subtitle}"></p>
-                </div>
+                <h4 class="book__small-title" th:text="${b.title}"></h4>
 
                 <p class="book__small-subtitle-sub">Kiedy czytana/słuchana:</p>
                 <div th:if="${ub.readFrom != null && ub.readTo == null}">

@@ -6,11 +6,11 @@
 </head>
 <body>
 <div th:fragment="book-add">
-    <div class="container">
+    <div class="container" >
         <h4 class="bg-warning font-weight-bold info-reading-status" style="margin-top: 30px">Opis:</h4>
 
     </div>
-    <div class="container">
+    <div class="container" style="display: flex">
         <form th:object="${book}" th:action="@{/books/add}" method="post">
             <div class="container-child">
 
@@ -74,8 +74,15 @@
             </div>
 
         </form>
-        <div class="container-child">
-            <img class="book_picture" src="/pictures/default-image.jpg" th:src="${book?.cover}">
+        <div class="container-child" style="align-self: center">
+<!--            <img class="book_picture" src="/static/pictures/no-cover.jpg" th:src="${book?.cover}">-->
+
+            <img th:if="${book.cover != null && book.cover != ''}"
+                 th:alt="${book?.title}" th:src="${book?.cover}" style="height: 500px">
+
+            <img th:unless="${book.cover != null &&  book.cover != ''}"
+                 th:alt="${book?.title}" th:src="@{/images/no-cover.jpg}" style="height: 500px">
+
         </div>
     </div>
 </div>
