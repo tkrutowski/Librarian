@@ -82,6 +82,9 @@ SELECT * from authors;
 SELECT * from authors where first_name='rYK';
 SELECT * from users;
 SELECT * from books;
+
+SELECT * from series;
+SELECT * from userbooks;
 SELECT * FROM categories;
 delete from authors where id_author>0;
 

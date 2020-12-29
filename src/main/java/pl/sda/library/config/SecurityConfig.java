@@ -26,7 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        int i=0;
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
@@ -58,18 +57,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.csrf().disable();
 //        http.headers().frameOptions().disable();
 
-
         http.csrf().disable()
                 .authorizeRequests()
-//                .antMatchers("/api/**").hasRole("ADMIN")
-                .antMatchers("/home").hasAnyRole("ADMIN","USER")
-                .antMatchers("/users","/users/**").hasRole("ADMIN")
+                .antMatchers("/api/**").hasRole("ADMIN")
+                .antMatchers("/home").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/users", "/users/**").hasRole("ADMIN")
                 .antMatchers("/users/**").hasRole("ADMIN")
-                .antMatchers("/bookstores/delete/**","/authors/delete/**").hasRole("ADMIN")
-                .antMatchers("/bookstores","/authors").hasAnyRole("ADMIN","USER")
-                .antMatchers("/userbooks","/userbooks/**").hasRole("USER")
-                .antMatchers("/books","/books/**").hasRole("USER")
-                .antMatchers("/**","/login*").permitAll()
+                .antMatchers("/bookstores/delete/**", "/authors/delete/**").hasRole("ADMIN")
+                .antMatchers("/bookstores", "/authors").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/userbooks", "/userbooks/**").hasRole("USER")
+                .antMatchers("/books", "/books/**").hasRole("USER")
+                .antMatchers("/**", "/login*").permitAll()
                 .antMatchers("/h2console/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -87,7 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web
                 .ignoring()
                 .antMatchers("/h2-console/**");
