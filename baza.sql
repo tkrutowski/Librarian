@@ -38,7 +38,6 @@ CREATE TABLE `users` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `id_series` BIGINT NULL,
   `title` VARCHAR(100) NULL,
-  `subtitle` VARCHAR(100) NULL,
   `description` TEXT NULL,
   `cover` TEXT NULL,
   `book_in_series_no` TINYINT NULL DEFAULT 0,
@@ -83,8 +82,10 @@ SELECT * from authors;
 SELECT * from authors where first_name='rYK';
 SELECT * from users;
 SELECT * from books;
+SELECT * FROM categories;
 delete from authors where id_author>0;
 
+update categories set name = 'Sensacja' where id=5;
       INSERT INTO authors(first_name, last_name) VALUES('Lee','Child' );
     INSERT INTO authors(first_name, last_name) VALUES('Jo','Nesbo' );
     INSERT INTO authors(first_name, last_name) VALUES('Tom','Clancy' );
@@ -93,8 +94,10 @@ delete from authors where id_author>0;
     INSERT INTO authors(first_name, last_name) VALUES('Michael', 'Connelly' );
     INSERT INTO authors(first_name, last_name) VALUES('Evan', 'Currie' );
     
-    select * from series;
     select * from categories;
+    select * from categories where name='kryminał';
+    delete from categories where id=5;
+    
     delete from books where id=16;
       INSERT INTO users(username,password,name, role) VALUES('admin',/*1234*/'$2y$06$SWEQM5PNMs1psVa2FnRytuZvfeHO0Xnt2m0qXgGSPYPQnVBi5Z6Xy','administrator', 'ADMIN');
     INSERT INTO users(username,password,name, role) VALUES('test',/*'12345'*/'$2y$06$ACSryLuz9ojOffj/.ADPquYUHGTgoPq6mjXF24iAWG6YOvV5LYA2W','tom kru','USER');

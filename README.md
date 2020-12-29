@@ -4,22 +4,22 @@
 
 
 ### Simple application to store, manage favorite books, ebooks and more.
-![Main](https://github.com/tkrutowski/Library/blob/master/src/main/resources/templates/fragments/MainPage.png?raw=true)
+![Main](https://github.com/tkrutowski/Library/blob/master/src/main/resources/static/images/github/MainPage.png?raw=true)
 
 The application was written as a final project within the JAVA course organized by Software Development Academy. 
 
 Examples of library functionality:
 * login with assigned User and Admin rights based on spring security
 
-![Login page](https://github.com/tkrutowski/Library/blob/master/src/main/resources/templates/fragments/Login%20page.png?raw=true)
-![Bad login](https://github.com/tkrutowski/Library/blob/master/src/main/resources/templates/fragments/Bad%20login.png?raw=true)
+![Login page](https://github.com/tkrutowski/Library/blob/master/src/main/resources/static/images/github/Login%20page.png?raw=true)
+![Bad login](https://github.com/tkrutowski/Library/blob/master/src/main/resources/static/images/github/Bad%20login.png?raw=true)
 
 * adding and displaying books with description and link to the photo
 
 * creating separate libraries of elements for each user
-![Search](https://github.com/tkrutowski/Library/blob/master/src/main/resources/templates/fragments/search%20book.png?raw=true)
+![Search](https://github.com/tkrutowski/Library/blob/master/src/main/resources/static/images/github/search%20book.png?raw=true)
 * displaying books in three views (small, medium, large):
-![WidokChange](https://github.com/tkrutowski/Library/blob/master/src/main/resources/templates/fragments/WidokChange.gif?raw=true)
+![WidokChange](https://github.com/tkrutowski/Library/blob/master/src/main/resources/static/images/github/WidokChange.gif?raw=true)
 * the possibility of importing data and picture from the portal https://upolujebooka.pl after providing a link to the book
 * filtering books by series, reading status, author
 
