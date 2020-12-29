@@ -13,7 +13,7 @@
     height: 100px;
 }
 
-body{
+body {
     background-color: #545b62;
 }
 
@@ -22,15 +22,15 @@ h1 {
     text-align: center;
     padding-top: 18px;
     margin-top: 60px;
-    color:  #343a40;
+    color: #343a40;
 }
 
-.info-reading-status{
+.info-reading-status {
     height: 40px;
     text-align: center;
     padding-top: 5px;
     /*margin-top: 60px;*/
-    color:  #343a40;
+    color: #343a40;
     width: inherit;
 }
 
@@ -44,4 +44,16 @@ h1 {
     margin-top: 3px;
     font-size: 16px;
     border-radius: 5px;
+}
+
+.edit-buttons {
+    margin-right: 10px;
+    height: 20px;
+}
+
+.edit-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-left: 10px;
 }

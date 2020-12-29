@@ -5,10 +5,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import pl.sda.library.domain.model.Book;
 import pl.sda.library.domain.model.BookViewOption;
 import pl.sda.library.domain.model.EditionType;
@@ -80,6 +82,13 @@ public class WebUserBookController {
     public String addUserBook(UserBook userBook) {
         userBook.setIdUser(getUser().getId());
         userBookService.addUserBook(userBook);
+        return "redirect:/home";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteUserBook(@PathVariable Long id) {
+        int i=0;
+        userBookService.deleteUserBook(id);
         return "redirect:/home";
     }
 

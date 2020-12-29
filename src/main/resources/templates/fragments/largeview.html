@@ -9,9 +9,16 @@
     <div th:each="b : ${bookList}">
 
         <div th:if="${b.id == ub.idBook}">
+
             <div class="book__large-type">
+                <div class="edit-div">
+                    <a th:href="@{/userbooks/delete/{id}(id=${ub.id})}">
+                        <img class="edit-buttons" th:src="@{/images/delete-icon.png}">
+                    </a>
+                </div>
                 <h2 th:text="${ub.editionType}"></h2>
             </div>
+
             <div style="float:left;">
 
                 <img th:if="${b.cover != null && b.cover != ''}" class="book__large-picture"
@@ -72,7 +79,8 @@
             </div>
             <div class="book__large-discription">
                 <p class="book__large-subtitle-sub">Opis: </p>
-                <textarea class="book__large-discription-area book__large-subtitle-sub book__large-discription-text" rows="15" cols="80" readonly="true"
+                <textarea class="book__large-discription-area book__large-subtitle-sub book__large-discription-text"
+                          rows="15" cols="80" readonly="true"
                           th:text="${b.description}">
             </textarea>
             </div>
