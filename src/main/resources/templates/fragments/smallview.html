@@ -12,7 +12,9 @@
             <div class="book__small-type">
 
                 <div class="edit-div">
-
+                    <a th:href="@{/userbooks/edit/{id}(id=${ub.id})}">
+                        <img class="edit-buttons" th:src="@{/images/edit-icon.png}">
+                    </a>
                     <a th:href="@{/userbooks/delete/{id}(id=${ub.id})}">
                         <img class="edit-buttons" th:src="@{/images/delete-icon.png}">
                     </a>

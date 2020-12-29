@@ -10,13 +10,16 @@
 
         <div th:if="${b.id == ub.idBook}">
 
-            <div class="book__large-type">
-                <div class="edit-div">
+            <div class="book__large-type" style="display: flex;">
+                <h2 th:text="${ub.editionType}" style="width: 400px; padding-left: 90px"></h2>
+                <div class="edit-div" style="padding-bottom: 10px;">
+                    <a th:href="@{/userbooks/edit/{id}(id=${ub.id})}">
+                        <img class="edit-buttons" th:src="@{/images/edit-icon.png}">
+                    </a>
                     <a th:href="@{/userbooks/delete/{id}(id=${ub.id})}">
                         <img class="edit-buttons" th:src="@{/images/delete-icon.png}">
                     </a>
                 </div>
-                <h2 th:text="${ub.editionType}"></h2>
             </div>
 
             <div style="float:left;">

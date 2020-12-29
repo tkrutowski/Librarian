@@ -19,7 +19,6 @@ public class UserBookService {
 
     private UserBookRepository userBookRepository;
 
-
     public UserBook addUserBook(UserBook userBook) {
         if (isUserBookExist(userBook)) {
             throw new UserBookAlreadyExistException(userBook);
@@ -35,8 +34,6 @@ public class UserBookService {
         }
 
         userBookById.get().setBookstore(userBook.getBookstore());
-        //TODO po zmianie trzeba sprawdzić czy już taki nie istnieje
-        userBookById.get().setEditionType(userBook.getEditionType());
         userBookById.get().setReadingStatus(userBook.getReadingStatus());
         userBookById.get().setOwnershipStatus(userBook.getOwnershipStatus());
         userBookById.get().setReadFrom(userBook.getReadFrom());

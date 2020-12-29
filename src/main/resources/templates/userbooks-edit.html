@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+
+</head>
+
+<body>
+<div th:replace="fragments/head :: js-script" th:remove="tag"></div>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h4 class="bg-warning font-weight-bold info-reading-status">Edytuj książkę w Bibliotece</h4>
+    <div id="main" th:replace="fragments/edit-userbook :: ub-edit"></div>
+</div>
+
+</body>
+</html>
