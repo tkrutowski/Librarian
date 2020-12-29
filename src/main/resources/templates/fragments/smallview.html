@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -10,8 +10,18 @@
 
         <div th:if="${b.id == ub.idBook}">
             <div class="book__small-type">
+
+                <div class="edit-div">
+                    <a th:href="@{/userbooks/edit/{id}(id=${ub.id})}">
+                        <img class="edit-buttons" th:src="@{/images/edit-icon.png}">
+                    </a>
+                    <a th:href="@{/userbooks/delete/{id}(id=${ub.id})}">
+                        <img class="edit-buttons" th:src="@{/images/delete-icon.png}">
+                    </a>
+                </div>
                 <h2 th:text="${ub.editionType}"></h2>
             </div>
+
 
             <img th:if="${b.cover != null && b.cover != ''}" class="book__small-picture"
                  th:alt="${b.title}" th:src="${b.cover}"

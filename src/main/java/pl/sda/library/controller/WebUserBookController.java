@@ -5,10 +5,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import pl.sda.library.domain.model.Book;
 import pl.sda.library.domain.model.BookViewOption;
 import pl.sda.library.domain.model.EditionType;
@@ -76,10 +79,36 @@ public class WebUserBookController {
         return "userbooks";
     }
 
+    @GetMapping("/edit/{id}")
+    public ModelAndView editUsersBook(@PathVariable Long id) {
+        ModelAndView modelAndView=new ModelAndView();
+        UserBook userBook = userBookService.findUserBook(id);
+        modelAndView.addObject("userbookToEdit",userBook);
+        modelAndView.addObject("idUB", id);
+        modelAndView.addObject("ownershipStatus", Arrays.asList(OwnershipStatus.values()));
+        modelAndView.addObject("editionType", Arrays.asList(EditionType.values()));
+        modelAndView.addObject("readingStatus", Arrays.asList(ReadingStatus.values()));
+        modelAndView.addObject("bookstoreList", bookstoreService.findAllBookstores());
+        modelAndView.setViewName("userbooks-edit");
+        return modelAndView;
+    }
+
     @PostMapping
     public String addUserBook(UserBook userBook) {
         userBook.setIdUser(getUser().getId());
         userBookService.addUserBook(userBook);
+        return "redirect:/home";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editUserBook(UserBook userBook, @PathVariable Long id) {
+        userBookService.editUserBook(userBook, id);
+        return "redirect:/home";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteUserBook(@PathVariable Long id) {
+        userBookService.deleteUserBook(id);
         return "redirect:/home";
     }
 

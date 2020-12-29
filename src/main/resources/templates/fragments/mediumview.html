@@ -5,11 +5,19 @@
 </head>
 <body>
 <div class="book_medium" th:each="ub : ${userBookList}" th:fragment="ub-largeview">
-    <div  th:each="b : ${bookList}">
+    <div th:each="b : ${bookList}">
 
         <div th:if="${b.id == ub.idBook}">
-            <div class="book__medium-type">
-                <h2 th:text="${ub.editionType}"></h2>
+            <div class="book__large-type" style="display: flex;">
+                <h2 th:text="${ub.editionType}" style="width: 400px; padding-left: 90px"></h2>
+                <div class="edit-div" style="padding-bottom: 10px;">
+                    <a th:href="@{/userbooks/edit/{id}(id=${ub.id})}">
+                        <img class="edit-buttons" th:src="@{/images/edit-icon.png}">
+                    </a>
+                    <a th:href="@{/userbooks/delete/{id}(id=${ub.id})}">
+                        <img class="edit-buttons" th:src="@{/images/delete-icon.png}">
+                    </a>
+                </div>
             </div>
             <div style="float:left;">
 
@@ -43,7 +51,7 @@
                 </div>
                 <div class="book__medium-subtitle" th:unless="${b.bookInSeriesNo != 0}">
                     <p class="book__medium-subtitle-sub">Czesc cyklu: </p>
-                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" ></p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold"></p>
                 </div>
                 <div class="book__medium-subtitle">
                     <p class="book__medium-subtitle-sub">Ksiegarnia: </p>
@@ -56,15 +64,17 @@
                 </div>
                 <div class="book__medium-subtitle">
                     <p class="book__medium-subtitle-sub">Stan przeczytania: </p>
-                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${ub.readingStatus.getDescription()}"></p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold"
+                       th:text="${ub.readingStatus.getDescription()}"></p>
                 </div>
 
                 <p class="book__medium-subtitle-sub">Kiedy czytana/słuchana:</p>
                 <div th:if="${ub.readFrom != null && ub.readTo == null}">
-                <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${ub.readFrom}"></p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${ub.readFrom}"></p>
                 </div>
                 <div th:if="${ub.readFrom != null && ub.readTo != null}">
-                <p class="book__medium-subtitle-sub book__medium-subtitle-bold" th:text="${ub.readFrom + '  do  ' + ub.readTo}"></p>
+                    <p class="book__medium-subtitle-sub book__medium-subtitle-bold"
+                       th:text="${ub.readFrom + '  do  ' + ub.readTo}"></p>
                 </div>
             </div>
         </div>
